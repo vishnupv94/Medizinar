@@ -1,0 +1,61 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Force HTTPS (uncomment on production if SSL is available)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Block access to the app directory
+    RewriteRule ^app/ - [F,L]
+
+    # Block access to database directory
+    RewriteRule ^database/ - [F,L]
+
+    # Block access to hidden files and directories
+    RewriteRule (^|/)\.(?!well-known) - [F,L]
+
+    # Block access to uploads directory listing
+    RewriteRule ^uploads/ - [F,L]
+
+    # Allow existing files and directories to pass through
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Route all other requests to front controller
+    RewriteRule ^(.*)$ index.php [L,QSA]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Block access to sensitive file types
+<FilesMatch "\.(env|log|sql|bak|sh|ini)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php83___lsphp .php .php8 .phtml
+</IfModule>
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php83” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php83___lsphp .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

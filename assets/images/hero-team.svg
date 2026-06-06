@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="none">
+  <!-- ============================================
+       Hero Team — People Network
+       Original illustration · Medizinar Care
+       ============================================ -->
+
+  <!-- Background glow -->
+  <circle cx="300" cy="200" r="160" fill="#e0f4e2" opacity="0.35"/>
+  <circle cx="300" cy="200" r="100" fill="#f8eed8" opacity="0.25"/>
+
+  <!-- Central person (leader) -->
+  <g transform="translate(265, 110)">
+    <circle cx="35" cy="30" r="34" fill="white" stroke="#176B23" stroke-width="2.5"/>
+    <circle cx="35" cy="20" r="14" fill="#d4a574"/>
+    <path d="M18 18 Q28 6 35 9 Q42 6 52 18" fill="#333"/>
+    <rect x="18" y="36" width="34" height="26" rx="7" fill="#176B23"/>
+    <rect x="32" y="38" width="6" height="16" rx="1" fill="white"/>
+    <rect x="27" y="43" width="16" height="6" rx="1" fill="white"/>
+    <circle cx="30" cy="18" r="1.5" fill="#333"/>
+    <circle cx="40" cy="18" r="1.5" fill="#333"/>
+    <path d="M31 24 Q35 27 39 24" fill="none" stroke="#333" stroke-width="0.8"/>
+    <!-- Stethoscope -->
+    <path d="M24 36 Q22 50 28 56" fill="none" stroke="#a5781e" stroke-width="1.5"/>
+    <circle cx="28" cy="57" r="3" fill="#a5781e"/>
+  </g>
+
+  <!-- Left person -->
+  <g transform="translate(100, 180)">
+    <circle cx="30" cy="26" r="28" fill="white" stroke="#a5781e" stroke-width="2"/>
+    <circle cx="30" cy="18" r="11" fill="#e8c9a0"/>
+    <path d="M18 16 Q24 8 30 10 Q36 8 42 16" fill="#5a3e2b"/>
+    <rect x="16" y="32" width="28" height="20" rx="6" fill="#a5781e"/>
+    <circle cx="26" cy="16" r="1.2" fill="#333"/>
+    <circle cx="34" cy="16" r="1.2" fill="#333"/>
+    <path d="M27 20 Q30 23 33 20" fill="none" stroke="#333" stroke-width="0.7"/>
+  </g>
+
+  <!-- Right person -->
+  <g transform="translate(430, 180)">
+    <circle cx="30" cy="26" r="28" fill="white" stroke="#a5781e" stroke-width="2"/>
+    <circle cx="30" cy="18" r="11" fill="#d4a574"/>
+    <path d="M18 14 Q24 6 30 8 Q36 6 42 14" fill="#333"/>
+    <rect x="16" y="32" width="28" height="20" rx="6" fill="#176B23"/>
+    <circle cx="26" cy="16" r="1.2" fill="#333"/>
+    <circle cx="34" cy="16" r="1.2" fill="#333"/>
+    <path d="M27 20 Q30 23 33 20" fill="none" stroke="#333" stroke-width="0.7"/>
+  </g>
+
+  <!-- Bottom-left person -->
+  <g transform="translate(175, 270)">
+    <circle cx="28" cy="24" r="24" fill="white" stroke="#176B23" stroke-width="1.5"/>
+    <circle cx="28" cy="17" r="10" fill="#e8c9a0"/>
+    <path d="M17 14 Q22 6 28 8 Q34 6 39 14" fill="#5a3e2b"/>
+    <rect x="16" y="28" width="24" height="17" rx="5" fill="#176B23"/>
+    <circle cx="24" cy="15" r="1" fill="#333"/>
+    <circle cx="32" cy="15" r="1" fill="#333"/>
+    <path d="M25 19 Q28 22 31 19" fill="none" stroke="#333" stroke-width="0.6"/>
+  </g>
+
+  <!-- Bottom-right person -->
+  <g transform="translate(370, 270)">
+    <circle cx="28" cy="24" r="24" fill="white" stroke="#176B23" stroke-width="1.5"/>
+    <circle cx="28" cy="17" r="10" fill="#d4a574"/>
+    <path d="M17 12 Q22 4 28 6 Q34 4 39 12" fill="#333"/>
+    <rect x="16" y="28" width="24" height="17" rx="5" fill="#a5781e"/>
+    <circle cx="24" cy="15" r="1" fill="#333"/>
+    <circle cx="32" cy="15" r="1" fill="#333"/>
+    <path d="M25 19 Q28 22 31 19" fill="none" stroke="#333" stroke-width="0.6"/>
+  </g>
+
+  <!-- Connection lines (network) -->
+  <line x1="265" y1="155" x2="155" y2="200" stroke="#a5781e" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.5"/>
+  <line x1="335" y1="155" x2="445" y2="200" stroke="#a5781e" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.5"/>
+  <line x1="155" y1="230" x2="203" y2="280" stroke="#176B23" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.4"/>
+  <line x1="445" y1="230" x2="398" y2="280" stroke="#176B23" stroke-width="1.2" stroke-dasharray="4,4" opacity="0.4"/>
+  <line x1="300" y1="175" x2="203" y2="280" stroke="#176B23" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+  <line x1="300" y1="175" x2="398" y2="280" stroke="#176B23" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+
+  <!-- Badges -->
+  <g transform="translate(48, 100)">
+    <rect width="80" height="32" rx="16" fill="white" stroke="#a5781e" stroke-width="1.2"/>
+    <text x="40" y="20" font-family="sans-serif" font-size="9" font-weight="700" fill="#a5781e" text-anchor="middle">Caring</text>
+  </g>
+  <g transform="translate(472, 100)">
+    <rect width="80" height="32" rx="16" fill="white" stroke="#176B23" stroke-width="1.2"/>
+    <text x="40" y="20" font-family="sans-serif" font-size="9" font-weight="700" fill="#176B23" text-anchor="middle">Committed</text>
+  </g>
+  <g transform="translate(240, 350)">
+    <rect width="120" height="32" rx="16" fill="white" stroke="#a5781e" stroke-width="1.2"/>
+    <text x="60" y="20" font-family="sans-serif" font-size="9" font-weight="700" fill="#a5781e" text-anchor="middle">Working Together</text>
+  </g>
+
+  <!-- Decorative dots -->
+  <circle cx="60" cy="300" r="4" fill="#a5781e" opacity="0.3"/>
+  <circle cx="540" cy="300" r="4" fill="#176B23" opacity="0.3"/>
+  <circle cx="300" cy="60" r="5" fill="#176B23" opacity="0.2"/>
+  <circle cx="80" cy="170" r="3" fill="#a5781e" opacity="0.2"/>
+  <circle cx="520" cy="170" r="3" fill="#176B23" opacity="0.2"/>
+</svg>

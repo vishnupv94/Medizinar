@@ -1,0 +1,441 @@
+/* ===================================================
+   Medizinar Care — Custom Stylesheet
+   Tailwind CDN handles utilities; this file adds
+   custom components, animations, and overrides.
+   =================================================== */
+
+/* ----- CSS Variables ----- */
+:root {
+  /* Brand logo colors — change these to update globally */
+  --logo-gold:      #ab7e22;
+  --logo-green:     #186c21;
+
+  --primary:        var(--logo-green);
+  --primary-dark:   #0f5219;
+  --primary-light:  #e0f4e2;
+  --accent:         var(--logo-gold);
+  --accent-hover:   #c4922a;
+  --accent-light:   #f8eed8;
+  --text-dark:      #1a2e1a;
+  --text-muted:     #4d7055;
+  --border-light:   #d4e8d5;
+}
+
+/* ----- Base ----- */
+html { scroll-behavior: smooth; }
+
+body {
+  color: #2d3748;
+  overflow-x: hidden;
+}
+
+/* ----- Header scroll effect (handled via JS + class) ----- */
+#main-header.scrolled {
+  box-shadow: 0 4px 20px rgba(23, 107, 35, 0.12);
+}
+
+/* ----- Gold accent strip under top bar ----- */
+.topbar-accent {
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), #d4a22e, var(--accent));
+}
+
+/* ----- Hero Section ----- */
+.hero-section {
+  background: linear-gradient(135deg, #0a3d12 0%, #176B23 45%, #1e8a2d 100%);
+  position: relative;
+}
+
+.hero-pattern {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+/* ----- Inner page hero (smaller banner) ----- */
+.inner-hero {
+  background: linear-gradient(135deg, #0f5219 0%, #176B23 60%, #1e8a2d 100%);
+}
+.inner-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--primary), var(--accent));
+}
+
+/* ----- Section helpers ----- */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.22;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 3px;
+  margin-top: 12px;
+}
+
+.text-center .section-title::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-subtitle {
+  color: #4a6045;
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 580px;
+}
+
+/* ----- Cards ----- */
+.service-card {
+  background: white;
+  border-radius: 14px;
+  padding: 2rem;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 12px rgba(23,107,35,0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px rgba(23,107,35,0.13);
+  border-color: var(--accent);
+}
+
+.service-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* ----- Step cards (How it works) ----- */
+.step-card {
+  position: relative;
+  text-align: center;
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  color: white;
+  font-weight: 800;
+  font-size: 1.15rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 0 6px rgba(23,107,35,0.12);
+}
+
+.step-number.gold {
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(165,120,30,0.15);
+}
+
+/* ----- Testimonial card ----- */
+.testimonial-card {
+  background: white;
+  border-radius: 14px;
+  padding: 2rem;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 12px rgba(23,107,35,0.07);
+  position: relative;
+}
+
+.testimonial-card::before {
+  content: '\201C';
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.35;
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  font-family: Georgia, serif;
+}
+
+/* ----- Feature list items ----- */
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.feature-check {
+  width: 22px;
+  height: 22px;
+  background: var(--accent-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ----- CTA Section ----- */
+.cta-section {
+  background: linear-gradient(135deg, #0f5219 0%, #176B23 100%);
+}
+
+/* ----- Buttons ----- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 13px 26px;
+  border-radius: 10px;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(165,120,30,0.3);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(165,120,30,0.35);
+}
+
+.btn-outline-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 12px 26px;
+  border-radius: 10px;
+  border: none;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(171,126,34,0.3);
+}
+
+.btn-outline-white:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(171,126,34,0.35);
+}
+
+.btn-outline-green {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 11px 24px;
+  border-radius: 10px;
+  border: none;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(171,126,34,0.3);
+}
+
+.btn-outline-green:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(171,126,34,0.35);
+}
+
+/* ----- Form styles ----- */
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: white;
+  color: #1f2937;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(165,120,30,0.12);
+}
+
+.form-textarea { resize: vertical; min-height: 110px; }
+
+.form-error { color: #dc2626; font-size: 0.78rem; margin-top: 4px; }
+
+/* Alert messages */
+.alert {
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-left: 4px solid;
+  margin-bottom: 20px;
+}
+.alert-success { background: #f0fdf4; color: #14532d; border-color: #22c55e; }
+.alert-error   { background: #fef2f2; color: #7f1d1d; border-color: #ef4444; }
+
+/* ----- About page value cards ----- */
+.value-card {
+  border-radius: 14px;
+  padding: 1.75rem;
+  background: white;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 10px rgba(23,107,35,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(23,107,35,0.1);
+  border-color: var(--accent);
+}
+
+/* ----- Team cards ----- */
+.team-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 12px rgba(23,107,35,0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-align: center;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(23,107,35,0.13);
+}
+
+.team-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, #176B23, #1e8a2d);
+  margin: 0 auto;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(23,107,35,0.2);
+}
+
+/* ----- Floating buttons animation ----- */
+.float-btn {
+  animation: float-in 0.5s ease both;
+}
+
+@keyframes float-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ----- Stat counter cards ----- */
+.stat-card {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* ----- Contact info cards ----- */
+.contact-info-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 2px 12px rgba(23,107,35,0.07);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: transform 0.2s ease;
+}
+
+.contact-info-card:hover {
+  transform: translateY(-2px);
+}
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ----- Responsive tweaks ----- */
+@media (max-width: 640px) {
+  .float-btn span { display: none; }
+  .float-btn { padding: 13px; border-radius: 50%; }
+}
+
+/* ----- Scroll fade-in animation ----- */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

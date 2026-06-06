@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" fill="none">
+  <!-- ============================================
+       Hero About — Team & Heart / Trust
+       Original illustration · Medizinar Care
+       ============================================ -->
+
+  <!-- Background aura -->
+  <circle cx="300" cy="250" r="200" fill="#e0f4e2" opacity="0.4"/>
+  <circle cx="300" cy="250" r="140" fill="#f8eed8" opacity="0.3"/>
+
+  <!-- Large heart shape -->
+  <path d="M300 380 C300 380, 140 280, 140 200 C140 140, 200 120, 240 150 C260 165, 280 185, 300 210 C320 185, 340 165, 360 150 C400 120, 460 140, 460 200 C460 280, 300 380, 300 380Z"
+        fill="#176B23" opacity="0.08" stroke="#176B23" stroke-width="2"/>
+
+  <!-- Inner heart accent -->
+  <path d="M300 340 C300 340, 190 265, 190 210 C190 170, 230 155, 255 175 C270 185, 285 200, 300 220 C315 200, 330 185, 345 175 C370 155, 410 170, 410 210 C410 265, 300 340, 300 340Z"
+        fill="#a5781e" opacity="0.1"/>
+
+  <!-- Team member 1 (left) -->
+  <g transform="translate(140, 160)">
+    <circle cx="35" cy="30" r="28" fill="white" stroke="#a5781e" stroke-width="2"/>
+    <circle cx="35" cy="22" r="12" fill="#d4a574"/>
+    <path d="M20 20 Q28 10 35 12 Q42 10 50 20" fill="#5a3e2b"/>
+    <rect x="20" y="36" width="30" height="22" rx="6" fill="#176B23"/>
+    <circle cx="35" cy="20" r="1.5" fill="#333"/>
+    <circle cx="28" cy="20" r="1.5" fill="#333"/>
+    <path d="M29 25 Q33 28 37 25" fill="none" stroke="#333" stroke-width="0.8"/>
+  </g>
+
+  <!-- Team member 2 (right) -->
+  <g transform="translate(390, 160)">
+    <circle cx="35" cy="30" r="28" fill="white" stroke="#a5781e" stroke-width="2"/>
+    <circle cx="35" cy="22" r="12" fill="#e8c9a0"/>
+    <path d="M22 18 Q28 8 35 10 Q42 8 48 18" fill="#333"/>
+    <rect x="20" y="36" width="30" height="22" rx="6" fill="#a5781e"/>
+    <circle cx="35" cy="20" r="1.5" fill="#333"/>
+    <circle cx="28" cy="20" r="1.5" fill="#333"/>
+    <path d="M29 25 Q33 28 37 25" fill="none" stroke="#333" stroke-width="0.8"/>
+  </g>
+
+  <!-- Team member 3 (center-bottom) -->
+  <g transform="translate(255, 280)">
+    <circle cx="45" cy="30" r="32" fill="white" stroke="#176B23" stroke-width="2"/>
+    <circle cx="45" cy="20" r="14" fill="#d4a574"/>
+    <path d="M30 16 Q38 4 45 7 Q52 4 60 16" fill="#5a3e2b"/>
+    <rect x="28" y="36" width="34" height="24" rx="7" fill="#176B23"/>
+    <!-- Cross on uniform -->
+    <rect x="42" y="39" width="6" height="14" rx="1" fill="white"/>
+    <rect x="38" y="43" width="14" height="6" rx="1" fill="white"/>
+    <circle cx="45" cy="18" r="1.5" fill="#333"/>
+    <circle cx="38" cy="18" r="1.5" fill="#333"/>
+    <path d="M39 24 Q43 27 47 24" fill="none" stroke="#333" stroke-width="0.8"/>
+  </g>
+
+  <!-- Connecting curves between members -->
+  <path d="M210 190 Q300 140 390 190" fill="none" stroke="#a5781e" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+  <path d="M175 210 Q260 280 300 310" fill="none" stroke="#176B23" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.4"/>
+  <path d="M425 210 Q340 280 300 310" fill="none" stroke="#176B23" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.4"/>
+
+  <!-- Mission text badge -->
+  <g transform="translate(50, 80)">
+    <rect x="0" y="0" width="100" height="38" rx="19" fill="white" stroke="#176B23" stroke-width="1.5"/>
+    <circle cx="22" cy="19" r="10" fill="#e0f4e2"/>
+    <text x="22" y="23" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#176B23">★</text>
+    <text x="60" y="23" font-family="sans-serif" font-size="9" font-weight="700" fill="#176B23" text-anchor="middle">Mission</text>
+  </g>
+
+  <!-- Vision text badge -->
+  <g transform="translate(450, 80)">
+    <rect x="0" y="0" width="100" height="38" rx="19" fill="white" stroke="#a5781e" stroke-width="1.5"/>
+    <circle cx="22" cy="19" r="10" fill="#f8eed8"/>
+    <text x="22" y="23" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#a5781e">👁</text>
+    <text x="64" y="23" font-family="sans-serif" font-size="9" font-weight="700" fill="#a5781e" text-anchor="middle">Vision</text>
+  </g>
+
+  <!-- Values badge (bottom) -->
+  <g transform="translate(180, 420)">
+    <rect x="0" y="0" width="240" height="40" rx="20" fill="white" stroke="#a5781e" stroke-width="1.5"/>
+    <text x="120" y="25" font-family="sans-serif" font-size="10" font-weight="700" fill="#333" text-anchor="middle">Compassion · Trust · Quality</text>
+  </g>
+
+  <!-- Decorative floating elements -->
+  <circle cx="80" cy="320" r="6" fill="#a5781e" opacity="0.3"/>
+  <circle cx="520" cy="320" r="6" fill="#176B23" opacity="0.3"/>
+  <circle cx="530" cy="160" r="4" fill="#a5781e" opacity="0.4"/>
+  <circle cx="70" cy="200" r="4" fill="#176B23" opacity="0.4"/>
+  <circle cx="300" cy="80" r="3" fill="#a5781e" opacity="0.3"/>
+
+  <!-- Shield at top center -->
+  <g transform="translate(278, 100)">
+    <path d="M22 6 L22 2 Q22 0, 24 0 L20 0 Q18 0, 18 2 L18 6 L14 6 L14 26 Q14 36, 22 38 Q30 36, 30 26 L30 6 Z" fill="#176B23" transform="scale(0.9)"/>
+    <path d="M17 16 L20 19 L26 13" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>
