@@ -1,0 +1,20 @@
+# Environment & secrets
+.env
+
+# Uploads - keep .htaccess and .gitkeep, ignore actual uploaded files
+uploads/**/*
+!uploads/**/.htaccess
+!uploads/**/.gitkeep
+
+# Server logs
+error_log
+
+# Dev-only folder
+medicinar/
+
+# Node (no build step, but prevent accidental commits)
+node_modules/
+package-lock.json
+
+# macOS
+.DS_Store

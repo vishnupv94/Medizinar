@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home1/skyhine3/medizinarcare.skyhine.com/
+    - /bin/rsync -a --exclude='.git' --exclude='.env' --exclude='uploads/' --exclude='error_log' --exclude='medicinar/' --exclude='package-lock.json' --exclude='.DS_Store' . $DEPLOYPATH
