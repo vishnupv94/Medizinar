@@ -424,8 +424,7 @@ body {
 
 /* ----- Responsive tweaks ----- */
 @media (max-width: 640px) {
-  .float-btn span { display: none; }
-  .float-btn { padding: 13px; border-radius: 50%; }
+  .fixed.rounded-full span { font-size: 0.78rem; }
 }
 
 /* ----- Scroll fade-in animation ----- */
