@@ -12,7 +12,7 @@
             <div class="text-white">
                 <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-full px-4 py-1.5 text-sm font-medium mb-6 border border-white/20">
                     <span class="w-2 h-2 rounded-full bg-green-300 animate-pulse"></span>
-                    Trusted Home Healthcare — Kerala
+                    Trusted Home Healthcare
                 </div>
 
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
@@ -52,7 +52,7 @@
 
             <div class="hidden lg:flex justify-center items-center">
                 <div class="w-full max-w-lg relative">
-                    <img src="<?= asset('images/hero-home.svg') ?>" alt="Compassionate home healthcare illustration" class="w-full h-auto drop-shadow-2xl" width="600" height="500" loading="eager">
+                    <img src="<?= asset('images/hero-home.jpg') ?>" alt="Nurse consulting with an elderly patient at home" class="w-full h-[420px] object-cover object-center rounded-2xl drop-shadow-2xl" width="800" height="600" loading="eager">
                     <div class="absolute -bottom-2 left-4 bg-white rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-3 border-l-4" style="border-color:#a5781e">
                         <span class="text-2xl font-bold" style="color:#a5781e">100+</span>
                         <span class="text-xs text-gray-500 leading-tight">Happy<br>Families</span>
@@ -153,9 +153,9 @@
                 ];
                 foreach ($why_cards as $card): ?>
                     <div class="value-card">
-                        <div class="w-10 h-10 rounded-xl mb-3 flex items-center justify-center" style="background:var(--primary-light)"><?= $card['icon'] ?></div>
-                        <h3 class="font-bold text-gray-800 mb-1.5"><?= h($card['title']) ?></h3>
-                        <p class="text-gray-500 text-sm leading-relaxed"><?= $card['desc'] ?></p>
+                        <div class="w-12 h-12 rounded-2xl mb-4 flex items-center justify-center" style="background:var(--primary-light)"><?= $card['icon'] ?></div>
+                        <h3 class="font-bold mb-2" style="color:var(--text-dark);font-size:0.95rem"><?= h($card['title']) ?></h3>
+                        <p class="text-sm leading-relaxed" style="color:var(--text-muted)"><?= $card['desc'] ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -171,7 +171,7 @@
         <div class="grid lg:grid-cols-2 gap-12 items-center">
 
             <div class="fade-in-up">
-                <div class="section-badge" style="background:rgba(255,255,255,0.15);color:white">Trusted Team</div>
+                <div class="section-badge" style="color:white">Trusted Team</div>
                 <h2 class="text-3xl sm:text-4xl font-bold mb-5 text-white leading-tight">
                     Trusted &amp; Verified Caregivers
                 </h2>
@@ -349,24 +349,29 @@
 
 <section class="py-12 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="rounded-2xl p-8 sm:p-12 text-center fade-in-up" style="background:#f8eed8">
-            <div class="section-badge">Coverage</div>
-            <h2 class="section-title mb-3">Areas We Serve</h2>
-            <p class="section-subtitle mx-auto mb-6">
-                We currently provide home care services across Kerala, India, with our primary base in
-                Kottarakkara, Kollam District.
-            </p>
-            <div class="flex flex-wrap justify-center gap-3">
-                <?php
-                $areas = ['Kottarakkara', 'Kollam District', 'Kerala', 'India'];
-                foreach ($areas as $a): ?>
-                    <span class="inline-flex items-center gap-1.5 bg-white text-primary-700 text-sm font-medium px-4 py-2 rounded-full border border-primary-200 shadow-sm" style="color:#176B23;border-color:#a5d4a8">
-                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20" style="color:#176B23">
-                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                        </svg>
-                        <?= h($a) ?>
-                    </span>
-                <?php endforeach; ?>
+        <div class="rounded-2xl overflow-hidden fade-in-up" style="background:#0c2912;position:relative;min-height:220px;">
+            <div class="hero-pattern absolute inset-0" style="opacity:0.08"></div>
+            <div class="absolute inset-0" style="background:radial-gradient(ellipse 55% 100% at 30% 50%, #1a5c26 0%, transparent 80%)"></div>
+            <div class="relative z-10 p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-10">
+
+                <div class="flex-1 text-center sm:text-left">
+                    <div class="section-badge mb-4" style="color:rgba(255,255,255,0.55)">Coverage</div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">Areas We Serve</h2>
+                    <p class="text-white/65 text-sm leading-relaxed max-w-md">
+                        We currently provide home care services across Kerala, India, with our primary base in
+                        Kottarakkara, Kollam District.
+                    </p>
+                </div>
+
+                <div class="flex-shrink-0 flex items-center justify-center" style="position:relative;width:260px;height:180px;">
+                    <img src="<?= asset('images/homecare.jpg') ?>"
+                         alt="Caregiver assisting elderly patient"
+                         style="position:absolute;right:0;top:0;width:180px;height:160px;object-fit:cover;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,0.45);">
+                    <img src="<?= asset('images/care-hero.jpg') ?>"
+                         alt="Doctor with stethoscope"
+                         style="position:absolute;left:0;bottom:0;width:130px;height:120px;object-fit:cover;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);border:3px solid #0c2912;">
+                </div>
+
             </div>
         </div>
     </div>
