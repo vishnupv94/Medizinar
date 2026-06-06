@@ -2,7 +2,7 @@
 
 define('SITE_NAME', 'Medizinar Care');
 define('SITE_TAGLINE', 'Compassionate Home Healthcare');
-define('SITE_URL', env('SITE_URL', ''));
+define('SITE_URL', rtrim(env('SITE_URL', 'http://localhost:8000'), '/'));
 
 define('PHONE', '9745782716');
 define('PHONE_DISPLAY', '+91 97457 82716');

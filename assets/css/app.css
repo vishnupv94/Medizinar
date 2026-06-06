@@ -71,8 +71,8 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--accent-light);
-  color: var(--accent);
+  background: var(--primary);
+  color: #fff;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -130,7 +130,7 @@ body {
 .service-icon {
   width: 52px;
   height: 52px;
-  background: var(--accent-light);
+  background: var(--primary-light);
   border-radius: 12px;
   display: flex;
   align-items: center;
