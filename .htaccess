@@ -31,6 +31,18 @@ Options -Indexes
 # Set default charset
 AddDefaultCharset UTF-8
 
+# Production PHP settings
+<IfModule mod_php.c>
+    php_flag display_errors Off
+    php_flag log_errors On
+    php_value session.save_path "/tmp"
+</IfModule>
+<IfModule lsapi_module>
+    php_flag display_errors Off
+    php_flag log_errors On
+    php_value session.save_path "/tmp"
+</IfModule>
+
 # Security headers
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
@@ -49,9 +61,6 @@ AddDefaultCharset UTF-8
     </IfModule>
 </FilesMatch>
 
-<IfModule mime_module>
-  AddHandler application/x-httpd-ea-php83___lsphp .php .php8 .phtml
-</IfModule>
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php83” package as the default “PHP” programming language.
