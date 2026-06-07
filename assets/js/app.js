@@ -21,8 +21,140 @@ function openTeamModal(btn) {
 }
 
 function closeTeamModal() {
-  document.getElementById('team-modal').classList.add('hidden');
+  const modal = document.getElementById('team-modal');
+  if (!modal) return;
+  modal.classList.add('hidden');
   document.body.style.overflow = '';
+}
+
+function prefersReducedMotion() {
+  return typeof window.matchMedia === 'function'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function launchSuccessConfetti(sourceEl) {
+  if (!sourceEl || prefersReducedMotion()) return;
+
+  const testPiece = document.createElement('span');
+  if (typeof testPiece.animate !== 'function') return;
+
+  const rect = sourceEl.getBoundingClientRect();
+  const originX = rect.left + (rect.width / 2);
+  const originY = rect.top + Math.min(rect.height * 0.28, 28);
+  const colors = ['#16a34a', '#22c55e', '#86efac', '#ab7e22', '#f59e0b', '#fde68a'];
+  const totalPieces = window.innerWidth < 640 ? 18 : 26;
+
+  for (let i = 0; i < totalPieces; i += 1) {
+    const piece = document.createElement('span');
+    const size = 6 + Math.random() * 8;
+    const spreadX = (Math.random() - 0.5) * Math.min(window.innerWidth * 0.42, 320);
+    const endY = 120 + Math.random() * 150;
+    const rotation = (Math.random() - 0.5) * 720;
+    const drift = (Math.random() - 0.5) * 40;
+
+    piece.setAttribute('aria-hidden', 'true');
+    piece.style.position = 'fixed';
+    piece.style.left = '0';
+    piece.style.top = '0';
+    piece.style.width = `${size}px`;
+    piece.style.height = `${Math.random() > 0.55 ? size : size * 0.55}px`;
+    piece.style.borderRadius = Math.random() > 0.45 ? '999px' : '3px';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.pointerEvents = 'none';
+    piece.style.opacity = '0';
+    piece.style.zIndex = '130';
+    piece.style.willChange = 'transform, opacity';
+
+    document.body.appendChild(piece);
+
+    const animation = piece.animate([
+      {
+        transform: `translate3d(${originX}px, ${originY}px, 0) rotate(0deg) scale(0.85)`,
+        opacity: 0,
+      },
+      {
+        transform: `translate3d(${originX + (spreadX * 0.3)}px, ${originY + 28}px, 0) rotate(${rotation * 0.3}deg) scale(1)`,
+        opacity: 1,
+        offset: 0.18,
+      },
+      {
+        transform: `translate3d(${originX + spreadX + drift}px, ${originY + endY}px, 0) rotate(${rotation}deg) scale(0.92)`,
+        opacity: 0,
+      },
+    ], {
+      duration: 1100 + Math.random() * 500,
+      easing: 'cubic-bezier(0.12, 0.8, 0.24, 1)',
+      fill: 'forwards',
+      delay: Math.random() * 120,
+    });
+
+    animation.onfinish = () => piece.remove();
+  }
+}
+
+function initSuccessPopups() {
+  const popups = document.querySelectorAll('[data-success-popup]');
+  if (!popups.length) return;
+
+  const reducedMotion = prefersReducedMotion();
+
+  popups.forEach((popup) => {
+    const card = popup.querySelector('[data-success-popup-card]');
+    const closeButton = popup.querySelector('[data-success-popup-close]');
+    let dismissTimer = null;
+    let isDismissed = false;
+
+    if (!card) return;
+
+    const dismissPopup = () => {
+      if (isDismissed) return;
+
+      isDismissed = true;
+      window.clearTimeout(dismissTimer);
+
+      popup.style.opacity = '0';
+      card.style.opacity = '0';
+      card.style.transform = reducedMotion
+        ? 'translateY(-4px)'
+        : 'translateY(-12px) scale(0.98)';
+
+      window.setTimeout(() => popup.remove(), 320);
+    };
+
+    const scheduleDismiss = () => {
+      window.clearTimeout(dismissTimer);
+      const delay = parseInt(popup.getAttribute('data-success-popup-delay'), 10) || 4200;
+      dismissTimer = window.setTimeout(dismissPopup, delay);
+    };
+
+    if (closeButton) {
+      closeButton.addEventListener('click', dismissPopup);
+    }
+
+    card.addEventListener('mouseenter', () => {
+      window.clearTimeout(dismissTimer);
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (!isDismissed) scheduleDismiss();
+    });
+
+    requestAnimationFrame(() => {
+      popup.style.transition = 'opacity 0.28s ease';
+      card.style.transition = reducedMotion
+        ? 'opacity 0.18s ease'
+        : 'transform 0.34s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease';
+      popup.style.opacity = '1';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0) scale(1)';
+    });
+
+    if (!reducedMotion) {
+      window.setTimeout(() => launchSuccessConfetti(card), 120);
+    }
+
+    scheduleDismiss();
+  });
 }
 
 document.addEventListener('keydown', (e) => {
@@ -30,6 +162,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  initSuccessPopups();
 
   // ── Mobile menu toggle ──────────────────────────────────
   const btn   = document.getElementById('mobile-menu-btn');
@@ -115,12 +248,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Active nav link highlight (current page) ───────────
   const currentPath = window.location.pathname.split('/').pop() || 'index.php';
-  document.querySelectorAll('nav a').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && (href === currentPath || href.endsWith('/' + currentPath))) {
-      link.classList.add('text-primary-700', 'font-semibold');
-    }
-  });
+  const mainHeaderNav = document.getElementById('main-header');
+  if (mainHeaderNav) {
+    mainHeaderNav.querySelectorAll('nav a').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && (href === currentPath || href.endsWith('/' + currentPath))) {
+        link.classList.add('text-primary-700', 'font-semibold');
+      }
+    });
+  }
 
   // ── Smooth anchor scroll ────────────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
