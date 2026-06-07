@@ -17,19 +17,21 @@ class EntryController extends Controller
 
     public function contactList(): void
     {
+        $q      = sanitize_input($_GET['q'] ?? '');
         $page   = max(1, (int) ($_GET['page'] ?? 1));
         $limit  = 20;
         $offset = ($page - 1) * $limit;
-        $total  = ContactEntry::count();
+        $total  = ContactEntry::countFiltered($q);
         $pages  = max(1, (int) ceil($total / $limit));
 
         $this->view('admin/contact-entries', [
             'pageTitle'  => 'Contact Entries',
             'adminPage'  => 'contacts',
-            'entries'    => ContactEntry::getAll($limit, $offset),
+            'entries'    => ContactEntry::getFiltered($q, $limit, $offset),
             'page'       => $page,
             'totalPages' => $pages,
             'total'      => $total,
+            'q'          => $q,
         ]);
     }
 
@@ -65,19 +67,27 @@ class EntryController extends Controller
 
     public function appointmentList(): void
     {
+        $q      = sanitize_input($_GET['q'] ?? '');
+        $status = sanitize_input($_GET['status'] ?? '');
+        if (!in_array($status, ['', 'pending', 'confirmed', 'completed', 'cancelled'], true)) {
+            $status = '';
+        }
+
         $page   = max(1, (int) ($_GET['page'] ?? 1));
         $limit  = 20;
         $offset = ($page - 1) * $limit;
-        $total  = AppointmentEntry::count();
+        $total  = AppointmentEntry::countFiltered($q, $status);
         $pages  = max(1, (int) ceil($total / $limit));
 
         $this->view('admin/appointment-entries', [
             'pageTitle'  => 'Appointment Entries',
             'adminPage'  => 'appointments',
-            'entries'    => AppointmentEntry::getAll($limit, $offset),
+            'entries'    => AppointmentEntry::getFiltered($q, $status, $limit, $offset),
             'page'       => $page,
             'totalPages' => $pages,
             'total'      => $total,
+            'q'          => $q,
+            'status'     => $status,
         ]);
     }
 

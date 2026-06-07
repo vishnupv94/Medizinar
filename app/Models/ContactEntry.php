@@ -54,4 +54,29 @@ class ContactEntry
             [$limit]
         );
     }
+
+    public static function getFiltered(string $q = '', int $limit = 20, int $offset = 0): array
+    {
+        if ($q !== '') {
+            $like = '%' . $q . '%';
+            return Database::getInstance()->fetchAll(
+                'SELECT * FROM contact_entries WHERE name LIKE ? OR phone LIKE ? OR email LIKE ? OR subject LIKE ? ORDER BY created_at DESC LIMIT ? OFFSET ?',
+                [$like, $like, $like, $like, $limit, $offset]
+            );
+        }
+        return self::getAll($limit, $offset);
+    }
+
+    public static function countFiltered(string $q = ''): int
+    {
+        if ($q !== '') {
+            $like = '%' . $q . '%';
+            return Database::getInstance()->count(
+                'contact_entries',
+                'name LIKE ? OR phone LIKE ? OR email LIKE ? OR subject LIKE ?',
+                [$like, $like, $like, $like]
+            );
+        }
+        return self::count();
+    }
 }

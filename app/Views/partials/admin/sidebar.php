@@ -1,8 +1,14 @@
 <?php
+use App\Models\ContactEntry;
+use App\Models\AppointmentEntry;
+
+$unreadContacts      = ContactEntry::countUnread();
+$pendingAppointments = AppointmentEntry::countByStatus('pending');
+
 $links = [
-    ['href' => '/admin/dashboard',           'key' => 'dashboard',    'label' => 'Dashboard',    'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z"/>'],
-    ['href' => '/admin/entries/contact',     'key' => 'contacts',     'label' => 'Contact Entries',     'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>'],
-    ['href' => '/admin/entries/appointments', 'key' => 'appointments', 'label' => 'Appointments',  'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>'],
+    ['href' => '/admin/dashboard',            'key' => 'dashboard',    'label' => 'Dashboard',       'badge' => 0,                    'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z"/>'],
+    ['href' => '/admin/entries/contact',      'key' => 'contacts',     'label' => 'Contact Entries', 'badge' => $unreadContacts,      'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>'],
+    ['href' => '/admin/entries/appointments', 'key' => 'appointments', 'label' => 'Appointments',    'badge' => $pendingAppointments, 'icon' => '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>'],
 ];
 ?>
 <aside class="w-64 bg-sidebar flex flex-col flex-shrink-0 h-full">
@@ -24,7 +30,12 @@ $links = [
                 class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                       <?= $active ? 'bg-sidebar-active text-white' : 'text-gray-400 hover:bg-sidebar-hover hover:text-white' ?>">
                 <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><?= $link['icon'] ?></svg>
-                <?= $link['label'] ?>
+                <span class="flex-1"><?= $link['label'] ?></span>
+                <?php if (!empty($link['badge'])): ?>
+                    <span class="ml-auto text-xs font-bold bg-red-500 text-white rounded-full min-w-[1.25rem] h-5 px-1 flex items-center justify-center leading-none">
+                        <?= $link['badge'] > 99 ? '99+' : $link['badge'] ?>
+                    </span>
+                <?php endif; ?>
             </a>
         <?php endforeach; ?>
     </nav>

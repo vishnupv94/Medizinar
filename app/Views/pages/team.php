@@ -34,41 +34,44 @@
         <div class="text-center mb-12 fade-in-up">
             <div class="section-badge">Leadership</div>
             <h2 class="section-title">Leadership &amp; Core Team</h2>
+            <p class="section-subtitle mx-auto mt-4">
+                Meet the dedicated professionals behind Medizinar Care LLP, committed to delivering compassionate, reliable, and professional home healthcare services across India.
+            </p>
         </div>
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
             <?php
             $team = [
                 [
-                    'name'    => 'Jayhar M.J',
-                    'role'    => 'Founder',
+                    'name'    => 'Jayhar M.J.',
+                    'role'    => 'Founder & Managing Partner',
                     'initial' => 'J',
                     'color'   => '#176B23',
                     'photo'   => 'https://randomuser.me/api/portraits/men/32.jpg',
-                    'bio'     => 'Jayhar M.J is the founder of Medizinar Care and the driving force behind the mission to provide dependable home healthcare services. He focuses on building a trusted service that ensures families receive compassionate and responsible caregiving support.',
+                    'bio'     => 'Visionary leader driving Medizinar Care LLP\'s mission to provide trusted, compassionate, and professional home nursing services across India. Focused on operational excellence, service quality, and client satisfaction.',
                 ],
                 [
-                    'name'    => 'Shanimol S.M',
-                    'role'    => 'Accountant',
+                    'name'    => 'Shanimol S.M.',
+                    'role'    => 'Accounts & Finance Manager',
                     'initial' => 'S',
                     'color'   => '#ab7e22',
                     'photo'   => 'https://randomuser.me/api/portraits/women/44.jpg',
-                    'bio'     => 'Shanimol oversees the financial operations of Medizinar Care, ensuring smooth administrative processes and transparent financial management. Her role helps maintain the organisation\'s efficiency and stability.',
+                    'bio'     => 'Responsible for financial planning, accounting operations, compliance management, budgeting, and maintaining the organization\'s financial integrity and transparency.',
                 ],
                 [
-                    'name'    => 'Jaya M',
-                    'role'    => 'Client Relations',
+                    'name'    => 'Jaya M.',
+                    'role'    => 'Client Relationship Manager',
                     'initial' => 'J',
                     'color'   => '#176B23',
                     'photo'   => 'https://randomuser.me/api/portraits/women/68.jpg',
-                    'bio'     => 'Jaya manages communication with clients and coordinates caregiving services. She plays an important role in understanding family needs and arranging the right support services for every client.',
+                    'bio'     => 'Dedicated to ensuring exceptional client satisfaction through seamless communication, personalized support, service coordination, and long-term relationship management.',
                 ],
                 [
-                    'name'    => 'Soumya M',
-                    'role'    => 'Digital Marketing',
+                    'name'    => 'Soumya M.',
+                    'role'    => 'Brand & Digital Communications Manager',
                     'initial' => 'S',
                     'color'   => '#ab7e22',
                     'photo'   => 'https://randomuser.me/api/portraits/women/91.jpg',
-                    'bio'     => 'Soumya handles the digital presence and communication of Medizinar Care, ensuring that families looking for home healthcare support can easily learn about our services and connect with our team.',
+                    'bio'     => 'Responsible for strengthening Medizinar Care LLP\'s brand presence through strategic digital communication, social media management, online engagement, and marketing initiatives. Focused on building trust, increasing visibility, and connecting families with quality home healthcare services.',
                 ],
             ];
             foreach ($team as $i => $member): ?>

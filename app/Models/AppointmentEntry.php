@@ -68,4 +68,50 @@ class AppointmentEntry
             [$limit]
         );
     }
+
+    public static function getFiltered(string $q = '', string $status = '', int $limit = 20, int $offset = 0): array
+    {
+        $where  = [];
+        $params = [];
+
+        if ($q !== '') {
+            $like     = '%' . $q . '%';
+            $where[]  = '(name LIKE ? OR phone LIKE ? OR email LIKE ? OR service LIKE ?)';
+            array_push($params, $like, $like, $like, $like);
+        }
+
+        if ($status !== '') {
+            $where[]  = 'status = ?';
+            $params[] = $status;
+        }
+
+        $whereClause = empty($where) ? '1' : implode(' AND ', $where);
+        array_push($params, $limit, $offset);
+
+        return Database::getInstance()->fetchAll(
+            "SELECT * FROM appointment_entries WHERE {$whereClause} ORDER BY created_at DESC LIMIT ? OFFSET ?",
+            $params
+        );
+    }
+
+    public static function countFiltered(string $q = '', string $status = ''): int
+    {
+        $where  = [];
+        $params = [];
+
+        if ($q !== '') {
+            $like     = '%' . $q . '%';
+            $where[]  = '(name LIKE ? OR phone LIKE ? OR email LIKE ? OR service LIKE ?)';
+            array_push($params, $like, $like, $like, $like);
+        }
+
+        if ($status !== '') {
+            $where[]  = 'status = ?';
+            $params[] = $status;
+        }
+
+        $whereClause = empty($where) ? '1' : implode(' AND ', $where);
+
+        return Database::getInstance()->count('appointment_entries', $whereClause, $params);
+    }
 }

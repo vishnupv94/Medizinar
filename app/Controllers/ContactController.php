@@ -22,7 +22,7 @@ class ContactController extends Controller
     {
         $token = $_POST['csrf_token'] ?? '';
         if (!Csrf::verify($token)) {
-            $this->redirect('/contact', ['error' => 'Invalid form submission. Please try again.']);
+            $this->redirect(url('/contact'), ['error' => 'Invalid form submission. Please try again.']);
         }
 
         $name     = sanitize_input($_POST['name']     ?? '');
@@ -94,7 +94,7 @@ class ContactController extends Controller
                 unlink($attachmentPath);
             }
             $_SESSION['old_cf'] = compact('name', 'phone', 'email', 'category', 'subject', 'message');
-            $this->redirect('/contact', ['error' => implode(' ', $errors)]);
+            $this->redirect(url('/contact'), ['error' => implode(' ', $errors)]);
         }
 
         try {
@@ -108,7 +108,14 @@ class ContactController extends Controller
                 'attachment_name' => $attachmentName,
                 'ip_address'      => $_SERVER['REMOTE_ADDR'] ?? '',
             ]);
-        } catch (\Throwable $ignored) {
+        } catch (\Throwable $e) {
+            if ($attachmentPath && file_exists($attachmentPath)) {
+                unlink($attachmentPath);
+            }
+            $_SESSION['old_cf'] = compact('name', 'phone', 'email', 'category', 'subject', 'message');
+            $this->redirect(url('/contact'), [
+                'error' => 'We could not process your request at this time. Please call us at ' . PHONE_DISPLAY . ' or reach us via WhatsApp.',
+            ]);
         }
 
         $categoryLabels = [
@@ -158,21 +165,16 @@ class ContactController extends Controller
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-        $sent = mail(MAIL_TO, $mailSubject, $body, $headers);
+        @mail(MAIL_TO, $mailSubject, $body, $headers);
 
         if ($attachmentPath && file_exists($attachmentPath)) {
             unlink($attachmentPath);
         }
 
-        if ($sent) {
-            $this->redirect('/contact', [
-                'success' => 'Your message has been sent successfully! We will get back to you as soon as possible.',
-            ]);
-        } else {
-            $_SESSION['old_cf'] = compact('name', 'phone', 'email', 'category', 'subject', 'message');
-            $this->redirect('/contact', [
-                'error' => 'We could not send your message at this time. Please call us at ' . PHONE_DISPLAY . ' or reach us via WhatsApp.',
-            ]);
-        }
+        unset($_SESSION['old_cf']);
+
+        $this->redirect(url('/contact'), [
+            'success' => 'Your message has been sent successfully! We will get back to you as soon as possible.',
+        ]);
     }
 }

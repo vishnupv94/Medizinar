@@ -28,7 +28,7 @@ class AppointmentController extends Controller
     {
         $token = $_POST['csrf_token'] ?? '';
         if (!Csrf::verify($token)) {
-            $this->redirect('/appointment', ['error' => 'Invalid form submission. Please try again.']);
+            $this->redirect(url('/appointment'), ['error' => 'Invalid form submission. Please try again.']);
         }
 
         $name       = sanitize_input($_POST['name']       ?? '');
@@ -74,7 +74,7 @@ class AppointmentController extends Controller
 
         if (!empty($errors)) {
             $_SESSION['old_appt'] = compact('name', 'phone', 'email', 'service', 'location', 'start_date', 'duration', 'message');
-            $this->redirect('/appointment', ['error' => implode(' ', $errors)]);
+            $this->redirect(url('/appointment'), ['error' => implode(' ', $errors)]);
         }
 
         try {
@@ -89,7 +89,11 @@ class AppointmentController extends Controller
                 'message'    => $message ?: null,
                 'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
             ]);
-        } catch (\Throwable $ignored) {
+        } catch (\Throwable $e) {
+            $_SESSION['old_appt'] = compact('name', 'phone', 'email', 'service', 'location', 'start_date', 'duration', 'message');
+            $this->redirect(url('/appointment'), [
+                'error' => 'We could not process your request at this time. Please call us at ' . PHONE_DISPLAY . ' or reach us via WhatsApp.',
+            ]);
         }
 
         $serviceLabels = [
@@ -144,17 +148,12 @@ class AppointmentController extends Controller
         $headers .= "MIME-Version: 1.0\r\n";
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-        $sent = mail(MAIL_TO, $subject, $body, $headers);
+        @mail(MAIL_TO, $subject, $body, $headers);
 
-        if ($sent) {
-            $this->redirect('/appointment', [
-                'success' => 'Your appointment request has been received! Our team will contact you within 24 hours to confirm the details.',
-            ]);
-        } else {
-            $_SESSION['old_appt'] = compact('name', 'phone', 'email', 'service', 'location', 'start_date', 'duration', 'message');
-            $this->redirect('/appointment', [
-                'error' => 'We could not send your request at this time. Please try calling us directly at ' . PHONE_DISPLAY . ' or reach us via WhatsApp.',
-            ]);
-        }
+        unset($_SESSION['old_appt']);
+
+        $this->redirect(url('/appointment'), [
+            'success' => 'Your appointment request has been received! Our team will contact you within 24 hours to confirm the details.',
+        ]);
     }
 }
