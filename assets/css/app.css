@@ -123,29 +123,66 @@ body {
 
 /* ----- Cards ----- */
 .service-card {
-  background: white;
-  border-radius: 14px;
+  background: linear-gradient(
+    145deg,
+    rgba(171,126,34,0.06) 0%,
+    rgba(255,255,255,0.95) 35%,
+    rgba(23,107,35,0.05) 100%
+  );
+  border-radius: 16px;
   padding: 2rem;
-  border: 1px solid var(--border-light);
-  box-shadow: 0 2px 12px rgba(23,107,35,0.07);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  border: 1px solid #eaeaea;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 4px 16px rgba(23,107,35,0.07);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--logo-gold), var(--logo-green), var(--logo-gold));
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.service-card:hover::before {
+  opacity: 1;
 }
 
 .service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 32px rgba(23,107,35,0.13);
-  border-color: var(--accent);
+  transform: translateY(-5px);
+  border-color: rgba(171,126,34,0.28);
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.05),
+    0 14px 38px rgba(23,107,35,0.12),
+    0 4px 12px rgba(171,126,34,0.08);
 }
 
 .service-icon {
   width: 52px;
   height: 52px;
-  background: var(--primary-light);
-  border-radius: 12px;
+  background: linear-gradient(135deg, var(--logo-gold) 0%, #c4922a 100%);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(171,126,34,0.30);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-icon svg {
+  filter: brightness(0) invert(1);
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(171,126,34,0.40);
 }
 
 /* ----- Step cards (How it works) ----- */
@@ -465,30 +502,69 @@ body {
 
 /* ----- Contact info cards ----- */
 .contact-info-card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  border: 1px solid var(--border-light);
-  box-shadow: 0 2px 12px rgba(23,107,35,0.07);
+  background: linear-gradient(
+    145deg,
+    rgba(171,126,34,0.06) 0%,
+    rgba(255,255,255,0.95) 40%,
+    rgba(23,107,35,0.05) 100%
+  );
+  border-radius: 16px;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid #eaeaea;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 4px 16px rgba(23,107,35,0.07);
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  transition: transform 0.2s ease;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--logo-gold), var(--logo-green), var(--logo-gold));
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.contact-info-card:hover::before {
+  opacity: 1;
 }
 
 .contact-info-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  border-color: rgba(171,126,34,0.28);
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.05),
+    0 12px 32px rgba(23,107,35,0.11),
+    0 4px 10px rgba(171,126,34,0.08);
 }
 
 .contact-icon {
-  width: 44px;
-  height: 44px;
-  background: var(--accent-light);
-  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--logo-gold) 0%, #c4922a 100%);
+  border-radius: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(171,126,34,0.30);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-icon svg {
+  filter: brightness(0) invert(1);
+}
+
+.contact-info-card:hover .contact-icon {
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(171,126,34,0.40);
 }
 
 /* ----- Responsive tweaks ----- */
