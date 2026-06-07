@@ -59,6 +59,13 @@
 
     <?php partial('nav', ['page' => $page ?? '']) ?>
 
+    <?php if ($msg = flash('error')): ?>
+        <div class="bg-red-50 border-b border-red-200 px-4 py-3 text-sm text-red-700 text-center"><?= h($msg) ?></div>
+    <?php endif; ?>
+    <?php if ($msg = flash('success')): ?>
+        <div class="bg-green-50 border-b border-green-200 px-4 py-3 text-sm text-green-700 text-center"><?= h($msg) ?></div>
+    <?php endif; ?>
+
     <?= $content ?>
 
     <?php partial('floating-buttons') ?>
