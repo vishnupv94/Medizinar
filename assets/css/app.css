@@ -390,13 +390,30 @@ body {
   overflow: hidden;
   border: 1px solid var(--border-light);
   box-shadow: 0 2px 12px rgba(23,107,35,0.07);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
   text-align: center;
+  position: relative;
+  height: 260px;
 }
 
 .team-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(23,107,35,0.13);
+  box-shadow: 0 14px 36px rgba(23,107,35,0.16);
+}
+
+.team-card-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  position: absolute;
+  inset: 0;
+  transition: transform 0.4s ease;
+}
+
+.team-card:hover .team-card-photo {
+  transform: scale(1.05);
 }
 
 .team-avatar {
@@ -415,6 +432,17 @@ body {
   box-shadow: 0 4px 12px rgba(23,107,35,0.2);
 }
 
+.team-photo {
+  width: 110px;
+  height: 110px;
+  border-radius: 16px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  margin: 0 auto;
+  border: 3px solid white;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+}
 /* ----- Floating buttons animation ----- */
 .float-btn {
   animation: float-in 0.5s ease both;

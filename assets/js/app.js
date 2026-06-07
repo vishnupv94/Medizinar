@@ -1,5 +1,34 @@
 /* Medizinar Care — Main JavaScript */
 
+// ── Team member modal ────────────────────────────────────
+function openTeamModal(btn) {
+  const modal   = document.getElementById('team-modal');
+  const photo   = document.getElementById('modal-photo');
+  const name    = document.getElementById('modal-name');
+  const role    = document.getElementById('modal-role');
+  const bio     = document.getElementById('modal-bio');
+  const color   = btn.dataset.color;
+
+  photo.src           = btn.dataset.photo;
+  photo.alt           = btn.dataset.name;
+  name.textContent    = btn.dataset.name;
+  role.textContent    = btn.dataset.role;
+  role.style.background = color;
+  bio.textContent     = btn.dataset.bio;
+
+  modal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeTeamModal() {
+  document.getElementById('team-modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeTeamModal();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ── Mobile menu toggle ──────────────────────────────────
