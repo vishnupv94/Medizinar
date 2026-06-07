@@ -587,3 +587,6 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ----- Hide reCAPTCHA v3 badge (disclosure shown on forms instead) ----- */
+.grecaptcha-badge { visibility: hidden !important; }

@@ -190,6 +190,13 @@
                                 Your data is secure and private.
                             </p>
                         </div>
+                        <?php if (recaptcha_enabled()): ?>
+                        <p class="text-gray-400 text-xs mt-2">
+                            Protected by reCAPTCHA &mdash;
+                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="underline hover:text-gray-500">Privacy</a> &amp;
+                            <a href="https://policies.google.com/terms" target="_blank" rel="noopener" class="underline hover:text-gray-500">Terms</a> apply.
+                        </p>
+                        <?php endif; ?>
 
                         <?php unset($_SESSION['old_appt']); ?>
                     </form>
