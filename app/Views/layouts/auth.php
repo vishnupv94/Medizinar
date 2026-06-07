@@ -34,7 +34,9 @@
 </head>
 
 <body class="font-sans bg-gray-100 text-gray-800 antialiased min-h-screen flex items-center justify-center">
+    <?php partial('success-popup') ?>
     <?= $content ?>
+    <script src="<?= asset('js/app.js') ?>?v=<?= filemtime(ROOT_PATH . '/assets/js/app.js') ?>"></script>
 </body>
 
 </html>

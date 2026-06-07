@@ -63,6 +63,7 @@
 </head>
 
 <body class="font-sans bg-gray-100 text-gray-800 antialiased">
+    <?php partial('success-popup') ?>
     <div class="flex h-screen overflow-hidden">
 
         <?php partial('admin/sidebar', ['adminPage' => $adminPage ?? '']) ?>
@@ -72,9 +73,6 @@
             <?php partial('admin/topbar') ?>
 
             <main class="flex-1 overflow-y-auto p-6 admin-scrollbar">
-                <?php if ($msg = flash('success')): ?>
-                    <div class="mb-4 rounded-lg bg-green-50 border border-green-200 text-green-800 px-4 py-3 text-sm"><?= h($msg) ?></div>
-                <?php endif; ?>
                 <?php if ($msg = flash('error')): ?>
                     <div class="mb-4 rounded-lg bg-red-50 border border-red-200 text-red-800 px-4 py-3 text-sm"><?= h($msg) ?></div>
                 <?php endif; ?>
@@ -91,6 +89,7 @@
             });
         });
     </script>
+    <script src="<?= asset('js/app.js') ?>?v=<?= filemtime(ROOT_PATH . '/assets/js/app.js') ?>"></script>
 </body>
 
 </html>

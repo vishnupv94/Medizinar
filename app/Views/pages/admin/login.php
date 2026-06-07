@@ -13,9 +13,6 @@
         <?php if ($msg = flash('error')): ?>
             <div class="mb-4 rounded-lg bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm"><?= h($msg) ?></div>
         <?php endif; ?>
-        <?php if ($msg = flash('success')): ?>
-            <div class="mb-4 rounded-lg bg-green-50 border border-green-200 text-green-700 px-4 py-3 text-sm"><?= h($msg) ?></div>
-        <?php endif; ?>
 
         <form method="POST" action="<?= url('/admin/login') ?>" class="space-y-5">
             <?= csrf_field() ?>
