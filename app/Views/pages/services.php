@@ -217,12 +217,6 @@
                         </div>
                     </div>
                 </div>
-                            </div>
-                            <h3 class="text-xl font-bold mb-3" style="color:#7a5a10">House Maid Services</h3>
-                            <p class="text-sm leading-relaxed" style="color:#8a6820">Trusted domestic staff providing daily household support and a clean, organised home environment.</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -269,7 +263,7 @@
                 ],
             ];
             foreach ($quick as $i => $q): ?>
-                <div id="<?= $q['id'] ?>" class="service-card fade-in-up scroll-mt-24" style="animation-delay:<?= $i * 0.1 ?>s">
+                <div id="<?= $q['id'] ?>" class="service-card fade-in-up scroll-mt-24 flex flex-col h-full" style="animation-delay:<?= $i * 0.1 ?>s">
                     <div class="service-icon"><?= $q['icon'] ?></div>
                     <h3 class="font-bold text-gray-800 mb-3"><?= h($q['title']) ?></h3>
                     <ul class="space-y-2 mb-4">
@@ -282,7 +276,7 @@
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                    <a href="<?= url('/appointment') ?>?service=<?= $q['id'] ?>" class="inline-flex items-center gap-1 text-sm font-semibold transition-all hover:gap-2" style="color:#a5781e">
+                    <a href="<?= url('/appointment') ?>?service=<?= $q['id'] ?>" class="inline-flex items-center gap-1 text-sm font-semibold transition-all hover:gap-2 mt-auto" style="color:#a5781e">
                         Book Now
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
