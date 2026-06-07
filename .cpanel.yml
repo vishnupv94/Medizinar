@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home1/skyhine3/medizinarcare.skyhine.com/
+    - export DEPLOYPATH=/home1/skyhine3/medizinarcare_live/
     - /bin/rsync -a --exclude='.git' --exclude='.env' --exclude='uploads/' --exclude='error_log' --exclude='medicinar/' --exclude='package-lock.json' --exclude='.DS_Store' . $DEPLOYPATH
     - find $DEPLOYPATH -type d -not -path '*/.git/*' -exec chmod 755 {} \;
     - find $DEPLOYPATH/app -type f -name '*.php' -exec chmod 644 {} \;
