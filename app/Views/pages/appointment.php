@@ -174,7 +174,7 @@
 
                         <?php if (recaptcha_enabled()): ?>
                         <div class="mb-6">
-                            <div class="g-recaptcha" data-sitekey="<?= h(RECAPTCHA_SITE_KEY) ?>" data-theme="light"></div>
+                            <div class="g-recaptcha" data-sitekey="<?= h(recaptcha_site_key()) ?>" data-theme="light"></div>
                         </div>
                         <?php endif; ?>
 

@@ -2,9 +2,24 @@
 
 namespace App\Helpers;
 
+use App\Models\SiteSetting;
+
 class Recaptcha
 {
     private const VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
+
+    /**
+     * Return the active site key (DB value takes priority over .env constant).
+     */
+    public static function siteKey(): string
+    {
+        try {
+            $dbKey = SiteSetting::get('RECAPTCHA_SITE_KEY', '');
+            return $dbKey !== '' ? $dbKey : (defined('RECAPTCHA_SITE_KEY') ? RECAPTCHA_SITE_KEY : '');
+        } catch (\Throwable $e) {
+            return defined('RECAPTCHA_SITE_KEY') ? RECAPTCHA_SITE_KEY : '';
+        }
+    }
 
     /**
      * Verify the reCAPTCHA token sent with the form.
@@ -13,7 +28,12 @@ class Recaptcha
      */
     public static function verify(string $token): bool
     {
-        $secret = defined('RECAPTCHA_SECRET_KEY') ? RECAPTCHA_SECRET_KEY : '';
+        try {
+            $dbSecret = SiteSetting::get('RECAPTCHA_SECRET_KEY', '');
+            $secret   = $dbSecret !== '' ? $dbSecret : (defined('RECAPTCHA_SECRET_KEY') ? RECAPTCHA_SECRET_KEY : '');
+        } catch (\Throwable $e) {
+            $secret = defined('RECAPTCHA_SECRET_KEY') ? RECAPTCHA_SECRET_KEY : '';
+        }
 
         if ($secret === '') {
             // reCAPTCHA not configured – skip verification
@@ -56,6 +76,6 @@ class Recaptcha
      */
     public static function isEnabled(): bool
     {
-        return defined('RECAPTCHA_SITE_KEY') && RECAPTCHA_SITE_KEY !== '';
+        return self::siteKey() !== '';
     }
 }

@@ -88,3 +88,8 @@ function recaptcha_verify(string $token): bool
 {
     return \App\Helpers\Recaptcha::verify($token);
 }
+
+function recaptcha_site_key(): string
+{
+    return \App\Helpers\Recaptcha::siteKey();
+}

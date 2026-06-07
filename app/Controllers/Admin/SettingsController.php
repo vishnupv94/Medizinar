@@ -4,9 +4,16 @@ namespace App\Controllers\Admin;
 
 use App\Core\Controller;
 use App\Helpers\Csrf;
+use App\Models\SiteSetting;
 
 class SettingsController extends Controller
 {
+    private const FIELDS = [
+        'RECAPTCHA_SITE_KEY',
+        'RECAPTCHA_SECRET_KEY',
+        'GOOGLE_MAPS_EMBED_URL',
+    ];
+
     public function __construct()
     {
         $this->layout = 'admin';
@@ -15,9 +22,13 @@ class SettingsController extends Controller
 
     public function index(): void
     {
+        // Load current values from DB (fallback to constants from .env via app.php)
+        $settings = SiteSetting::all();
+
         $this->view('admin/settings', [
             'pageTitle' => 'Settings',
             'adminPage' => 'settings',
+            'settings'  => $settings,
         ]);
     }
 
@@ -27,43 +38,15 @@ class SettingsController extends Controller
             $this->redirect(url('/admin/settings'), ['error' => 'Invalid form submission.']);
         }
 
-        $envPath = ROOT_PATH . '/.env';
-
-        if (!is_readable($envPath) || !is_writable($envPath)) {
-            $this->redirect(url('/admin/settings'), ['error' => 'Cannot write to .env file. Please check file permissions.']);
-        }
-
-        // Fields allowed to be updated via this form
-        $fields = [
-            'RECAPTCHA_SITE_KEY',
-            'RECAPTCHA_SECRET_KEY',
-            'GOOGLE_MAPS_EMBED_URL',
-        ];
-
-        $lines   = file($envPath, FILE_IGNORE_NEW_LINES);
-        $updated = [];
-
-        foreach ($lines as $line) {
-            $trimmed = trim($line);
-
-            // Preserve blank lines and comments
-            if ($trimmed === '' || $trimmed[0] === '#') {
-                $updated[] = $line;
-                continue;
-            }
-
-            $parts = explode('=', $trimmed, 2);
-            $key   = trim($parts[0]);
-
-            if (in_array($key, $fields, true) && isset($_POST[$key])) {
-                $val     = str_replace(["\r", "\n"], '', $_POST[$key]);
-                $updated[] = $key . '=' . $val;
-            } else {
-                $updated[] = $line;
+        $data = [];
+        foreach (self::FIELDS as $field) {
+            if (isset($_POST[$field])) {
+                // Sanitise: strip bare CR/LF characters (textarea may inject them)
+                $data[$field] = trim(str_replace(["\r\n", "\r"], "\n", $_POST[$field]));
             }
         }
 
-        file_put_contents($envPath, implode("\n", $updated) . "\n");
+        SiteSetting::setMany($data);
 
         $this->redirect(url('/admin/settings'), ['success' => 'Settings saved successfully.']);
     }

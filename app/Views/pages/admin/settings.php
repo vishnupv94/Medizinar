@@ -21,7 +21,7 @@
                     <p class="text-xs text-gray-500">Protects your contact and appointment forms from spam bots.</p>
                 </div>
                 <div class="ml-auto">
-                    <?php if (RECAPTCHA_SITE_KEY !== ''): ?>
+                    <?php if (($settings['RECAPTCHA_SITE_KEY'] ?? '') !== ''): ?>
                         <span class="inline-flex items-center gap-1.5 text-xs font-medium text-green-700 bg-green-100 px-2.5 py-1 rounded-full">
                             <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Active
                         </span>
@@ -41,7 +41,7 @@
                     <input type="text" id="RECAPTCHA_SITE_KEY" name="RECAPTCHA_SITE_KEY"
                         class="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary font-mono"
                         placeholder="6Le…"
-                        value="<?= h(RECAPTCHA_SITE_KEY) ?>">
+                        value="<?= h($settings['RECAPTCHA_SITE_KEY'] ?? '') ?>">
                 </div>
 
                 <div>
@@ -51,7 +51,7 @@
                     <input type="password" id="RECAPTCHA_SECRET_KEY" name="RECAPTCHA_SECRET_KEY"
                         class="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary font-mono"
                         placeholder="6Le…"
-                        value="<?= h(RECAPTCHA_SECRET_KEY) ?>">
+                        value="<?= h($settings['RECAPTCHA_SECRET_KEY'] ?? '') ?>">
                     <button type="button" onclick="toggleSecret()" class="mt-1.5 text-xs text-primary hover:underline">Show / Hide key</button>
                 </div>
 
@@ -92,15 +92,15 @@
                     </label>
                     <textarea id="GOOGLE_MAPS_EMBED_URL" name="GOOGLE_MAPS_EMBED_URL" rows="4"
                         class="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary font-mono resize-y"
-                        placeholder="https://www.google.com/maps/embed?pb=..."><?= h(GOOGLE_MAPS_EMBED_URL) ?></textarea>
+                        placeholder="https://www.google.com/maps/embed?pb=..."><?= h($settings['GOOGLE_MAPS_EMBED_URL'] ?? '') ?></textarea>
                     <p class="text-xs text-gray-400 mt-1.5">
                         Open Google Maps → find your location → Share → Embed a map → copy the <code>src="..."</code> URL.
                     </p>
                 </div>
 
-                <?php if (GOOGLE_MAPS_EMBED_URL !== ''): ?>
+                <?php if (($settings['GOOGLE_MAPS_EMBED_URL'] ?? '') !== ''): ?>
                 <div class="rounded-lg overflow-hidden border border-gray-200" style="height:220px">
-                    <iframe src="<?= h(GOOGLE_MAPS_EMBED_URL) ?>" width="100%" height="100%" style="border:0"
+                    <iframe src="<?= h($settings['GOOGLE_MAPS_EMBED_URL'] ?? '') ?>" width="100%" height="100%" style="border:0"
                         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>

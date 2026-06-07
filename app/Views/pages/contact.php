@@ -166,7 +166,7 @@
 
                     <?php if (recaptcha_enabled()): ?>
                     <div class="mb-5">
-                        <div class="g-recaptcha" data-sitekey="<?= h(RECAPTCHA_SITE_KEY) ?>" data-theme="light"></div>
+                        <div class="g-recaptcha" data-sitekey="<?= h(recaptcha_site_key()) ?>" data-theme="light"></div>
                     </div>
                     <?php endif; ?>
 
@@ -186,7 +186,7 @@
                     <div class="rounded-2xl overflow-hidden shadow-card border border-primary-100" style="height:350px;border-color:#d4e8d5">
                         <iframe
                             title="Medizinar Care Office Location"
-                            src="<?= h(GOOGLE_MAPS_EMBED_URL) ?>"
+                            src="<?= h(\App\Models\SiteSetting::get('GOOGLE_MAPS_EMBED_URL', GOOGLE_MAPS_EMBED_URL)) ?>"
                             width="100%" height="100%" style="border:0" allowfullscreen=""
                             loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
