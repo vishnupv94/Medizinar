@@ -113,23 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay);
   });
 
-  // ── Phone number OTP UI toggle ──────────────────────────
-  const otpTrigger = document.getElementById('send-otp-btn');
-  const otpSection = document.getElementById('otp-section');
-  if (otpTrigger && otpSection) {
-    otpTrigger.addEventListener('click', () => {
-      const phoneInput = document.getElementById('phone');
-      if (!phoneInput || !phoneInput.value.trim()) {
-        phoneInput && phoneInput.focus();
-        return;
-      }
-      otpSection.classList.remove('hidden');
-      otpTrigger.textContent = 'Resend OTP';
-      otpTrigger.classList.add('opacity-70');
-      // NOTE: Real OTP requires backend SMS integration (Twilio / MSG91)
-    });
-  }
-
   // ── Active nav link highlight (current page) ───────────
   const currentPath = window.location.pathname.split('/').pop() || 'index.php';
   document.querySelectorAll('nav a').forEach(link => {

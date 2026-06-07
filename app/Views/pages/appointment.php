@@ -44,28 +44,10 @@
                                     <label for="phone" class="block text-sm font-medium text-gray-700 mb-1.5">
                                         Phone Number <span class="text-red-500">*</span>
                                     </label>
-                                    <div class="flex gap-2">
-                                        <input type="tel" id="phone" name="phone" required
-                                            class="form-input flex-1 <?= !empty($errors['phone']) ? 'is-invalid' : '' ?>"
-                                            placeholder="+91 XXXXX XXXXX"
-                                            value="<?= h($old['phone'] ?? '') ?>">
-                                        <button type="button" id="send-otp-btn"
-                                            class="shrink-0 px-3 py-2.5 rounded-lg text-sm font-medium border-2 transition-colors"
-                                            style="border-color:#a5781e;color:#a5781e"
-                                            onmouseover="this.style.background='#a5781e';this.style.color='white'"
-                                            onmouseout="this.style.background='';this.style.color='#a5781e'">
-                                            Send OTP
-                                        </button>
-                                    </div>
-                                    <div id="otp-section" class="hidden mt-3">
-                                        <label class="block text-sm font-medium text-gray-700 mb-1.5">Enter OTP</label>
-                                        <input type="text" name="otp" inputmode="numeric" maxlength="6"
-                                            class="form-input tracking-widest text-center font-semibold"
-                                            placeholder="· · · · · ·">
-                                        <p class="text-xs text-gray-400 mt-1.5">
-                                            OTP sent to your mobile number. (Note: Live OTP requires SMS integration.)
-                                        </p>
-                                    </div>
+                                    <input type="tel" id="phone" name="phone" required
+                                        class="form-input <?= !empty($errors['phone']) ? 'is-invalid' : '' ?>"
+                                        placeholder="+91 XXXXX XXXXX"
+                                        value="<?= h($old['phone'] ?? '') ?>">
                                     <?php if (!empty($errors['phone'])): ?>
                                         <p class="form-error"><?= h($errors['phone']) ?></p>
                                     <?php endif; ?>
