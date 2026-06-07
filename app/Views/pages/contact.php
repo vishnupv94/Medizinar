@@ -179,7 +179,7 @@
                         </iframe>
                     </div>
                     <p class="text-gray-400 text-xs mt-2 text-center">
-                        Melkulangara, Vayakal B.O, Kottarakkara, Kollam, Kerala
+                        Melkulangara, Vayakal Post Office, Kottarakkara, Kollam, Kerala
                     </p>
                 </div>
 

@@ -9,7 +9,7 @@ define('PHONE_DISPLAY', '+91 97457 82716');
 define('WHATSAPP_NUM', '919745782716');
 define('EMAIL', 'Care@medizinarcare.com');
 
-define('ADDRESS_LINE1', 'Melkulangara, Vayakal B.O');
+define('ADDRESS_LINE1', 'Melkulangara, Vayakal Post Office');
 define('ADDRESS_LINE2', 'Kottarakkara, Kollam District – 691532');
 define('ADDRESS_LINE3', 'Kerala, India');
 
