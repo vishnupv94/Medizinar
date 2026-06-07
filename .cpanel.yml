@@ -8,3 +8,4 @@ deployment:
     - find $DEPLOYPATH/assets -type f -exec chmod 644 {} \;
     - mkdir -p $DEPLOYPATH/uploads/contact
     - chmod 755 $DEPLOYPATH/uploads $DEPLOYPATH/uploads/contact
+    - php $DEPLOYPATH/database/setup.php
