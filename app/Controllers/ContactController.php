@@ -11,10 +11,14 @@ class ContactController extends Controller
 {
     public function index(): void
     {
+        $errors = $_SESSION['cf_errors'] ?? [];
+        unset($_SESSION['cf_errors']);
+
         $this->view('contact', [
             'page'      => 'contact',
             'pageTitle' => 'Contact Us',
             'metaDesc'  => 'Contact Medizinar Care for home healthcare inquiries, support requests, or to book a service. Phone, WhatsApp, or our online contact form.',
+            'errors'    => $errors,
         ]);
     }
 
@@ -35,24 +39,24 @@ class ContactController extends Controller
         $errors = [];
 
         if ($name === '' || mb_strlen($name) < 2) {
-            $errors[] = 'Full name must be at least 2 characters.';
+            $errors['name'] = 'Full name must be at least 2 characters.';
         }
         if ($phone === '') {
-            $errors[] = 'Phone number is required.';
+            $errors['phone'] = 'Phone number is required.';
         } elseif (!validate_phone($phone)) {
-            $errors[] = 'Please enter a valid Indian mobile number.';
+            $errors['phone'] = 'Please enter a valid Indian mobile number.';
         }
         if ($email !== '' && !validate_email($email)) {
-            $errors[] = 'Please enter a valid email address.';
+            $errors['email'] = 'Please enter a valid email address.';
         }
         if ($category === '') {
-            $errors[] = 'Please select a ticket category.';
+            $errors['category'] = 'Please select a ticket category.';
         }
         if ($subject === '' || mb_strlen($subject) < 3) {
-            $errors[] = 'Subject must be at least 3 characters.';
+            $errors['subject'] = 'Subject must be at least 3 characters.';
         }
         if ($message === '' || mb_strlen($message) < 10) {
-            $errors[] = 'Message must be at least 10 characters.';
+            $errors['message'] = 'Message must be at least 10 characters.';
         }
 
         $attachmentPath = null;
@@ -93,8 +97,9 @@ class ContactController extends Controller
             if ($attachmentPath && file_exists($attachmentPath)) {
                 unlink($attachmentPath);
             }
-            $_SESSION['old_cf'] = compact('name', 'phone', 'email', 'category', 'subject', 'message');
-            $this->redirect(url('/contact'), ['error' => implode(' ', $errors)]);
+            $_SESSION['old_cf']    = compact('name', 'phone', 'email', 'category', 'subject', 'message');
+            $_SESSION['cf_errors'] = $errors;
+            $this->redirect(url('/contact'));
         }
 
         try {

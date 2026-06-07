@@ -10,7 +10,10 @@ class AppointmentController extends Controller
 {
     public function index(): void
     {
-        $old        = $_SESSION['old_appt'] ?? [];
+        $old    = $_SESSION['old_appt'] ?? [];
+        $errors = $_SESSION['appt_errors'] ?? [];
+        unset($_SESSION['appt_errors']);
+
         $preService = sanitize_input($_GET['service'] ?? '');
         if (empty($old['service']) && !empty($preService)) {
             $old['service'] = $preService;
@@ -21,6 +24,7 @@ class AppointmentController extends Controller
             'pageTitle' => 'Make an Appointment',
             'metaDesc'  => 'Book a home healthcare appointment with Medizinar Care. Choose your service, share your requirements, and our team will reach you promptly.',
             'old'       => $old,
+            'errors'    => $errors,
         ]);
     }
 
@@ -43,38 +47,39 @@ class AppointmentController extends Controller
         $errors = [];
 
         if ($name === '' || mb_strlen($name) < 2) {
-            $errors[] = 'Full name must be at least 2 characters.';
+            $errors['name'] = 'Full name must be at least 2 characters.';
         }
         if ($phone === '') {
-            $errors[] = 'Phone number is required.';
+            $errors['phone'] = 'Phone number is required.';
         } elseif (!validate_phone($phone)) {
-            $errors[] = 'Please enter a valid Indian mobile number.';
+            $errors['phone'] = 'Please enter a valid Indian mobile number.';
         }
         if ($email !== '' && !validate_email($email)) {
-            $errors[] = 'Please enter a valid email address.';
+            $errors['email'] = 'Please enter a valid email address.';
         }
         if ($service === '') {
-            $errors[] = 'Please select the service you need.';
+            $errors['service'] = 'Please select the service you need.';
         }
         if ($location === '' || mb_strlen($location) < 10) {
-            $errors[] = 'Please enter a complete location/address (min 10 characters).';
+            $errors['location'] = 'Please enter a complete location/address (min 10 characters).';
         }
         if ($start_date === '') {
-            $errors[] = 'Please select a preferred start date.';
+            $errors['start_date'] = 'Please select a preferred start date.';
         } else {
             $parsedDate = \DateTime::createFromFormat('Y-m-d', $start_date);
             $today      = new \DateTime('today');
             if ($parsedDate === false || $parsedDate < $today) {
-                $errors[] = 'Preferred start date must be today or a future date.';
+                $errors['start_date'] = 'Preferred start date must be today or a future date.';
             }
         }
         if ($duration === '') {
-            $errors[] = 'Please select a duration.';
+            $errors['duration'] = 'Please select a duration.';
         }
 
         if (!empty($errors)) {
-            $_SESSION['old_appt'] = compact('name', 'phone', 'email', 'service', 'location', 'start_date', 'duration', 'message');
-            $this->redirect(url('/appointment'), ['error' => implode(' ', $errors)]);
+            $_SESSION['old_appt']    = compact('name', 'phone', 'email', 'service', 'location', 'start_date', 'duration', 'message');
+            $_SESSION['appt_errors'] = $errors;
+            $this->redirect(url('/appointment'));
         }
 
         try {

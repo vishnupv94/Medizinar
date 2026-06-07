@@ -84,45 +84,43 @@
                     Submit a support request, inquiry, or feedback. Our team will review and respond promptly.
                 </p>
 
-                <?php if (!empty($success)): ?>
-                    <div class="alert alert-success" data-auto-close="6000" role="alert">
-                        ✅ <?= h($success) ?>
-                    </div>
-                <?php endif; ?>
-                <?php if (!empty($error)): ?>
-                    <div class="alert alert-error" role="alert">
-                        ❌ <?= h($error) ?>
-                    </div>
-                <?php endif; ?>
-
                 <form action="<?= url('/contact') ?>" method="POST" enctype="multipart/form-data" novalidate>
                     <?= csrf_field() ?>
 
                     <div class="grid sm:grid-cols-2 gap-5 mb-5">
                         <div>
                             <label class="form-label" for="cf_name">Full Name <span class="text-red-500">*</span></label>
-                            <input type="text" id="cf_name" name="name" class="form-input"
+                            <input type="text" id="cf_name" name="name" class="form-input <?= !empty($errors['name']) ? 'is-invalid' : '' ?>"
                                 placeholder="Your full name" required maxlength="120"
                                 value="<?= h($_SESSION['old_cf']['name'] ?? '') ?>">
+                            <?php if (!empty($errors['name'])): ?>
+                                <p class="form-error"><?= h($errors['name']) ?></p>
+                            <?php endif; ?>
                         </div>
                         <div>
                             <label class="form-label" for="cf_phone">Phone Number <span class="text-red-500">*</span></label>
-                            <input type="tel" id="cf_phone" name="phone" class="form-input"
+                            <input type="tel" id="cf_phone" name="phone" class="form-input <?= !empty($errors['phone']) ? 'is-invalid' : '' ?>"
                                 placeholder="e.g. 9745782716" required maxlength="15"
                                 value="<?= h($_SESSION['old_cf']['phone'] ?? '') ?>">
+                            <?php if (!empty($errors['phone'])): ?>
+                                <p class="form-error"><?= h($errors['phone']) ?></p>
+                            <?php endif; ?>
                         </div>
                     </div>
 
                     <div class="mb-5">
                         <label class="form-label" for="cf_email">Email Address</label>
-                        <input type="email" id="cf_email" name="email" class="form-input"
+                        <input type="email" id="cf_email" name="email" class="form-input <?= !empty($errors['email']) ? 'is-invalid' : '' ?>"
                             placeholder="your@email.com" maxlength="200"
                             value="<?= h($_SESSION['old_cf']['email'] ?? '') ?>">
+                        <?php if (!empty($errors['email'])): ?>
+                            <p class="form-error"><?= h($errors['email']) ?></p>
+                        <?php endif; ?>
                     </div>
 
                     <div class="mb-5">
                         <label class="form-label" for="cf_category">Ticket Category <span class="text-red-500">*</span></label>
-                        <select id="cf_category" name="category" class="form-select" required>
+                        <select id="cf_category" name="category" class="form-select <?= !empty($errors['category']) ? 'is-invalid' : '' ?>" required>
                             <option value="">Select a category</option>
                             <?php
                             $cats = ['General Inquiry', 'Complaint / Issue', 'Service Feedback', 'Caregiver Support Request'];
@@ -133,19 +131,28 @@
                                 </option>
                             <?php endforeach; ?>
                         </select>
+                        <?php if (!empty($errors['category'])): ?>
+                            <p class="form-error"><?= h($errors['category']) ?></p>
+                        <?php endif; ?>
                     </div>
 
                     <div class="mb-5">
                         <label class="form-label" for="cf_subject">Subject <span class="text-red-500">*</span></label>
-                        <input type="text" id="cf_subject" name="subject" class="form-input"
+                        <input type="text" id="cf_subject" name="subject" class="form-input <?= !empty($errors['subject']) ? 'is-invalid' : '' ?>"
                             placeholder="Brief subject of your inquiry" required maxlength="200"
                             value="<?= h($_SESSION['old_cf']['subject'] ?? '') ?>">
+                        <?php if (!empty($errors['subject'])): ?>
+                            <p class="form-error"><?= h($errors['subject']) ?></p>
+                        <?php endif; ?>
                     </div>
 
                     <div class="mb-5">
                         <label class="form-label" for="cf_message">Message / Description <span class="text-red-500">*</span></label>
-                        <textarea id="cf_message" name="message" class="form-textarea" rows="5"
+                        <textarea id="cf_message" name="message" class="form-textarea <?= !empty($errors['message']) ? 'is-invalid' : '' ?>" rows="5"
                             placeholder="Describe your inquiry, issue, or feedback in detail..." required maxlength="3000"><?= h($_SESSION['old_cf']['message'] ?? '') ?></textarea>
+                        <?php if (!empty($errors['message'])): ?>
+                            <p class="form-error"><?= h($errors['message']) ?></p>
+                        <?php endif; ?>
                     </div>
 
                     <div class="mb-7">

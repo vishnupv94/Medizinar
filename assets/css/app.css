@@ -359,6 +359,10 @@ body {
 
 .form-textarea { resize: vertical; min-height: 110px; }
 
+.form-input.is-invalid,
+.form-select.is-invalid,
+.form-textarea.is-invalid { border-color: #ef4444; }
+
 .form-error { color: #dc2626; font-size: 0.78rem; margin-top: 4px; }
 
 /* Alert messages */

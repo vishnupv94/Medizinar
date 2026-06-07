@@ -8,22 +8,6 @@
 <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <?php if (!empty($success)): ?>
-            <div class="alert-success mb-8 max-w-3xl mx-auto" data-auto-close="5000">
-                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span><?= h($success) ?></span>
-            </div>
-        <?php elseif (!empty($error)): ?>
-            <div class="alert-error mb-8 max-w-3xl mx-auto" data-auto-close="8000">
-                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span><?= h($error) ?></span>
-            </div>
-        <?php endif; ?>
-
         <div class="grid lg:grid-cols-3 gap-10">
 
             <div class="lg:col-span-2 fade-in-up">
@@ -48,9 +32,12 @@
                                         Full Name <span class="text-red-500">*</span>
                                     </label>
                                     <input type="text" id="name" name="name" required
-                                        class="form-input"
+                                        class="form-input <?= !empty($errors['name']) ? 'is-invalid' : '' ?>"
                                         placeholder="Enter your full name"
                                         value="<?= h($old['name'] ?? '') ?>">
+                                    <?php if (!empty($errors['name'])): ?>
+                                        <p class="form-error"><?= h($errors['name']) ?></p>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div>
@@ -59,7 +46,7 @@
                                     </label>
                                     <div class="flex gap-2">
                                         <input type="tel" id="phone" name="phone" required
-                                            class="form-input flex-1"
+                                            class="form-input flex-1 <?= !empty($errors['phone']) ? 'is-invalid' : '' ?>"
                                             placeholder="+91 XXXXX XXXXX"
                                             value="<?= h($old['phone'] ?? '') ?>">
                                         <button type="button" id="send-otp-btn"
@@ -79,6 +66,9 @@
                                             OTP sent to your mobile number. (Note: Live OTP requires SMS integration.)
                                         </p>
                                     </div>
+                                    <?php if (!empty($errors['phone'])): ?>
+                                        <p class="form-error"><?= h($errors['phone']) ?></p>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div>
@@ -86,9 +76,12 @@
                                         Email Address <span class="text-gray-400 font-normal">(optional)</span>
                                     </label>
                                     <input type="email" id="email" name="email"
-                                        class="form-input"
+                                        class="form-input <?= !empty($errors['email']) ? 'is-invalid' : '' ?>"
                                         placeholder="your@email.com"
                                         value="<?= h($old['email'] ?? '') ?>">
+                                    <?php if (!empty($errors['email'])): ?>
+                                        <p class="form-error"><?= h($errors['email']) ?></p>
+                                    <?php endif; ?>
                                 </div>
 
                             </div>
@@ -116,13 +109,16 @@
                                     <label for="service" class="block text-sm font-medium text-gray-700 mb-1.5">
                                         Service Required <span class="text-red-500">*</span>
                                     </label>
-                                    <select id="service" name="service" required class="form-select">
+                                    <select id="service" name="service" required class="form-select <?= !empty($errors['service']) ? 'is-invalid' : '' ?>">
                                         <?php foreach ($services as $val => $label): ?>
                                             <option value="<?= h($val) ?>" <?= ($selService === $val) ? 'selected' : '' ?>>
                                                 <?= h($label) ?>
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
+                                    <?php if (!empty($errors['service'])): ?>
+                                        <p class="form-error"><?= h($errors['service']) ?></p>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div class="sm:col-span-2">
@@ -130,8 +126,11 @@
                                         Location / Full Address <span class="text-red-500">*</span>
                                     </label>
                                     <textarea id="location" name="location" required rows="2"
-                                        class="form-textarea"
+                                        class="form-textarea <?= !empty($errors['location']) ? 'is-invalid' : '' ?>"
                                         placeholder="House / Flat No., Street, City, District, PIN"><?= h($old['location'] ?? '') ?></textarea>
+                                    <?php if (!empty($errors['location'])): ?>
+                                        <p class="form-error"><?= h($errors['location']) ?></p>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div>
@@ -139,16 +138,19 @@
                                         Preferred Start Date <span class="text-red-500">*</span>
                                     </label>
                                     <input type="date" id="start_date" name="start_date" required
-                                        class="form-input"
+                                        class="form-input <?= !empty($errors['start_date']) ? 'is-invalid' : '' ?>"
                                         min="<?= date('Y-m-d') ?>"
                                         value="<?= h($old['start_date'] ?? '') ?>">
+                                    <?php if (!empty($errors['start_date'])): ?>
+                                        <p class="form-error"><?= h($errors['start_date']) ?></p>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div>
                                     <label for="duration" class="block text-sm font-medium text-gray-700 mb-1.5">
                                         Duration / Period <span class="text-red-500">*</span>
                                     </label>
-                                    <select id="duration" name="duration" required class="form-select">
+                                    <select id="duration" name="duration" required class="form-select <?= !empty($errors['duration']) ? 'is-invalid' : '' ?>">
                                         <?php
                                         $durations = [
                                             ''          => '— Select duration —',
@@ -169,6 +171,9 @@
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
+                                    <?php if (!empty($errors['duration'])): ?>
+                                        <p class="form-error"><?= h($errors['duration']) ?></p>
+                                    <?php endif; ?>
                                 </div>
 
                             </div>
