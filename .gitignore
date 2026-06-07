@@ -16,5 +16,8 @@ medicinar/
 node_modules/
 package-lock.json
 
+# Runtime / temp
+tmp/
+
 # macOS
 .DS_Store

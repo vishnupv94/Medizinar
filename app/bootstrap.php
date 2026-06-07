@@ -23,6 +23,13 @@ require APP_PATH . '/Helpers/functions.php';
 require APP_PATH . '/Config/app.php';
 
 if (session_status() === PHP_SESSION_NONE) {
+    $sessionDir = ROOT_PATH . '/tmp/sessions';
+    if (!is_dir($sessionDir)) {
+        @mkdir($sessionDir, 0700, true);
+    }
+    if (is_dir($sessionDir) && is_writable($sessionDir)) {
+        session_save_path($sessionDir);
+    }
     session_start();
 }
 
