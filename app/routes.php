@@ -38,7 +38,8 @@ $router->get('/admin/entries/appointments/{id}',          [EntryController::clas
 $router->post('/admin/entries/appointments/{id}/status',  [EntryController::class, 'appointmentStatus']);
 $router->post('/admin/entries/appointments/{id}/delete',  [EntryController::class, 'appointmentDelete']);
 
-$router->get('/admin/settings',  [SettingsController::class, 'index']);
-$router->post('/admin/settings', [SettingsController::class, 'update']);
+$router->get('/admin/settings',          [SettingsController::class, 'index']);
+$router->post('/admin/settings',         [SettingsController::class, 'update']);
+$router->post('/admin/settings/password', [SettingsController::class, 'changePassword']);
 
 return $router;

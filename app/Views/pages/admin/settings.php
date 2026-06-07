@@ -120,11 +120,91 @@
             <p class="text-xs text-gray-400">Changes are written to the <code>.env</code> file immediately.</p>
         </div>
     </form>
+
+    <!-- Change Password Section (separate form) -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mt-2">
+        <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                </svg>
+            </div>
+            <div>
+                <h2 class="font-semibold text-gray-800 text-sm">Change Admin Password</h2>
+                <p class="text-xs text-gray-500">Update your admin login password. You will not be logged out.</p>
+            </div>
+        </div>
+
+        <form action="<?= url('/admin/settings/password') ?>" method="POST" class="p-6 space-y-5">
+            <?= csrf_field() ?>
+
+            <div>
+                <label for="current_password" class="block text-sm font-medium text-gray-700 mb-1.5">
+                    Current Password
+                </label>
+                <div class="relative">
+                    <input type="password" id="current_password" name="current_password"
+                        class="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary pr-20"
+                        placeholder="Enter current password" autocomplete="current-password">
+                    <button type="button" onclick="togglePwField('current_password')"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600">Show</button>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                    <label for="new_password" class="block text-sm font-medium text-gray-700 mb-1.5">
+                        New Password <span class="text-gray-400 font-normal text-xs">(min. 8 chars)</span>
+                    </label>
+                    <div class="relative">
+                        <input type="password" id="new_password" name="new_password"
+                            class="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary pr-20"
+                            placeholder="New password" autocomplete="new-password" minlength="8">
+                        <button type="button" onclick="togglePwField('new_password')"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600">Show</button>
+                    </div>
+                </div>
+                <div>
+                    <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-1.5">
+                        Confirm New Password
+                    </label>
+                    <div class="relative">
+                        <input type="password" id="confirm_password" name="confirm_password"
+                            class="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary pr-20"
+                            placeholder="Repeat new password" autocomplete="new-password" minlength="8">
+                        <button type="button" onclick="togglePwField('confirm_password')"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-gray-600">Show</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 pt-1">
+                <button type="submit"
+                    class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors shadow-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                    </svg>
+                    Update Password
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script>
 function toggleSecret() {
     const field = document.getElementById('RECAPTCHA_SECRET_KEY');
     field.type = field.type === 'password' ? 'text' : 'password';
+}
+function togglePwField(id) {
+    const field = document.getElementById(id);
+    const btn   = field.nextElementSibling;
+    if (field.type === 'password') {
+        field.type = 'text';
+        btn.textContent = 'Hide';
+    } else {
+        field.type = 'password';
+        btn.textContent = 'Show';
+    }
 }
 </script>
