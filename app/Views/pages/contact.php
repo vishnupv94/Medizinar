@@ -164,6 +164,12 @@
                         <p class="text-gray-400 text-xs mt-1.5">Upload a photo or document if needed (max 5 MB). Supported: JPG, PNG, PDF, DOC.</p>
                     </div>
 
+                    <?php if (recaptcha_enabled()): ?>
+                    <div class="mb-5">
+                        <div class="g-recaptcha" data-sitekey="<?= h(RECAPTCHA_SITE_KEY) ?>" data-theme="light"></div>
+                    </div>
+                    <?php endif; ?>
+
                     <button type="submit" class="btn-primary w-full justify-center">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -180,7 +186,7 @@
                     <div class="rounded-2xl overflow-hidden shadow-card border border-primary-100" style="height:350px;border-color:#d4e8d5">
                         <iframe
                             title="Medizinar Care Office Location"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.5!2d76.7795!3d8.9905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05f82a4b3e9e9b%3A0x0!2sKottarakkara%2C+Kollam%2C+Kerala!5e0!3m2!1sen!2sin!4v1"
+                            src="<?= h(GOOGLE_MAPS_EMBED_URL) ?>"
                             width="100%" height="100%" style="border:0" allowfullscreen=""
                             loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                         </iframe>

@@ -29,6 +29,20 @@ class ContactController extends Controller
             $this->redirect(url('/contact'), ['error' => 'Invalid form submission. Please try again.']);
         }
 
+        // reCAPTCHA verification
+        $recaptchaToken = $_POST['g-recaptcha-response'] ?? '';
+        if (!recaptcha_verify($recaptchaToken)) {
+            $_SESSION['old_cf'] = [
+                'name'     => sanitize_input($_POST['name']     ?? ''),
+                'phone'    => sanitize_input($_POST['phone']    ?? ''),
+                'email'    => sanitize_input($_POST['email']    ?? ''),
+                'category' => sanitize_input($_POST['category'] ?? ''),
+                'subject'  => sanitize_input($_POST['subject']  ?? ''),
+                'message'  => sanitize_input($_POST['message']  ?? ''),
+            ];
+            $this->redirect(url('/contact'), ['error' => 'reCAPTCHA verification failed. Please try again.']);
+        }
+
         $name     = sanitize_input($_POST['name']     ?? '');
         $phone    = sanitize_input($_POST['phone']    ?? '');
         $email    = sanitize_input($_POST['email']    ?? '');

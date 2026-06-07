@@ -78,3 +78,13 @@ function partial(string $name, array $data = []): void
     extract($data, EXTR_SKIP);
     require APP_PATH . '/Views/partials/' . $name . '.php';
 }
+
+function recaptcha_enabled(): bool
+{
+    return \App\Helpers\Recaptcha::isEnabled();
+}
+
+function recaptcha_verify(string $token): bool
+{
+    return \App\Helpers\Recaptcha::verify($token);
+}

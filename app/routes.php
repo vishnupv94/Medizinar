@@ -7,6 +7,7 @@ use App\Controllers\AppointmentController;
 use App\Controllers\Admin\AuthController;
 use App\Controllers\Admin\DashboardController;
 use App\Controllers\Admin\EntryController;
+use App\Controllers\Admin\SettingsController;
 
 $router = new Router();
 
@@ -36,5 +37,8 @@ $router->get('/admin/entries/appointments',               [EntryController::clas
 $router->get('/admin/entries/appointments/{id}',          [EntryController::class, 'appointmentDetail']);
 $router->post('/admin/entries/appointments/{id}/status',  [EntryController::class, 'appointmentStatus']);
 $router->post('/admin/entries/appointments/{id}/delete',  [EntryController::class, 'appointmentDelete']);
+
+$router->get('/admin/settings',  [SettingsController::class, 'index']);
+$router->post('/admin/settings', [SettingsController::class, 'update']);
 
 return $router;

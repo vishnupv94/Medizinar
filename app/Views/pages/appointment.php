@@ -172,6 +172,12 @@
                                 placeholder="Describe any special requirements, medical conditions, budget preferences, or questions you may have..."><?= h($old['message'] ?? '') ?></textarea>
                         </fieldset>
 
+                        <?php if (recaptcha_enabled()): ?>
+                        <div class="mb-6">
+                            <div class="g-recaptcha" data-sitekey="<?= h(RECAPTCHA_SITE_KEY) ?>" data-theme="light"></div>
+                        </div>
+                        <?php endif; ?>
+
                         <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
                             <button type="submit" class="btn-primary w-full sm:w-auto">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
