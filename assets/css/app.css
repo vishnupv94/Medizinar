@@ -434,7 +434,7 @@ body {
   transition: transform 0.28s ease, box-shadow 0.28s ease;
   text-align: center;
   position: relative;
-  height: 260px;
+  height: 340px;
 }
 
 .team-card:hover {

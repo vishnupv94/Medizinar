@@ -68,7 +68,17 @@ class Recaptcha
 
         $json = json_decode($result, true);
 
-        return isset($json['success']) && $json['success'] === true;
+        if (!isset($json['success']) || $json['success'] !== true) {
+            return false;
+        }
+
+        // reCAPTCHA v3 returns a score (0.0–1.0); v2 does not include this field.
+        // Accept if score field is absent (v2) or >= 0.5 (v3).
+        if (isset($json['score']) && $json['score'] < 0.5) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

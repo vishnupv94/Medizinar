@@ -271,4 +271,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── reCAPTCHA v3 invisible form protection ──────────────
+  document.querySelectorAll('input[name="g-recaptcha-response"]').forEach(hiddenInput => {
+    const form = hiddenInput.closest('form');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      // If token already filled (re-submit after grecaptcha resolved) — allow through
+      if (hiddenInput.value) return;
+
+      e.preventDefault();
+
+      const scriptTag = document.querySelector('script[src*="recaptcha/api.js?render="]');
+      const siteKey   = scriptTag ? new URL(scriptTag.src).searchParams.get('render') : '';
+
+      if (!siteKey || typeof grecaptcha === 'undefined') {
+        // reCAPTCHA not loaded — submit anyway (server-side fail-open matches this)
+        form.submit();
+        return;
+      }
+
+      grecaptcha.ready(() => {
+        grecaptcha.execute(siteKey, { action: 'submit' }).then(token => {
+          hiddenInput.value = token;
+          form.submit();
+        }).catch(() => {
+          form.submit();
+        });
+      });
+    });
+  });
+
 });

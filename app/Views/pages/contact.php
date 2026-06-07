@@ -165,9 +165,7 @@
                     </div>
 
                     <?php if (recaptcha_enabled()): ?>
-                    <div class="mb-5">
-                        <div class="g-recaptcha" data-sitekey="<?= h(recaptcha_site_key()) ?>" data-theme="light"></div>
-                    </div>
+                    <input type="hidden" name="g-recaptcha-response" id="cf_recaptcha_token">
                     <?php endif; ?>
 
                     <button type="submit" class="btn-primary w-full justify-center">

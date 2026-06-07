@@ -173,9 +173,7 @@
                         </fieldset>
 
                         <?php if (recaptcha_enabled()): ?>
-                        <div class="mb-6">
-                            <div class="g-recaptcha" data-sitekey="<?= h(recaptcha_site_key()) ?>" data-theme="light"></div>
-                        </div>
+                        <input type="hidden" name="g-recaptcha-response" id="appt_recaptcha_token">
                         <?php endif; ?>
 
                         <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
