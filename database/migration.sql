@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `contact_entries` (
     `subject`         VARCHAR(255)  NOT NULL,
     `message`         TEXT          NOT NULL,
     `attachment_name` VARCHAR(255)  DEFAULT NULL,
+    `attachment_path` VARCHAR(255)  DEFAULT NULL,
     `ip_address`      VARCHAR(45)   DEFAULT NULL,
     `is_read`         TINYINT(1)    DEFAULT 0,
     `created_at`      TIMESTAMP     DEFAULT CURRENT_TIMESTAMP
