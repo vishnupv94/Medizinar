@@ -30,8 +30,12 @@
                 <p class="text-gray-500 text-sm">Short-term / add-on services on a daily service charge basis.</p>
             </div>
         </div>
-        <div class="max-w-md mx-auto mt-10 fade-in-up">
-            <img src="<?= asset('images/hero-services.svg') ?>" alt="Medizinar Care services overview" class="w-full h-auto" width="600" height="500" loading="lazy">
+        <div class="max-w-2xl mx-auto mt-10 fade-in-up">
+            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=800&auto=format&q=80"
+                 alt="Medizinar Care home care services"
+                 class="w-full h-72 object-cover rounded-2xl"
+                 style="object-position:center 30%"
+                 width="800" height="288" loading="lazy">
         </div>
     </div>
 </section>
@@ -51,20 +55,25 @@
         <div id="bedside" class="scroll-mt-24 mb-14">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="fade-in-up">
-                    <div class="rounded-2xl p-10 relative overflow-hidden text-white"
-                        style="background:linear-gradient(135deg,#0f5219,#176B23)">
-                        <div class="hero-pattern absolute inset-0 opacity-20"></div>
+                    <div class="rounded-2xl p-10 relative overflow-hidden"
+                         style="background:linear-gradient(135deg,#e8f5ea 0%,#f0faf1 60%,#e8f5ea 100%); min-height:260px">
+                        <!-- top accent bar -->
+                        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-2xl" style="background:linear-gradient(90deg,#176B23,#2ea84a)"></div>
+                        <!-- watermark icon -->
+                        <div class="absolute bottom-4 right-4 opacity-[0.07]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32" fill="#176B23" viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Zm-7 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm4 10H8v-1a4 4 0 0 1 8 0v1Z"/></svg>
+                        </div>
                         <div class="relative z-10">
-                            <div class="text-5xl mb-4">🛏</div>
-                            <h3 class="text-2xl font-bold mb-3">Bedside Patient Care</h3>
-                            <p class="text-white/80 text-sm leading-relaxed">
-                                Professional support for patients recovering at home from illness, surgery, or long-term health conditions.
-                            </p>
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
+                                 style="background:rgba(23,107,35,0.12); box-shadow:0 4px 12px rgba(23,107,35,0.15)">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#176B23"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h13.5m-13.5 0a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3v.75a3 3 0 0 1-3 3m-13.5 0v9a3 3 0 0 0 3 3h.75M18 12.75h.008v.008H18v-.008Zm0 3h.008v.008H18v-.008Zm0 3h.008v.008H18v-.008ZM15 4.5l-3 3-3-3"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3" style="color:#0f5219">Bedside Patient Care</h3>
+                            <p class="text-sm leading-relaxed" style="color:#2d6a35">Professional support for patients recovering at home from illness, surgery, or long-term health conditions.</p>
                         </div>
                     </div>
                 </div>
                 <div class="fade-in-up">
-                    <div class="section-badge">Service 01</div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Bedside Patient Care</h3>
                     <p class="text-gray-600 leading-relaxed mb-6">
                         Our caregivers provide professional and compassionate bedside support to patients at home,
@@ -89,7 +98,6 @@
         <div id="elderly" class="scroll-mt-24 mb-14">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="fade-in-up order-2 lg:order-1">
-                    <div class="section-badge">Service 02</div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Elderly Care</h3>
                     <p class="text-gray-600 leading-relaxed mb-6">
                         Dedicated care services for senior citizens who require assistance with daily activities and
@@ -106,15 +114,21 @@
                     <a href="<?= url('/appointment') ?>?service=elderly" class="btn-primary mt-6">Book This Service</a>
                 </div>
                 <div class="fade-in-up order-1 lg:order-2">
-                    <div class="rounded-2xl p-10 relative overflow-hidden text-white"
-                        style="background:linear-gradient(135deg,#1a4a7a,#2563eb)">
-                        <div class="hero-pattern absolute inset-0 opacity-20"></div>
+                    <div class="rounded-2xl p-10 relative overflow-hidden"
+                         style="background:linear-gradient(135deg,#fef9ee 0%,#fffdf7 60%,#fef4d8 100%); min-height:260px">
+                        <!-- top accent bar -->
+                        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-2xl" style="background:linear-gradient(90deg,#ab7e22,#d4a22e)"></div>
+                        <!-- watermark icon -->
+                        <div class="absolute bottom-4 right-4 opacity-[0.07]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32" fill="#ab7e22" viewBox="0 0 24 24"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2Zm0 12c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4Z"/></svg>
+                        </div>
                         <div class="relative z-10">
-                            <div class="text-5xl mb-4">👴</div>
-                            <h3 class="text-2xl font-bold mb-3">Elderly Care</h3>
-                            <p class="text-white/80 text-sm leading-relaxed">
-                                Respectful and supportive care for senior citizens ensuring dignity and comfort in a familiar environment.
-                            </p>
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
+                                 style="background:rgba(171,126,34,0.12); box-shadow:0 4px 12px rgba(171,126,34,0.15)">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#ab7e22"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3" style="color:#7a5a10">Elderly Care</h3>
+                            <p class="text-sm leading-relaxed" style="color:#8a6820">Respectful and supportive care for senior citizens ensuring dignity, comfort, and meaningful companionship.</p>
                         </div>
                     </div>
                 </div>
@@ -127,20 +141,25 @@
         <div id="mother-baby" class="scroll-mt-24 mb-14">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="fade-in-up">
-                    <div class="rounded-2xl p-10 relative overflow-hidden text-white"
-                        style="background:linear-gradient(135deg,#7e22ce,#9333ea)">
-                        <div class="hero-pattern absolute inset-0 opacity-20"></div>
+                    <div class="rounded-2xl p-10 relative overflow-hidden"
+                         style="background:linear-gradient(135deg,#edf7ee 0%,#f4fbf4 60%,#e8f5ea 100%); min-height:260px">
+                        <!-- top accent bar -->
+                        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-2xl" style="background:linear-gradient(90deg,#176B23,#2ea84a)"></div>
+                        <!-- watermark icon -->
+                        <div class="absolute bottom-4 right-4 opacity-[0.07]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32" fill="#176B23" viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402C1 3.784 4.868 2 7.5 2c1.977 0 4.078.963 5.5 2.6C14.422 2.963 16.523 2 18.5 2 21.132 2 25 3.784 25 7.191c0 4.105-5.37 8.863-11 14.402z" transform="scale(0.9)"/></svg>
+                        </div>
                         <div class="relative z-10">
-                            <div class="text-5xl mb-4">👶</div>
-                            <h3 class="text-2xl font-bold mb-3">Mother &amp; Baby Care</h3>
-                            <p class="text-white/80 text-sm leading-relaxed">
-                                Compassionate support for mothers and newborns during the important postnatal recovery period.
-                            </p>
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
+                                 style="background:rgba(23,107,35,0.12); box-shadow:0 4px 12px rgba(23,107,35,0.15)">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#176B23"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3" style="color:#0f5219">Mother &amp; Baby Care</h3>
+                            <p class="text-sm leading-relaxed" style="color:#2d6a35">Compassionate postnatal support for mothers and newborns during the important recovery period.</p>
                         </div>
                     </div>
                 </div>
                 <div class="fade-in-up">
-                    <div class="section-badge">Service 03</div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Mother &amp; Baby Care</h3>
                     <p class="text-gray-600 leading-relaxed mb-6">
                         Care support for mothers and newborn babies during the postnatal recovery period. Our assistants
@@ -165,7 +184,6 @@
         <div id="housemaid" class="scroll-mt-24">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="fade-in-up order-2 lg:order-1">
-                    <div class="section-badge">Service 04</div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">House Maid Services</h3>
                     <p class="text-gray-600 leading-relaxed mb-6">
                         Reliable domestic support for households needing assistance with daily tasks. Our assistants
@@ -181,15 +199,27 @@
                     <a href="<?= url('/appointment') ?>?service=housemaid" class="btn-primary mt-6">Book This Service</a>
                 </div>
                 <div class="fade-in-up order-1 lg:order-2">
-                    <div class="rounded-2xl p-10 relative overflow-hidden text-white"
-                        style="background:linear-gradient(135deg,#92400e,#b45309)">
-                        <div class="hero-pattern absolute inset-0 opacity-20"></div>
+                    <div class="rounded-2xl p-10 relative overflow-hidden"
+                         style="background:linear-gradient(135deg,#fdf8ee 0%,#fffcf5 60%,#fef4d8 100%); min-height:260px">
+                        <!-- top accent bar -->
+                        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-2xl" style="background:linear-gradient(90deg,#ab7e22,#d4a22e)"></div>
+                        <!-- watermark icon -->
+                        <div class="absolute bottom-4 right-4 opacity-[0.07]">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32" fill="#ab7e22" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        </div>
                         <div class="relative z-10">
-                            <div class="text-5xl mb-4">🏠</div>
-                            <h3 class="text-2xl font-bold mb-3">House Maid Services</h3>
-                            <p class="text-white/80 text-sm leading-relaxed">
-                                Trusted domestic staff providing daily household support and a clean, organised home environment.
-                            </p>
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
+                                 style="background:rgba(171,126,34,0.12); box-shadow:0 4px 12px rgba(171,126,34,0.15)">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#ab7e22"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3" style="color:#7a5a10">House Maid Services</h3>
+                            <p class="text-sm leading-relaxed" style="color:#8a6820">Trusted domestic staff providing daily household support and a clean, organised home environment.</p>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3" style="color:#7a5a10">House Maid Services</h3>
+                            <p class="text-sm leading-relaxed" style="color:#8a6820">Trusted domestic staff providing daily household support and a clean, organised home environment.</p>
                         </div>
                     </div>
                 </div>
