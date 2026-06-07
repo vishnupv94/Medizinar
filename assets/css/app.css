@@ -340,12 +340,22 @@ body {
 .value-card {
   border-radius: 18px;
   padding: 1.75rem;
-  background: linear-gradient(145deg, #ffffff 0%, #f7fbf7 100%);
-  border: 1px solid rgba(23,107,35,0.14);
+  /* Gold top-left corner, green bottom-right corner, white centre — balanced & transparent */
+  background: linear-gradient(
+    145deg,
+    rgba(171, 126, 34, 0.12) 0%,
+    rgba(255, 255, 255, 0.42) 38%,
+    rgba(255, 255, 255, 0.38) 58%,
+    rgba(24, 108, 33, 0.12) 100%
+  );
+  border: 1px solid #eaeaea;
   box-shadow:
-    0 1px 2px rgba(0,0,0,0.04),
-    0 4px 12px rgba(23,107,35,0.06),
-    0 12px 28px rgba(23,107,35,0.04);
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 3px 8px rgba(171, 126, 34, 0.05),
+    0 6px 14px rgba(24, 108, 33, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.50);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: transform 0.28s ease, box-shadow 0.28s ease;
   position: relative;
   overflow: hidden;
@@ -356,16 +366,21 @@ body {
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 100%;
-  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(23,107,35,0.04) 0%, transparent 70%);
+  /* Dual shimmer — gold top, green bottom-right, both very subtle */
+  background:
+    radial-gradient(ellipse 80% 40% at 10% 0%,   rgba(171, 126, 34, 0.10) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 40% at 90% 100%,  rgba(24, 108, 33, 0.10) 0%, transparent 65%);
   pointer-events: none;
 }
 
 .value-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+
   box-shadow:
-    0 2px 4px rgba(0,0,0,0.05),
-    0 8px 20px rgba(23,107,35,0.09),
-    0 16px 36px rgba(23,107,35,0.06);
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 4px 12px rgba(171, 126, 34, 0.08),
+    0 10px 20px rgba(24, 108, 33, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 /* ----- Team cards ----- */
