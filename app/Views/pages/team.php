@@ -46,7 +46,7 @@
                     'role'    => 'Founder & Managing Partner',
                     'initial' => 'J',
                     'color'   => '#176B23',
-                    'photo'   => 'https://randomuser.me/api/portraits/men/32.jpg',
+                    'photo'   => asset('images/team/jayahar.jpeg'),
                     'bio'     => 'Visionary leader driving Medizinar Care LLP\'s mission to provide trusted, compassionate, and professional home nursing services across India. Focused on operational excellence, service quality, and client satisfaction.',
                 ],
                 [
@@ -54,7 +54,7 @@
                     'role'    => 'Accounts & Finance Manager',
                     'initial' => 'S',
                     'color'   => '#ab7e22',
-                    'photo'   => 'https://randomuser.me/api/portraits/women/44.jpg',
+                    'photo'   => asset('images/team/shani.jpeg'),
                     'bio'     => 'Responsible for financial planning, accounting operations, compliance management, budgeting, and maintaining the organization\'s financial integrity and transparency.',
                 ],
                 [
@@ -62,7 +62,7 @@
                     'role'    => 'Client Relationship Manager',
                     'initial' => 'J',
                     'color'   => '#176B23',
-                    'photo'   => 'https://randomuser.me/api/portraits/women/68.jpg',
+                    'photo'   => asset('images/team/jaya.jpeg'),
                     'bio'     => 'Dedicated to ensuring exceptional client satisfaction through seamless communication, personalized support, service coordination, and long-term relationship management.',
                 ],
                 [
@@ -70,7 +70,7 @@
                     'role'    => 'Brand & Digital Communications Manager',
                     'initial' => 'S',
                     'color'   => '#ab7e22',
-                    'photo'   => 'https://randomuser.me/api/portraits/women/91.jpg',
+                    'photo'   => asset('images/team/soumya.jpeg'),
                     'bio'     => 'Responsible for strengthening Medizinar Care LLP\'s brand presence through strategic digital communication, social media management, online engagement, and marketing initiatives. Focused on building trust, increasing visibility, and connecting families with quality home healthcare services.',
                 ],
             ];
