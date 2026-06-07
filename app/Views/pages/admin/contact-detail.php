@@ -74,7 +74,7 @@ $e = $entry;
                     <p class="text-xs text-gray-400 uppercase tracking-wider mb-2">Attachment</p>
                     <?php
                         $safePath = $e->attachment_path ?? null;
-                        $fileUrl  = $safePath ? url('/uploads/contact/' . rawurlencode($safePath)) : null;
+                        $fileUrl  = $safePath ? url('/admin/entries/contact/' . $e->id . '/attachment') : null;
                         $ext      = $safePath ? strtolower(pathinfo($safePath, PATHINFO_EXTENSION)) : '';
                         $isImage  = in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
                     ?>

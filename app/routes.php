@@ -31,6 +31,7 @@ $router->get('/admin/dashboard', [DashboardController::class, 'index']);
 
 $router->get('/admin/entries/contact',               [EntryController::class, 'contactList']);
 $router->get('/admin/entries/contact/{id}',          [EntryController::class, 'contactDetail']);
+$router->get('/admin/entries/contact/{id}/attachment', [EntryController::class, 'serveAttachment']);
 $router->post('/admin/entries/contact/{id}/delete',  [EntryController::class, 'contactDelete']);
 
 $router->get('/admin/entries/appointments',               [EntryController::class, 'appointmentList']);
