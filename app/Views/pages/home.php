@@ -55,8 +55,8 @@
 
             <div class="hidden lg:flex justify-center items-center">
                 <div class="w-full max-w-lg relative">
-                    <img src="<?= asset('images/hero-home.jpg') ?>"
-                        alt="Nurse consulting with an elderly patient at home"
+                    <img src="<?= asset('images/medizinar-care-home-hero.webp') ?>"
+                        alt="Medizinar Care nurse consulting with elderly patient at home in Kerala"
                         class="w-full h-[420px] object-cover object-center rounded-2xl drop-shadow-2xl" width="800"
                         height="600" loading="eager">
                     <div class="absolute -bottom-2 left-4 bg-white rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-3 border-l-4"
@@ -385,9 +385,9 @@
 
                 <div class="flex-shrink-0 flex items-center justify-center"
                     style="position:relative;width:260px;height:180px;">
-                    <img src="<?= asset('images/homecare.jpg') ?>" alt="Caregiver assisting elderly patient"
+                    <img src="<?= asset('images/medizinar-care-caregiver-elderly.webp') ?>" alt="Medizinar Care caregiver assisting elderly patient at home"
                         style="position:absolute;right:0;top:0;width:180px;height:160px;object-fit:cover;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,0.45);">
-                    <img src="<?= asset('images/care-hero.jpeg') ?>" alt="Doctor with stethoscope"
+                    <img src="<?= asset('images/medizinar-care-doctor-stethoscope.webp') ?>" alt="Medizinar Care doctor with stethoscope providing home healthcare"
                         style="position:absolute;left:0;bottom:0;width:130px;height:120px;object-fit:cover;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);border:3px solid #0c2912;">
                 </div>
 

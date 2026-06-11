@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="max-w-2xl mx-auto mt-10 fade-in-up">
-            <img src="<?= asset('images/services-hero.jpeg') ?>" alt="Medizinar Care home care services"
+            <img src="<?= asset('images/medizinar-care-home-care-services.webp') ?>" alt="Medizinar Care compassionate home care services in Kerala"
                 class="w-full h-72 object-cover rounded-2xl" style="object-position:center 30%" width="800" height="288"
                 loading="lazy">
         </div>

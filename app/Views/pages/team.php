@@ -19,7 +19,7 @@
             ensure every client receives the highest level of care and support.
         </p>
         <div class="max-w-2xl mx-auto mt-8">
-            <img src="<?= asset('images/team-group.jpg') ?>" alt="Medizinar Care team"
+            <img src="<?= asset('images/medizinar-care-team-group.webp') ?>" alt="Medizinar Care home healthcare team Kerala"
                 class="w-full h-72 object-cover rounded-2xl" style="object-position:center 30%" width="800" height="288"
                 loading="lazy">
         </div>
@@ -45,7 +45,7 @@
                     'role' => 'Founder & Managing Partner',
                     'initial' => 'J',
                     'color' => '#176B23',
-                    'photo' => asset('images/team/jayahar.jpeg'),
+                    'photo' => asset('images/team/medizinar-jayahar-caregiver.webp'),
                     'bio' => 'Visionary leader driving Medizinar Care LLP\'s mission to provide trusted, compassionate, and professional home nursing services across India. Focused on operational excellence, service quality, and client satisfaction.',
                     'obj_pos' => 'left',
                 ],
@@ -54,7 +54,7 @@
                     'role' => 'Accounts & Finance Manager',
                     'initial' => 'S',
                     'color' => '#ab7e22',
-                    'photo' => asset('images/team/shani.jpeg'),
+                    'photo' => asset('images/team/medizinar-shani-caregiver.webp'),
                     'bio' => 'Responsible for financial planning, accounting operations, compliance management, budgeting, and maintaining the organization\'s financial integrity and transparency.',
                 ],
                 [
@@ -62,7 +62,7 @@
                     'role' => 'Client Relationship Manager',
                     'initial' => 'J',
                     'color' => '#176B23',
-                    'photo' => asset('images/team/jaya.jpeg'),
+                    'photo' => asset('images/team/medizinar-jaya-caregiver.webp'),
                     'bio' => 'Dedicated to ensuring exceptional client satisfaction through seamless communication, personalized support, service coordination, and long-term relationship management.',
                     'obj_pos' => 'bottom',
                 ],
@@ -71,7 +71,7 @@
                     'role' => 'Brand & Digital Communications Manager',
                     'initial' => 'S',
                     'color' => '#ab7e22',
-                    'photo' => asset('images/team/soumya.jpeg'),
+                    'photo' => asset('images/team/medizinar-soumya-caregiver.webp'),
                     'bio' => 'Responsible for strengthening Medizinar Care LLP\'s brand presence through strategic digital communication, social media management, online engagement, and marketing initiatives. Focused on building trust, increasing visibility, and connecting families with quality home healthcare services.',
                 ],
             ];

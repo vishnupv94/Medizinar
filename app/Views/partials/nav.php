@@ -2,7 +2,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between">
 
         <a href="<?= url('/') ?>" class="flex items-center gap-2.5 shrink-0" aria-label="Medizinar Care - Home">
-            <img src="<?= asset('images/logo.png') ?>" alt="Medizinar Care" class="h-20 w-auto">
+            <img src="<?= asset('images/medizinar-care-logo.webp') ?>" alt="Medizinar Care – Home Healthcare Services Kerala" class="h-20 w-auto">
         </a>
 
         <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">

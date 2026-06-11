@@ -4,7 +4,7 @@
 
         <div class="lg:col-span-1">
             <a href="<?= url('/') ?>" class="inline-block mb-4">
-                <img src="<?= asset('images/logo.jpeg') ?>" alt="Medizinar Care" class="h-10 w-auto rounded-md bg-white p-1">
+                <img src="<?= asset('images/medizinar-care-logo-footer.webp') ?>" alt="Medizinar Care – Home Healthcare Kerala" class="h-10 w-auto rounded-md bg-white p-1">
             </a>
             <p class="text-primary-200 text-sm leading-relaxed mb-5">
                 Compassionate and reliable home healthcare services for patients, elderly individuals, and families — delivered with dignity and care.

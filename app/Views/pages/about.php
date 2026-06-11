@@ -12,7 +12,7 @@
             <div class="fade-in-up">
                 <div class="relative">
                     <div class="rounded-2xl overflow-hidden" style="height:420px">
-                        <img src="<?= asset('images/homecare.jpg') ?>" alt="Medizinar Care caregiver" class="w-full h-full object-cover" loading="lazy">
+                        <img src="<?= asset('images/medizinar-care-caregiver-elderly.webp') ?>" alt="Medizinar Care caregiver supporting elderly patient at home in Kerala" class="w-full h-full object-cover" loading="lazy">
                         <div class="absolute inset-0 rounded-2xl" style="background:linear-gradient(to top,rgba(12,41,18,0.6) 0%,transparent 55%)"></div>
                     </div>
                     <!-- Stats bar -->
@@ -66,7 +66,7 @@
 
             <div class="value-card fade-in-up">
                 <div class="flex items-center gap-3 mb-4">
-                    <img src="<?= asset('images/icon-mission.png') ?>" alt="Mission" class="w-12 h-12 shrink-0" loading="lazy">
+                    <img src="<?= asset('images/icon-medizinar-mission.webp') ?>" alt="Medizinar Care mission icon" class="w-12 h-12 shrink-0" loading="lazy">
                     <h3 class="text-xl font-bold" style="color:var(--text-dark)">Our Mission</h3>
                 </div>
                 <p class="text-sm leading-relaxed" style="color:var(--text-muted)">
@@ -78,7 +78,7 @@
 
             <div class="value-card fade-in-up">
                 <div class="flex items-center gap-3 mb-4">
-                    <img src="<?= asset('images/icon-vision.png') ?>" alt="Vision" class="w-12 h-12 shrink-0" loading="lazy">
+                    <img src="<?= asset('images/icon-medizinar-vision.webp') ?>" alt="Medizinar Care vision icon" class="w-12 h-12 shrink-0" loading="lazy">
                     <h3 class="text-xl font-bold" style="color:var(--text-dark)">Our Vision</h3>
                 </div>
                 <p class="text-sm leading-relaxed" style="color:var(--text-muted)">
@@ -105,10 +105,10 @@
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php
             $values = [
-                ['img' => 'icon-compassion.png', 'title' => 'Compassion',      'desc' => 'We treat every individual with kindness, empathy, and deep respect regardless of their condition.'],
-                ['img' => 'icon-trust.png',       'title' => 'Trust',           'desc' => 'We understand the importance of trust when families invite caregivers into their homes.'],
-                ['img' => 'icon-responsibility.png', 'title' => 'Responsibility', 'desc' => 'Our caregivers are committed to providing responsible, dependable, and consistent support.'],
-                ['img' => 'icon-quality.png',     'title' => 'Quality Care',    'desc' => 'We focus on maintaining high standards in every service we provide to every family.'],
+                ['img' => 'icon-medizinar-compassion.webp',     'title' => 'Compassion',      'desc' => 'We treat every individual with kindness, empathy, and deep respect regardless of their condition.'],
+                ['img' => 'icon-medizinar-trust.webp',          'title' => 'Trust',           'desc' => 'We understand the importance of trust when families invite caregivers into their homes.'],
+                ['img' => 'icon-medizinar-responsibility.webp', 'title' => 'Responsibility',  'desc' => 'Our caregivers are committed to providing responsible, dependable, and consistent support.'],
+                ['img' => 'icon-medizinar-quality.webp',        'title' => 'Quality Care',    'desc' => 'We focus on maintaining high standards in every service we provide to every family.'],
             ];
             foreach ($values as $i => $v): ?>
                 <div class="value-card text-center fade-in-up" style="animation-delay:<?= $i * 0.1 ?>s">
@@ -153,7 +153,7 @@
 
             <div class="fade-in-up relative">
                 <div class="rounded-2xl overflow-hidden" style="height:420px">
-                    <img src="<?= asset('images/about-care.jpg') ?>" alt="Medizinar Care professional caregiver" class="w-full h-full object-cover" loading="lazy">
+                    <img src="<?= asset('images/medizinar-care-professional-caregiver.webp') ?>" alt="Medizinar Care professional caregiver providing quality home care" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 rounded-2xl" style="background:linear-gradient(to top,rgba(12,41,18,0.55) 0%,transparent 50%)"></div>
                 </div>
                 <div class="absolute bottom-5 left-5 right-5">
@@ -193,11 +193,11 @@
         <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 max-w-5xl mx-auto">
             <?php
             $reasons = [
-                ['img' => 'icon-caregivers.png',   'title' => 'Compassionate Caregivers'],
-                ['img' => 'icon-reliable.png',      'title' => 'Reliable Service Support'],
-                ['img' => 'icon-flexible.png',      'title' => 'Flexible Care Options'],
-                ['img' => 'icon-quality.png',       'title' => 'Client Satisfaction'],
-                ['img' => 'icon-professional.png',  'title' => 'Professional Assistance'],
+                ['img' => 'icon-medizinar-caregivers.webp',   'title' => 'Compassionate Caregivers'],
+                ['img' => 'icon-medizinar-reliable.webp',      'title' => 'Reliable Service Support'],
+                ['img' => 'icon-medizinar-flexible.webp',      'title' => 'Flexible Care Options'],
+                ['img' => 'icon-medizinar-quality.webp',       'title' => 'Client Satisfaction'],
+                ['img' => 'icon-medizinar-professional.webp',  'title' => 'Professional Assistance'],
             ];
             foreach ($reasons as $i => $r): ?>
                 <div class="value-card text-center fade-in-up" style="animation-delay:<?= $i * 0.08 ?>s">
