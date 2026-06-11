@@ -30,7 +30,7 @@
     <meta property="og:url" content="<?= h($ogUrl) ?>">
     <meta property="og:image" content="<?= h($ogImage) ?>">
     <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:image:height" content="675">
     <meta property="og:image:alt" content="Medizinar Care – Compassionate Home Healthcare Services in Kerala">
     <meta property="og:locale" content="en_IN">
 
