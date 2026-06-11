@@ -1,0 +1,21 @@
+{
+  "name": "Medizinar Care",
+  "short_name": "Medizinar",
+  "description": "Compassionate home healthcare services in Kerala, India",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#186c21",
+  "icons": [
+    {
+      "src": "images/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
