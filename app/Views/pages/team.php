@@ -19,8 +19,9 @@
             ensure every client receives the highest level of care and support.
         </p>
         <div class="max-w-2xl mx-auto mt-8">
-            class="w-full h-72 object-cover rounded-2xl" style="object-position:center 30%" width="800" height="288"
-            loading="lazy">
+            <img src="<?= asset('images/medizinar-care-team-group.webp') ?>"
+                alt="Medizinar Care home healthcare team Kerala" class="w-full h-72 object-cover rounded-2xl"
+                style="object-position:center 30%" width="800" height="288" loading="lazy">
         </div>
     </div>
 </section>
