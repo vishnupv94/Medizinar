@@ -434,7 +434,7 @@ body {
   transition: transform 0.28s ease, box-shadow 0.28s ease;
   text-align: center;
   position: relative;
-  height: 340px;
+  aspect-ratio: 3 / 4;
 }
 
 .team-card:hover {
@@ -574,6 +574,11 @@ body {
 /* ----- Responsive tweaks ----- */
 @media (max-width: 640px) {
   .fixed.rounded-full span { font-size: 0.78rem; }
+  .team-card {
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 /* ----- Scroll fade-in animation ----- */

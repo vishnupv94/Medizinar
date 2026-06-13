@@ -37,7 +37,7 @@
                 reliable, and professional home healthcare services across India.
             </p>
         </div>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <?php
             $team = [
                 [
@@ -127,7 +127,7 @@
             <!-- backdrop -->
             <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeTeamModal()"></div>
             <!-- panel -->
-            <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8 text-center z-10">
+            <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md sm:max-w-lg p-8 sm:p-10 text-center z-10">
                 <button onclick="closeTeamModal()"
                     class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
                     aria-label="Close">
@@ -136,12 +136,12 @@
                             d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <img id="modal-photo" src="" alt="" class="team-photo mb-4 mx-auto"
-                    style="width:120px;height:120px;border-radius:18px">
-                <h3 id="modal-name" class="text-xl font-bold text-gray-800 mb-1"></h3>
+                <img id="modal-photo" src="" alt="" class="team-photo mb-5 mx-auto"
+                    style="width:140px;height:140px;border-radius:20px">
+                <h3 id="modal-name" class="text-2xl font-bold text-gray-800 mb-2"></h3>
                 <span id="modal-role"
-                    class="inline-block text-xs font-semibold px-3 py-1 rounded-full text-white mb-5"></span>
-                <p id="modal-bio" class="text-gray-500 text-sm leading-relaxed"></p>
+                    class="inline-block text-sm font-semibold px-4 py-1.5 rounded-full text-white mb-5"></span>
+                <p id="modal-bio" class="text-gray-500 text-base leading-relaxed"></p>
             </div>
         </div>
     </div>
