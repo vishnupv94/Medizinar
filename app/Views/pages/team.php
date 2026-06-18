@@ -21,7 +21,7 @@
         <div class="max-w-2xl mx-auto mt-8">
             <img src="<?= asset('images/medizinar-care-team-group.webp') ?>"
                 alt="Medizinar Care home healthcare team Kerala" class="w-full h-72 object-cover rounded-2xl"
-                style="object-position:center 30%" width="800" height="288" loading="lazy">
+                style="object-position:center 50%" width="800" height="288" loading="lazy">
         </div>
     </div>
 </section>
@@ -127,7 +127,8 @@
             <!-- backdrop -->
             <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeTeamModal()"></div>
             <!-- panel -->
-            <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md sm:max-w-lg p-8 sm:p-10 text-center z-10">
+            <div
+                class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md sm:max-w-lg p-8 sm:p-10 text-center z-10">
                 <button onclick="closeTeamModal()"
                     class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition"
                     aria-label="Close">
