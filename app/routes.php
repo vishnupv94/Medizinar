@@ -4,10 +4,12 @@ use App\Core\Router;
 use App\Controllers\PageController;
 use App\Controllers\ContactController;
 use App\Controllers\AppointmentController;
+use App\Controllers\BlogController;
 use App\Controllers\Admin\AuthController;
 use App\Controllers\Admin\DashboardController;
 use App\Controllers\Admin\EntryController;
 use App\Controllers\Admin\SettingsController;
+use App\Controllers\Admin\BlogController as AdminBlogController;
 
 $router = new Router();
 
@@ -21,6 +23,9 @@ $router->post('/contact',   [ContactController::class,     'submit']);
 
 $router->get('/appointment',  [AppointmentController::class, 'index']);
 $router->post('/appointment', [AppointmentController::class, 'submit']);
+
+$router->get('/blog',        [BlogController::class,       'index']);
+$router->get('/blog/{slug}', [BlogController::class,       'show']);
 
 $router->get('/admin/login',  [AuthController::class,      'loginForm']);
 $router->post('/admin/login', [AuthController::class,      'login']);
@@ -38,6 +43,14 @@ $router->get('/admin/entries/appointments',               [EntryController::clas
 $router->get('/admin/entries/appointments/{id}',          [EntryController::class, 'appointmentDetail']);
 $router->post('/admin/entries/appointments/{id}/status',  [EntryController::class, 'appointmentStatus']);
 $router->post('/admin/entries/appointments/{id}/delete',  [EntryController::class, 'appointmentDelete']);
+
+$router->get('/admin/blog',                [AdminBlogController::class, 'index']);
+$router->get('/admin/blog/create',         [AdminBlogController::class, 'create']);
+$router->post('/admin/blog',              [AdminBlogController::class, 'store']);
+$router->get('/admin/blog/{id}/edit',      [AdminBlogController::class, 'edit']);
+$router->post('/admin/blog/{id}',         [AdminBlogController::class, 'update']);
+$router->get('/admin/blog/{id}/preview',   [AdminBlogController::class, 'preview']);
+$router->post('/admin/blog/{id}/delete',  [AdminBlogController::class, 'delete']);
 
 $router->get('/admin/settings',          [SettingsController::class, 'index']);
 $router->post('/admin/settings',         [SettingsController::class, 'update']);

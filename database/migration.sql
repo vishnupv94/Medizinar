@@ -44,6 +44,20 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
     `updated_at` TIMESTAMP     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `blog_posts` (
+    `id`           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `title`        VARCHAR(255)  NOT NULL,
+    `slug`         VARCHAR(255)  NOT NULL UNIQUE,
+    `content`      TEXT          NOT NULL,
+    `excerpt`      VARCHAR(500)  DEFAULT NULL,
+    `image`        VARCHAR(255)  DEFAULT NULL,
+    `status`       ENUM('draft','published') DEFAULT 'draft',
+    `published_at` TIMESTAMP     NULL DEFAULT NULL,
+    `created_at`   TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`   TIMESTAMP     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX `idx_status_published` (`status`, `published_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Seed default settings (INSERT IGNORE so existing values are never overwritten)
 INSERT IGNORE INTO `site_settings` (`key`, `value`) VALUES
     ('RECAPTCHA_SITE_KEY',   ''),

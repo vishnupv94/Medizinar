@@ -28,5 +28,6 @@ define('NAV_LINKS', [
     ['label' => 'About Us',   'href' => '/about',      'key' => 'about'],
     ['label' => 'Services',   'href' => '/services',   'key' => 'services'],
     ['label' => 'Our Team',   'href' => '/team',       'key' => 'team'],
+    ['label' => 'Blog',       'href' => '/blog',       'key' => 'blog'],
     ['label' => 'Contact Us', 'href' => '/contact',    'key' => 'contact'],
 ]);

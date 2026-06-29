@@ -21,7 +21,7 @@
         $ogTitle = isset($pageTitle) ? h($pageTitle) . ' — ' . SITE_NAME : SITE_NAME . ' | ' . SITE_TAGLINE;
         $ogDesc  = isset($metaDesc) ? h($metaDesc) : 'Medizinar Care provides reliable and compassionate home care services including bedside patient care, elderly care, mother & baby care, and domestic support in Kerala.';
         $ogUrl   = SITE_URL . ($_SERVER['REQUEST_URI'] === '/' ? '' : rtrim($_SERVER['REQUEST_URI'], '/'));
-        $ogImage = asset('images/og-image.png');
+        $ogImage = isset($ogImage) && $ogImage ? $ogImage : asset('images/og-image.png');
     ?>
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="<?= SITE_NAME ?>">

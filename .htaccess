@@ -14,6 +14,9 @@
     # Block access to hidden files and directories
     RewriteRule (^|/)\.(?!well-known) - [F,L]
 
+    # Allow blog image uploads to be served publicly
+    RewriteRule ^uploads/blog/.+\.(jpe?g|png|webp)$ - [L]
+
     # Block access to uploads directory listing
     RewriteRule ^uploads/ - [F,L]
 
