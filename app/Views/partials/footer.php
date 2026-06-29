@@ -59,6 +59,8 @@
                 <li><a href="<?= url('/team') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Our Team</a></li>
                 <li><a href="<?= url('/contact') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Contact Us</a></li>
                 <li><a href="<?= url('/appointment') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Make an Appointment</a></li>
+                <li><a href="<?= url('/blog') ?>" target="_blank" rel="noopener" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Blog</a></li>
+                <li><a href="<?= url('/faq') ?>" target="_blank" rel="noopener" class="text-primary-200 hover:text-accent-light text-sm transition-colors">FAQ</a></li>
             </ul>
         </div>
 

@@ -10,6 +10,8 @@ use App\Controllers\Admin\DashboardController;
 use App\Controllers\Admin\EntryController;
 use App\Controllers\Admin\SettingsController;
 use App\Controllers\Admin\BlogController as AdminBlogController;
+use App\Controllers\FaqController;
+use App\Controllers\Admin\FaqController as AdminFaqController;
 
 $router = new Router();
 
@@ -26,6 +28,8 @@ $router->post('/appointment', [AppointmentController::class, 'submit']);
 
 $router->get('/blog',        [BlogController::class,       'index']);
 $router->get('/blog/{slug}', [BlogController::class,       'show']);
+
+$router->get('/faq',         [FaqController::class,        'index']);
 
 $router->get('/admin/login',  [AuthController::class,      'loginForm']);
 $router->post('/admin/login', [AuthController::class,      'login']);
@@ -51,6 +55,13 @@ $router->get('/admin/blog/{id}/edit',      [AdminBlogController::class, 'edit'])
 $router->post('/admin/blog/{id}',         [AdminBlogController::class, 'update']);
 $router->get('/admin/blog/{id}/preview',   [AdminBlogController::class, 'preview']);
 $router->post('/admin/blog/{id}/delete',  [AdminBlogController::class, 'delete']);
+
+$router->get('/admin/faqs',                [AdminFaqController::class, 'index']);
+$router->get('/admin/faqs/create',         [AdminFaqController::class, 'create']);
+$router->post('/admin/faqs',              [AdminFaqController::class, 'store']);
+$router->get('/admin/faqs/{id}/edit',      [AdminFaqController::class, 'edit']);
+$router->post('/admin/faqs/{id}',         [AdminFaqController::class, 'update']);
+$router->post('/admin/faqs/{id}/delete',  [AdminFaqController::class, 'delete']);
 
 $router->get('/admin/settings',          [SettingsController::class, 'index']);
 $router->post('/admin/settings',         [SettingsController::class, 'update']);
