@@ -11,6 +11,7 @@ use App\Controllers\Admin\EntryController;
 use App\Controllers\Admin\SettingsController;
 use App\Controllers\Admin\BlogController as AdminBlogController;
 use App\Controllers\FaqController;
+use App\Controllers\SitemapController;
 use App\Controllers\Admin\FaqController as AdminFaqController;
 
 $router = new Router();
@@ -30,6 +31,7 @@ $router->get('/blog',        [BlogController::class,       'index']);
 $router->get('/blog/{slug}', [BlogController::class,       'show']);
 
 $router->get('/faq',         [FaqController::class,        'index']);
+$router->get('/sitemap.xml',  [SitemapController::class,    'index']);
 
 $router->get('/admin/login',  [AuthController::class,      'loginForm']);
 $router->post('/admin/login', [AuthController::class,      'login']);

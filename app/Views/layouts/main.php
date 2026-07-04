@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IN">
 
 <head>
     <meta charset="UTF-8">
@@ -7,20 +7,29 @@
     <title><?= isset($pageTitle) ? h($pageTitle) . ' — ' . SITE_NAME : SITE_NAME . ' | ' . SITE_TAGLINE ?></title>
     <meta name="description" content="<?= isset($metaDesc) ? h($metaDesc) : 'Medizinar Care provides reliable and compassionate home care services including bedside patient care, elderly care, mother &amp; baby care, and domestic support.' ?>">
 
-    <!-- SEO Meta -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <link rel="canonical" href="<?= h(SITE_URL . ($_SERVER['REQUEST_URI'] === '/' ? '' : rtrim($_SERVER['REQUEST_URI'], '/'))) ?>">
+    <?php
+        // Strip query-string from canonical to avoid duplicate content issues
+        $canonicalPath = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
+        $canonicalUrl  = rtrim(SITE_URL, '/') . ($canonicalPath === '/' ? '' : rtrim($canonicalPath, '/'));
+    ?>
+    <link rel="canonical" href="<?= h($canonicalUrl) ?>">
+    <link rel="alternate" hreflang="en-IN" href="<?= h($canonicalUrl) ?>">
+    <link rel="alternate" hreflang="x-default" href="<?= h($canonicalUrl) ?>">
     <meta name="author" content="<?= SITE_NAME ?>">
     <meta name="theme-color" content="#186c21">
-    <meta name="keywords" content="home healthcare Kerala, bedside patient care, elderly care, mother baby care, housemaid services, NRI parent care, caregiver services, Medizinar Care, Kottarakkara, Kollam">
+    <meta name="keywords" content="home healthcare Kerala, home nursing Kerala, bedside patient care Kottarakkara, elderly care Kollam, mother baby care Kerala, housemaid services Kerala, NRI parent care India, caregiver Kerala, Medizinar Care">
     <meta name="geo.region" content="IN-KL">
-    <meta name="geo.placename" content="Kottarakkara, Kollam, Kerala">
+    <meta name="geo.placename" content="Kottarakkara, Kollam, Kerala, India">
+    <meta name="geo.position" content="8.9905;76.7795">
+    <meta name="ICBM" content="8.9905, 76.7795">
+    <meta name="format-detection" content="telephone=no">
 
     <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
     <?php
         $ogTitle = isset($pageTitle) ? h($pageTitle) . ' — ' . SITE_NAME : SITE_NAME . ' | ' . SITE_TAGLINE;
         $ogDesc  = isset($metaDesc) ? h($metaDesc) : 'Medizinar Care provides reliable and compassionate home care services including bedside patient care, elderly care, mother & baby care, and domestic support in Kerala.';
-        $ogUrl   = SITE_URL . ($_SERVER['REQUEST_URI'] === '/' ? '' : rtrim($_SERVER['REQUEST_URI'], '/'));
+        $ogUrl   = $canonicalUrl;
         $ogImage = isset($ogImage) && $ogImage ? $ogImage : asset('images/og-image.png');
     ?>
     <meta property="og:type" content="website">
@@ -95,18 +104,20 @@
     <script src="https://www.google.com/recaptcha/api.js?render=<?= h(recaptcha_site_key()) ?>" async defer></script>
     <?php endif; ?>
 
-    <!-- JSON-LD Structured Data -->
+    <!-- JSON-LD: Organisation / MedicalBusiness (sitewide) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
+        "@type": ["MedicalBusiness", "LocalBusiness"],
         "name": "<?= SITE_NAME ?>",
+        "alternateName": "Medizinar Care Kerala",
         "description": "<?= $ogDesc ?>",
         "url": "<?= h(SITE_URL) ?>",
         "logo": "<?= asset('images/favicon-512x512.png') ?>",
         "image": "<?= h($ogImage) ?>",
         "telephone": "+91<?= PHONE ?>",
         "email": "<?= EMAIL ?>",
+        "hasMap": "https://maps.google.com/?q=Medizinar+Care+Kottarakkara+Kerala",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "<?= ADDRESS_LINE1 ?>",
@@ -120,12 +131,12 @@
             "latitude": "8.9905",
             "longitude": "76.7795"
         },
-        "openingHoursSpecification": {
+        "openingHoursSpecification": [{
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
             "opens": "00:00",
             "closes": "23:59"
-        },
+        }],
         "sameAs": [
             "https://www.facebook.com/share/1bADZmQVno/",
             "https://www.instagram.com/medizinarcare",
@@ -133,13 +144,31 @@
             "https://www.linkedin.com/company/medizinar/"
         ],
         "priceRange": "$$",
-        "areaServed": {
-            "@type": "State",
-            "name": "Kerala"
-        },
-        "serviceType": ["Bedside Patient Care", "Elderly Care", "Mother & Baby Care", "House Maid Services", "NRI Parent Care"]
+        "currenciesAccepted": "INR",
+        "paymentAccepted": "Cash, Bank Transfer, UPI",
+        "areaServed": [
+            {"@type": "State",   "name": "Kerala"},
+            {"@type": "City",    "name": "Kottarakkara"},
+            {"@type": "City",    "name": "Kollam"},
+            {"@type": "Country", "name": "India"}
+        ],
+        "availableService": [
+            {"@type": "MedicalTherapy", "name": "Bedside Patient Care"},
+            {"@type": "MedicalTherapy", "name": "Elderly Care"},
+            {"@type": "MedicalTherapy", "name": "Mother & Baby Care"},
+            {"@type": "Service",        "name": "House Maid Services"},
+            {"@type": "MedicalTherapy", "name": "NRI Parent Care"},
+            {"@type": "Service",        "name": "Quick Support"}
+        ]
     }
     </script>
+
+    <?php if (!empty($jsonLd)): ?>
+    <!-- JSON-LD: Page-specific structured data -->
+    <script type="application/ld+json">
+    <?= json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
+    </script>
+    <?php endif; ?>
 </head>
 
 <body class="font-sans text-gray-800 bg-white antialiased">
