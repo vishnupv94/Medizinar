@@ -1,6 +1,6 @@
 <footer class="bg-primary-900 text-white">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
 
         <div class="lg:col-span-1">
             <a href="<?= url('/') ?>" class="inline-block mb-4">
@@ -61,6 +61,17 @@
                 <li><a href="<?= url('/appointment') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Make an Appointment</a></li>
                 <li><a href="<?= url('/blog') ?>" target="_blank" rel="noopener" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Blog</a></li>
                 <li><a href="<?= url('/faq') ?>" target="_blank" rel="noopener" class="text-primary-200 hover:text-accent-light text-sm transition-colors">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h3 class="font-semibold text-white mb-5 text-base">Legal</h3>
+            <div class="w-8 h-0.5 mb-4 rounded" style="background:#a5781e"></div>
+            <ul class="space-y-2.5">
+                <li><a href="<?= url('/privacy-policy') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Privacy Policy</a></li>
+                <li><a href="<?= url('/terms-and-conditions') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Terms &amp; Conditions</a></li>
+                <li><a href="<?= url('/disclaimer') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Disclaimer</a></li>
+                <li><a href="<?= url('/refund-policy') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Refund Policy</a></li>
             </ul>
         </div>
 

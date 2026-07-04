@@ -33,6 +33,12 @@ $router->get('/blog/{slug}', [BlogController::class,       'show']);
 $router->get('/faq',         [FaqController::class,        'index']);
 $router->get('/sitemap.xml',  [SitemapController::class,    'index']);
 
+$router->get('/privacy-policy',       [PageController::class, 'privacyPolicy']);
+$router->get('/terms-and-conditions', [PageController::class, 'termsAndConditions']);
+$router->get('/disclaimer',           [PageController::class, 'disclaimer']);
+$router->get('/refund-policy',        [PageController::class, 'refundPolicy']);
+
+
 $router->get('/admin/login',  [AuthController::class,      'loginForm']);
 $router->post('/admin/login', [AuthController::class,      'login']);
 $router->post('/admin/logout', [AuthController::class,      'logout']);

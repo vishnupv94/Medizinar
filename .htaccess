@@ -17,6 +17,9 @@
     # Allow blog image uploads to be served publicly
     RewriteRule ^uploads/blog/.+\.(jpe?g|png|webp)$ - [L]
 
+    # Allow legal documents to be served publicly
+    RewriteRule ^docs/legal/.+\.pdf$ - [L]
+
     # Block access to uploads directory listing
     RewriteRule ^uploads/ - [F,L]
 
@@ -82,6 +85,9 @@ AddDefaultCharset UTF-8
     # Webmanifest
     ExpiresByType application/manifest+json      "access plus 1 week"
     ExpiresByType application/json               "access plus 0 seconds"
+
+    # PDF documents
+    ExpiresByType application/pdf                "access plus 1 month"
 
     # HTML — no cache (always fresh)
     ExpiresByType text/html                      "access plus 0 seconds"

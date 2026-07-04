@@ -70,4 +70,40 @@ class PageController extends Controller
             'metaDesc'  => 'Meet the Medizinar Care team — certified nurses, caregivers and support staff dedicated to compassionate home healthcare across Kottarakkara, Kollam and Kerala.',
         ]);
     }
+
+    public function privacyPolicy(): void
+    {
+        $this->view('privacy-policy', [
+            'page'      => '',
+            'pageTitle' => 'Privacy Policy',
+            'metaDesc'  => 'Read the Medizinar Care Privacy Policy to understand how we collect, use, and protect your personal information when you use our home healthcare services.',
+        ]);
+    }
+
+    public function termsAndConditions(): void
+    {
+        $this->view('terms-and-conditions', [
+            'page'      => '',
+            'pageTitle' => 'Terms & Conditions',
+            'metaDesc'  => 'Review the Terms & Conditions governing your use of Medizinar Care home healthcare services in Kerala.',
+        ]);
+    }
+
+    public function disclaimer(): void
+    {
+        $this->view('disclaimer', [
+            'page'      => '',
+            'pageTitle' => 'Disclaimer',
+            'metaDesc'  => 'Read the Medizinar Care Disclaimer for important information about the limitations and scope of our home healthcare services.',
+        ]);
+    }
+
+    public function refundPolicy(): void
+    {
+        $this->view('refund-policy', [
+            'page'      => '',
+            'pageTitle' => 'Refund Policy',
+            'metaDesc'  => 'Understand the Medizinar Care Refund Policy, including our guidelines for service cancellations, refunds, and adjustments.',
+        ]);
+    }
 }
