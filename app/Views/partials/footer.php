@@ -70,8 +70,11 @@
             <ul class="space-y-2.5">
                 <li><a href="<?= url('/privacy-policy') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Privacy Policy</a></li>
                 <li><a href="<?= url('/terms-and-conditions') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Terms &amp; Conditions</a></li>
+                <li><a href="<?= url('/service-terms') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Service Terms</a></li>
                 <li><a href="<?= url('/disclaimer') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Disclaimer</a></li>
                 <li><a href="<?= url('/refund-policy') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Refund Policy</a></li>
+                <li><a href="<?= url('/grievance-policy') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Grievance Policy</a></li>
+                <li><a href="<?= url('/patient-rights') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Patient Rights</a></li>
             </ul>
         </div>
 

@@ -106,4 +106,31 @@ class PageController extends Controller
             'metaDesc'  => 'Understand the Medizinar Care Refund Policy, including our guidelines for service cancellations, refunds, and adjustments.',
         ]);
     }
+
+    public function grievancePolicy(): void
+    {
+        $this->view('grievance-policy', [
+            'page'      => '',
+            'pageTitle' => 'Grievance Policy',
+            'metaDesc'  => 'Learn how Medizinar Care handles your concerns, complaints, and feedback — fairly, promptly, and confidentially.',
+        ]);
+    }
+
+    public function patientRights(): void
+    {
+        $this->view('patient-rights', [
+            'page'      => '',
+            'pageTitle' => 'Patient Rights Policy',
+            'metaDesc'  => 'Understand your rights as a Medizinar Care patient — dignity, safety, privacy, and quality care are guaranteed.',
+        ]);
+    }
+
+    public function serviceTerms(): void
+    {
+        $this->view('service-terms', [
+            'page'      => '',
+            'pageTitle' => 'Service Terms',
+            'metaDesc'  => 'Read the Medizinar Care Service Terms governing the delivery of our professional home healthcare services.',
+        ]);
+    }
 }

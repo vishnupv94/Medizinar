@@ -190,6 +190,10 @@
     <?php partial('footer') ?>
 
     <script src="<?= asset('js/app.js') ?>?v=<?= filemtime(ROOT_PATH . '/assets/js/app.js') ?>"></script>
+
+    <?php partial('cookie-consent') ?>
+
 </body>
+
 
 </html>

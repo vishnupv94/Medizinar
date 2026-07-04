@@ -37,6 +37,10 @@ $router->get('/privacy-policy',       [PageController::class, 'privacyPolicy']);
 $router->get('/terms-and-conditions', [PageController::class, 'termsAndConditions']);
 $router->get('/disclaimer',           [PageController::class, 'disclaimer']);
 $router->get('/refund-policy',        [PageController::class, 'refundPolicy']);
+$router->get('/grievance-policy',     [PageController::class, 'grievancePolicy']);
+$router->get('/patient-rights',       [PageController::class, 'patientRights']);
+$router->get('/service-terms',        [PageController::class, 'serviceTerms']);
+
 
 
 $router->get('/admin/login',  [AuthController::class,      'loginForm']);

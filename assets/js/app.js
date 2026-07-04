@@ -302,4 +302,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── Cookie Consent ─────────────────────────────────────
+  initCookieConsent();
+
 });
+
+// ── Cookie Consent Logic ────────────────────────────────────────────────────
+function initCookieConsent() {
+  const STORAGE_KEY = 'mc_cookie_consent'; // mc = medizinar care
+  const banner      = document.getElementById('cookie-banner');
+  const acceptBtn   = document.getElementById('cookie-accept');
+  const declineBtn  = document.getElementById('cookie-decline');
+
+  if (!banner) return;
+
+  // Already decided — keep banner hidden
+  if (localStorage.getItem(STORAGE_KEY)) return;
+
+  // Show banner after a brief delay so it doesn't clash with page load
+  setTimeout(() => {
+    banner.removeAttribute('hidden');
+  }, 800);
+
+  function dismiss(choice) {
+    localStorage.setItem(STORAGE_KEY, choice); // 'accepted' | 'declined'
+
+    // Slide banner back down
+    banner.style.transition = 'transform 0.35s cubic-bezier(0.4, 0, 1, 1), opacity 0.3s ease';
+    banner.style.transform  = 'translateY(110%)';
+    banner.style.opacity    = '0';
+
+    setTimeout(() => banner.setAttribute('hidden', ''), 380);
+  }
+
+  if (acceptBtn)  acceptBtn.addEventListener('click',  () => dismiss('accepted'));
+  if (declineBtn) declineBtn.addEventListener('click', () => dismiss('declined'));
+}
+
