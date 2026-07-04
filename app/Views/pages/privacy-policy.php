@@ -19,11 +19,7 @@
                     <h2 class="text-2xl font-bold text-gray-900">Privacy Policy</h2>
                     <p class="text-gray-500 text-sm mt-1"><?= SITE_NAME ?> &mdash; Medizinar Care LLP</p>
                 </div>
-                <a href="<?= url('docs/legal/Privacy Policy.pdf') ?>" download
-                   class="inline-flex items-center gap-2 bg-primary hover:bg-primary-800 text-white font-semibold text-sm px-4 py-2.5 rounded-xl transition-colors shadow-sm shrink-0">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                    Download PDF
-                </a>
+
             </div>
 
             <!-- Intro -->
