@@ -4,6 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <?php if (defined('GA_MEASUREMENT_ID') && GA_MEASUREMENT_ID): ?>
+    <!-- Google Analytics — Consent Mode v2 -->
+    <!-- Step 1: Set consent defaults BEFORE loading gtag so no hits fire without consent -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      // Default: deny analytics until user accepts cookie consent
+      gtag('consent', 'default', {
+        analytics_storage:    'denied',
+        ad_storage:           'denied',
+        ad_user_data:         'denied',
+        ad_personalization:   'denied',
+        wait_for_update:      500,
+      });
+    </script>
+    <!-- Step 2: Load the gtag.js library -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<?= h(GA_MEASUREMENT_ID) ?>"></script>
+    <!-- Step 3: Configure GA -->
+    <script>
+      gtag('js', new Date());
+      gtag('config', '<?= h(GA_MEASUREMENT_ID) ?>', { send_page_view: true });
+    </script>
+    <?php endif; ?>
+
+
     <title><?= isset($pageTitle) ? h($pageTitle) . ' — ' . SITE_NAME : SITE_NAME . ' | ' . SITE_TAGLINE ?></title>
     <meta name="description" content="<?= isset($metaDesc) ? h($metaDesc) : 'Medizinar Care provides reliable and compassionate home care services including bedside patient care, elderly care, mother &amp; baby care, and domestic support.' ?>">
 

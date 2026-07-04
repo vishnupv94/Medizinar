@@ -316,16 +316,47 @@ function initCookieConsent() {
 
   if (!banner) return;
 
-  // Already decided — keep banner hidden
-  if (localStorage.getItem(STORAGE_KEY)) return;
+  // Returning visitor — restore consent without showing banner
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    if (stored === 'accepted' && typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        analytics_storage:  'granted',
+        ad_storage:         'denied',
+        ad_user_data:       'denied',
+        ad_personalization: 'denied',
+      });
+    }
+    return; // banner stays hidden
+  }
 
-  // Show banner after a brief delay so it doesn't clash with page load
+  // First visit — show banner after a brief delay
   setTimeout(() => {
     banner.removeAttribute('hidden');
   }, 800);
 
+
   function dismiss(choice) {
     localStorage.setItem(STORAGE_KEY, choice); // 'accepted' | 'declined'
+
+    // Update Google Analytics Consent Mode based on user choice
+    if (typeof gtag === 'function') {
+      if (choice === 'accepted') {
+        gtag('consent', 'update', {
+          analytics_storage:  'granted',
+          ad_storage:         'denied',  // we don't run ads
+          ad_user_data:       'denied',
+          ad_personalization: 'denied',
+        });
+      } else {
+        gtag('consent', 'update', {
+          analytics_storage:  'denied',
+          ad_storage:         'denied',
+          ad_user_data:       'denied',
+          ad_personalization: 'denied',
+        });
+      }
+    }
 
     // Slide banner back down
     banner.style.transition = 'transform 0.35s cubic-bezier(0.4, 0, 1, 1), opacity 0.3s ease';
@@ -334,6 +365,7 @@ function initCookieConsent() {
 
     setTimeout(() => banner.setAttribute('hidden', ''), 380);
   }
+
 
   if (acceptBtn)  acceptBtn.addEventListener('click',  () => dismiss('accepted'));
   if (declineBtn) declineBtn.addEventListener('click', () => dismiss('declined'));
