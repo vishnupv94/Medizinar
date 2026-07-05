@@ -227,6 +227,13 @@
         'contact'     => ['name' => 'Contact Us',          'url' => '/contact'],
         'appointment' => ['name' => 'Make an Appointment', 'url' => '/appointment'],
         'location'    => ['name' => 'Locations',           'url' => '/location'],
+        'privacy-policy'       => ['name' => 'Privacy Policy',       'url' => '/privacy-policy'],
+        'terms-and-conditions' => ['name' => 'Terms & Conditions',    'url' => '/terms-and-conditions'],
+        'disclaimer'           => ['name' => 'Disclaimer',           'url' => '/disclaimer'],
+        'refund-policy'        => ['name' => 'Refund Policy',        'url' => '/refund-policy'],
+        'grievance-policy'     => ['name' => 'Grievance Policy',     'url' => '/grievance-policy'],
+        'patient-rights'       => ['name' => 'Patient Rights Policy', 'url' => '/patient-rights'],
+        'service-terms'        => ['name' => 'Service Terms',        'url' => '/service-terms'],
     ];
     $currentPage = $page ?? '';
     $bcItems = [];

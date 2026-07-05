@@ -88,7 +88,7 @@ class PageController extends Controller
     public function privacyPolicy(): void
     {
         $this->view('privacy-policy', [
-            'page'      => '',
+            'page'      => 'privacy-policy',
             'pageTitle' => 'Privacy Policy',
             'metaDesc'  => 'Read the Medizinar Care Privacy Policy to understand how we collect, use, and protect your personal information when you use our home healthcare services.',
         ]);
@@ -97,7 +97,7 @@ class PageController extends Controller
     public function termsAndConditions(): void
     {
         $this->view('terms-and-conditions', [
-            'page'      => '',
+            'page'      => 'terms-and-conditions',
             'pageTitle' => 'Terms & Conditions',
             'metaDesc'  => 'Review the Terms & Conditions governing your use of Medizinar Care home healthcare services in Kerala.',
         ]);
@@ -106,7 +106,7 @@ class PageController extends Controller
     public function disclaimer(): void
     {
         $this->view('disclaimer', [
-            'page'      => '',
+            'page'      => 'disclaimer',
             'pageTitle' => 'Disclaimer',
             'metaDesc'  => 'Read the Medizinar Care Disclaimer for important information about the limitations and scope of our home healthcare services.',
         ]);
@@ -115,7 +115,7 @@ class PageController extends Controller
     public function refundPolicy(): void
     {
         $this->view('refund-policy', [
-            'page'      => '',
+            'page'      => 'refund-policy',
             'pageTitle' => 'Refund Policy',
             'metaDesc'  => 'Understand the Medizinar Care Refund Policy, including our guidelines for service cancellations, refunds, and adjustments.',
         ]);
@@ -124,7 +124,7 @@ class PageController extends Controller
     public function grievancePolicy(): void
     {
         $this->view('grievance-policy', [
-            'page'      => '',
+            'page'      => 'grievance-policy',
             'pageTitle' => 'Grievance Policy',
             'metaDesc'  => 'Learn how Medizinar Care handles your concerns, complaints, and feedback — fairly, promptly, and confidentially.',
         ]);
@@ -133,7 +133,7 @@ class PageController extends Controller
     public function patientRights(): void
     {
         $this->view('patient-rights', [
-            'page'      => '',
+            'page'      => 'patient-rights',
             'pageTitle' => 'Patient Rights Policy',
             'metaDesc'  => 'Understand your rights as a Medizinar Care patient — dignity, safety, privacy, and quality care are guaranteed.',
         ]);
@@ -142,7 +142,7 @@ class PageController extends Controller
     public function serviceTerms(): void
     {
         $this->view('service-terms', [
-            'page'      => '',
+            'page'      => 'service-terms',
             'pageTitle' => 'Service Terms',
             'metaDesc'  => 'Read the Medizinar Care Service Terms governing the delivery of our professional home healthcare services.',
         ]);

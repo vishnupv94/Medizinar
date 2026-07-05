@@ -26,6 +26,13 @@ class SitemapController extends Controller
         ['loc' => '/blog',        'changefreq' => 'daily',   'priority' => '0.7', 'lastmod' => null],
         ['loc' => '/contact',     'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-04-01'],
         ['loc' => '/appointment', 'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-04-01'],
+        ['loc' => '/privacy-policy',       'changefreq' => 'monthly', 'priority' => '0.4', 'lastmod' => '2026-07-06'],
+        ['loc' => '/terms-and-conditions', 'changefreq' => 'monthly', 'priority' => '0.4', 'lastmod' => '2026-07-06'],
+        ['loc' => '/disclaimer',           'changefreq' => 'monthly', 'priority' => '0.4', 'lastmod' => '2026-07-06'],
+        ['loc' => '/refund-policy',        'changefreq' => 'monthly', 'priority' => '0.4', 'lastmod' => '2026-07-06'],
+        ['loc' => '/grievance-policy',     'changefreq' => 'monthly', 'priority' => '0.4', 'lastmod' => '2026-07-06'],
+        ['loc' => '/patient-rights',       'changefreq' => 'monthly', 'priority' => '0.4', 'lastmod' => '2026-07-06'],
+        ['loc' => '/service-terms',        'changefreq' => 'monthly', 'priority' => '0.4', 'lastmod' => '2026-07-06'],
     ];
 
     public function index(): void
