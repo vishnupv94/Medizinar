@@ -64,44 +64,60 @@ class TeamMember
     public static function create(array $data): int
     {
         $db = Database::getInstance();
-        $db->query(
-            'INSERT INTO team_members (name, role, initial, color, bio, photo, obj_pos, obj_scale, status, sort_order)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [
-                $data['name'],
-                $data['role'],
-                $data['initial']    ?? null,
-                $data['color']      ?? '#176B23',
-                $data['bio']        ?? null,
-                $data['photo']      ?? null,
-                $data['obj_pos']    ?? 'center top',
-                (float) ($data['obj_scale'] ?? 1.00),
-                $data['status']     ?? 'published',
-                (int) ($data['sort_order'] ?? 0),
-            ]
-        );
+        $sql = 'INSERT INTO team_members (name, role, initial, color, bio, photo, obj_pos, obj_scale, status, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $params = [
+            $data['name'],
+            $data['role'],
+            $data['initial']    ?? null,
+            $data['color']      ?? '#176B23',
+            $data['bio']        ?? null,
+            $data['photo']      ?? null,
+            $data['obj_pos']    ?? 'center top',
+            (float) ($data['obj_scale'] ?? 1.00),
+            $data['status']     ?? 'published',
+            (int) ($data['sort_order'] ?? 0),
+        ];
+
+        try {
+            $db->query($sql, $params);
+        } catch (\PDOException $e) {
+            if (strpos($e->getMessage(), 'Unknown column \'obj_scale\'') !== false) {
+                $db->query('ALTER TABLE team_members ADD COLUMN obj_scale DECIMAL(4,2) DEFAULT 1.00 AFTER obj_pos');
+                $db->query($sql, $params);
+            } else {
+                throw $e;
+            }
+        }
         return (int) $db->query('SELECT LAST_INSERT_ID() AS id')->fetch()->id;
     }
 
     public static function update(int $id, array $data): void
     {
-        Database::getInstance()->query(
-            'UPDATE team_members SET name=?, role=?, initial=?, color=?, bio=?, photo=?, obj_pos=?, obj_scale=?, status=?, sort_order=?
-             WHERE id=?',
-            [
-                $data['name'],
-                $data['role'],
-                $data['initial']    ?? null,
-                $data['color']      ?? '#176B23',
-                $data['bio']        ?? null,
-                $data['photo']      ?? null,
-                $data['obj_pos']    ?? 'center top',
-                (float) ($data['obj_scale'] ?? 1.00),
-                $data['status']     ?? 'published',
-                (int) ($data['sort_order'] ?? 0),
-                $id,
-            ]
-        );
+        $sql = 'UPDATE team_members SET name=?, role=?, initial=?, color=?, bio=?, photo=?, obj_pos=?, obj_scale=?, status=?, sort_order=? WHERE id=?';
+        $params = [
+            $data['name'],
+            $data['role'],
+            $data['initial']    ?? null,
+            $data['color']      ?? '#176B23',
+            $data['bio']        ?? null,
+            $data['photo']      ?? null,
+            $data['obj_pos']    ?? 'center top',
+            (float) ($data['obj_scale'] ?? 1.00),
+            $data['status']     ?? 'published',
+            (int) ($data['sort_order'] ?? 0),
+            $id,
+        ];
+        
+        try {
+            Database::getInstance()->query($sql, $params);
+        } catch (\PDOException $e) {
+            if (strpos($e->getMessage(), 'Unknown column \'obj_scale\'') !== false) {
+                Database::getInstance()->query('ALTER TABLE team_members ADD COLUMN obj_scale DECIMAL(4,2) DEFAULT 1.00 AFTER obj_pos');
+                Database::getInstance()->query($sql, $params);
+            } else {
+                throw $e;
+            }
+        }
     }
 
     public static function delete(int $id): void
