@@ -99,7 +99,17 @@
                             'Comfort and monitoring support',
                         ]
                     ]) ?>
-                    <a href="<?= url('/appointment') ?>?service=bedside" class="btn-primary mt-6">Book This Service</a>
+                    <div class="flex items-center gap-6 mt-6">
+                        <a href="<?= url('/appointment') ?>?service=bedside" class="btn-primary">Book This Service</a>
+                        <a href="<?= url('/services/bedside-patient-care') ?>"
+                            class="inline-flex items-center gap-1.5 text-sm font-semibold hover:gap-2.5 transition-all"
+                            style="color:#a5781e">
+                            Learn More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,7 +135,17 @@
                             'Emotional companionship',
                         ]
                     ]) ?>
-                    <a href="<?= url('/appointment') ?>?service=elderly" class="btn-primary mt-6">Book This Service</a>
+                    <div class="flex items-center gap-6 mt-6">
+                        <a href="<?= url('/appointment') ?>?service=elderly" class="btn-primary">Book This Service</a>
+                        <a href="<?= url('/services/elderly-care') ?>"
+                            class="inline-flex items-center gap-1.5 text-sm font-semibold hover:gap-2.5 transition-all"
+                            style="color:#a5781e">
+                            Learn More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
                 <div class="fade-in-up order-1 lg:order-2">
                     <div class="rounded-2xl p-10 relative overflow-hidden"
@@ -210,8 +230,17 @@
                             'Newborn routine care guidance',
                         ]
                     ]) ?>
-                    <a href="<?= url('/appointment') ?>?service=mother-baby" class="btn-primary mt-6">Book This
-                        Service</a>
+                    <div class="flex items-center gap-6 mt-6">
+                        <a href="<?= url('/appointment') ?>?service=mother-baby" class="btn-primary">Book This Service</a>
+                        <a href="<?= url('/services/mother-baby-care') ?>"
+                            class="inline-flex items-center gap-1.5 text-sm font-semibold hover:gap-2.5 transition-all"
+                            style="color:#a5781e">
+                            Learn More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -236,8 +265,17 @@
                             'Household organisation',
                         ]
                     ]) ?>
-                    <a href="<?= url('/appointment') ?>?service=housemaid" class="btn-primary mt-6">Book This
-                        Service</a>
+                    <div class="flex items-center gap-6 mt-6">
+                        <a href="<?= url('/appointment') ?>?service=housemaid" class="btn-primary">Book This Service</a>
+                        <a href="<?= url('/services/home-maid-services') ?>"
+                            class="inline-flex items-center gap-1.5 text-sm font-semibold hover:gap-2.5 transition-all"
+                            style="color:#a5781e">
+                            Learn More
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
                 <div class="fade-in-up order-1 lg:order-2">
                     <div class="rounded-2xl p-10 relative overflow-hidden"
@@ -293,24 +331,28 @@
                     'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z"/></svg>',
                     'title' => 'Hospital Visit Companion',
                     'items' => ['Assistance during doctor appointments', 'Support during hospital procedures', 'Patient assistance during hospital visits'],
+                    'slug' => 'quick-support',
                 ],
                 [
                     'id' => 'day-support',
                     'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>',
                     'title' => 'Elderly Day Support',
                     'items' => ['4–8 hours daytime support', 'Daily living assistance', 'Ideal for temporary daytime care'],
+                    'slug' => 'quick-support',
                 ],
                 [
                     'id' => 'night-care',
                     'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg>',
                     'title' => 'Night Care Service',
                     'items' => ['Night-time patient monitoring', 'Elderly safety assurance', 'Overnight caregiving support'],
+                    'slug' => 'quick-support',
                 ],
                 [
                     'id' => 'nri',
                     'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5a17.92 17.92 0 0 1-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>',
                     'title' => 'NRI Parent Care',
                     'items' => ['Home visit check', 'Parent well-being assessment', 'Status update to family members'],
+                    'slug' => 'nri-parent-care',
                 ],
             ];
             foreach ($quick as $i => $q): ?>
@@ -330,14 +372,22 @@
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                    <a href="<?= url('/appointment') ?>?service=<?= $q['id'] ?>"
-                        class="inline-flex items-center gap-1 text-sm font-semibold transition-all hover:gap-2 mt-auto"
-                        style="color:#a5781e">
-                        Book Now
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </a>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-50">
+                        <a href="<?= url('/appointment') ?>?service=<?= $q['id'] ?>"
+                            class="inline-flex items-center gap-1 text-sm font-semibold transition-all hover:gap-2"
+                            style="color:#a5781e">
+                            Book Now
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <?php if (!empty($q['slug'])): ?>
+                            <a href="<?= url('/services/' . $q['slug']) ?>"
+                                class="text-xs font-semibold text-gray-400 hover:text-primary transition-colors">
+                                Details →
+                            </a>
+                        <?php endif; ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
