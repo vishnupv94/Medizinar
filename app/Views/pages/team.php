@@ -37,11 +37,25 @@
                 reliable, and professional home healthcare services across India.
             </p>
         </div>
-        <div class="team-grid">
-            <?php
-            use App\Models\TeamMember;
-            $team = TeamMember::getPublished();
-            foreach ($team as $i => $member):
+        <?php
+        use App\Models\TeamMember;
+        $team = TeamMember::getPublished();
+        // Compute best column count to avoid single-card orphan rows
+        $teamCount = count($team);
+        if ($teamCount <= 4) {
+            $teamCols = $teamCount ?: 1;
+        } elseif ($teamCount % 3 === 0) {
+            $teamCols = 3;
+        } elseif ($teamCount % 4 === 0) {
+            $teamCols = 4;
+        } elseif ($teamCount % 4 !== 1) {
+            $teamCols = 4;
+        } else {
+            $teamCols = 3;
+        }
+        ?>
+        <div class="team-grid" style="--team-cols:<?= $teamCols ?>">
+            <?php foreach ($team as $i => $member):
                 $photoUrl = $member->photo
                     ? (str_starts_with($member->photo, 'http')
                         ? $member->photo
