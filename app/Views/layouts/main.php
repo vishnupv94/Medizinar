@@ -185,12 +185,36 @@
             {"@type": "Country", "name": "India"}
         ],
         "availableService": [
-            {"@type": "MedicalTherapy", "name": "Bedside Patient Care"},
-            {"@type": "MedicalTherapy", "name": "Elderly Care"},
-            {"@type": "MedicalTherapy", "name": "Mother & Baby Care"},
-            {"@type": "Service",        "name": "House Maid Services"},
-            {"@type": "MedicalTherapy", "name": "NRI Parent Care"},
-            {"@type": "Service",        "name": "Quick Support"}
+            {
+                "@type": "MedicalTherapy",
+                "name": "Bedside Patient Care",
+                "url": "<?= url('/services/bedside-patient-care') ?>"
+            },
+            {
+                "@type": "MedicalTherapy",
+                "name": "Elderly Care",
+                "url": "<?= url('/services/elderly-care') ?>"
+            },
+            {
+                "@type": "MedicalTherapy",
+                "name": "Mother & Baby Care",
+                "url": "<?= url('/services/mother-baby-care') ?>"
+            },
+            {
+                "@type": "Service",
+                "name": "House Maid Services",
+                "url": "<?= url('/services/home-maid-services') ?>"
+            },
+            {
+                "@type": "MedicalTherapy",
+                "name": "NRI Parent Care",
+                "url": "<?= url('/services/nri-parent-care') ?>"
+            },
+            {
+                "@type": "Service",
+                "name": "Quick Support",
+                "url": "<?= url('/services/quick-support') ?>"
+            }
         ]
     }
     </script>
@@ -255,14 +279,14 @@
         $bcItems = [
             ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',     'item' => SITE_URL . '/'],
             ['@type' => 'ListItem', 'position' => 2, 'name' => 'Services', 'item' => SITE_URL . '/services'],
-            ['@type' => 'ListItem', 'position' => 3, 'name' => h($service['h1'] ?? $pageTitle ?? ''), 'item' => $canonicalUrl],
+            ['@type' => 'ListItem', 'position' => 3, 'name' => h(($service->h1 ?? null) ?? $pageTitle ?? ''), 'item' => $canonicalUrl],
         ];
     } elseif ($currentPage === 'location' && !empty($slug)) {
         // Location page — 3-level breadcrumb
         $bcItems = [
             ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',      'item' => SITE_URL . '/'],
             ['@type' => 'ListItem', 'position' => 2, 'name' => 'Locations', 'item' => SITE_URL . '/location'],
-            ['@type' => 'ListItem', 'position' => 3, 'name' => h($district['name'] ?? $pageTitle ?? ''), 'item' => $canonicalUrl],
+            ['@type' => 'ListItem', 'position' => 3, 'name' => h(($district->name ?? null) ?? $pageTitle ?? ''), 'item' => $canonicalUrl],
         ];
     }
     if (!empty($bcItems)):
