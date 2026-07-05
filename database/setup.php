@@ -21,10 +21,25 @@ try {
 
     echo "[OK] Database '{$name}' ready.\n";
 
-    $sql = file_get_contents(__DIR__ . '/migration.sql');
-    $pdo->exec($sql);
+    // Find and sort all SQL migration files in the database directory
+    $sqlFiles = glob(__DIR__ . '/*.sql');
+    usort($sqlFiles, function($a, $b) {
+        $aName = basename($a);
+        $bName = basename($b);
+        if ($aName === 'migration.sql') return -1;
+        if ($bName === 'migration.sql') return 1;
+        return strcmp($aName, $bName);
+    });
 
-    echo "[OK] Tables created.\n";
+    foreach ($sqlFiles as $file) {
+        $fileName = basename($file);
+        echo "Applying {$fileName}...\n";
+        $sql = file_get_contents($file);
+        if (trim($sql) !== '') {
+            $pdo->exec($sql);
+        }
+        echo "[OK] Applied {$fileName}.\n";
+    }
 
     $exists = $pdo->query("SELECT COUNT(*) FROM admins")->fetchColumn();
 
