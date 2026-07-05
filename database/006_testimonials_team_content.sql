@@ -84,16 +84,16 @@ INSERT IGNORE INTO `testimonials` (`id`, `name`, `location_label`, `text`, `star
 INSERT IGNORE INTO `team_members` (`id`, `name`, `role`, `initial`, `color`, `bio`, `photo`, `obj_pos`, `status`, `sort_order`) VALUES
 (1, 'Jayhar M.J.', 'Founder & Managing Partner', 'J', '#176B23',
  'Visionary leader driving Medizinar Care LLP''s mission to provide trusted, compassionate, and professional home nursing services across India. Focused on operational excellence, service quality, and client satisfaction.',
- 'images/team/medizinar-jayahar-caregiver.webp', 'left', 'published', 1),
+ 'images/team/medizinar-jayahar-caregiver.webp', 'left top', 'published', 1),
 (2, 'Shanimol S.M.', 'Accounts & Finance Manager', 'S', '#ab7e22',
  'Responsible for financial planning, accounting operations, compliance management, budgeting, and maintaining the organization''s financial integrity and transparency.',
- 'images/team/medizinar-shani-caregiver.webp', 'center top', 'published', 2),
+ 'images/team/medizinar-shani-caregiver.webp', 'center 20%', 'published', 2),
 (3, 'Jaya M.', 'Client Relationship Manager', 'J', '#176B23',
  'Dedicated to ensuring exceptional client satisfaction through seamless communication, personalized support, service coordination, and long-term relationship management.',
- 'images/team/medizinar-jaya-caregiver.webp', 'bottom', 'published', 3),
+ 'images/team/medizinar-jaya-caregiver.webp', 'center 30%', 'published', 3),
 (4, 'Soumya M.', 'Brand & Digital Communications Manager', 'S', '#ab7e22',
  'Responsible for strengthening Medizinar Care LLP''s brand presence through strategic digital communication, social media management, online engagement, and marketing initiatives. Focused on building trust, increasing visibility, and connecting families with quality home healthcare services.',
- 'images/team/medizinar-soumya-caregiver.webp', 'center top', 'published', 4);
+ 'images/team/medizinar-soumya-caregiver.webp', 'center 25%', 'published', 4);
 
 -- ----------------------------------------------------------------
 -- site_content — why_us (home + about + services pages)

@@ -37,7 +37,7 @@
                 reliable, and professional home healthcare services across India.
             </p>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="team-grid">
             <?php
             use App\Models\TeamMember;
             $team = TeamMember::getPublished();
@@ -51,15 +51,15 @@
                     : '';
             ?>
                 <button type="button"
-                    class="team-card group relative text-center w-full fade-in-up cursor-pointer focus:outline-none"
+                    class="team-card group relative text-center fade-in-up cursor-pointer focus:outline-none"
                     style="animation-delay:<?= $i * 0.1 ?>s" data-name="<?= h($member->name) ?>"
                     data-role="<?= h($member->role) ?>" data-initial="<?= h($member->initial) ?>"
                     data-color="<?= h($member->color) ?>" data-photo="<?= h($photoUrl) ?>"
                     data-bio="<?= h($member->bio) ?>" onclick="openTeamModal(this)">
-                    <div class="pt-8 px-5 pb-6">
+
                         <!-- full-bleed photo -->
                         <img src="<?= h($photoUrl) ?>" alt="<?= h($member->name) ?>" class="team-card-photo"
-                            style="object-position:<?= h($member->obj_pos ?? 'center top') ?>" loading="lazy">
+                            style="object-position:<?= h($member->obj_pos ?? 'center 20%') ?>" loading="lazy">
 
                         <!-- default: bottom nameplate -->
                         <div class="absolute bottom-0 left-0 right-0 px-4 py-4 transition-opacity duration-300 group-hover:opacity-0"
@@ -90,7 +90,7 @@
                                 View Details
                             </span>
                         </div>
-                    </div>
+
                 </button>
             <?php endforeach; ?>
         </div>
