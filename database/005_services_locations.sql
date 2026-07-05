@@ -161,6 +161,8 @@ VALUES
  'quick-support','gold',6,'published');
 
 -- ---- service_faqs -------------------------------------------
+-- Clean up duplicates from prior deploys that lacked explicit IDs
+DELETE FROM `service_faqs` WHERE `id` > 24;
 INSERT IGNORE INTO `service_faqs` (`id`,`service_id`,`question`,`answer`,`sort_order`) VALUES
 -- bedside
 (1, (SELECT id FROM services WHERE slug='bedside-patient-care'),'What does a bedside caregiver do?','A bedside caregiver assists patients with daily personal care including bathing, grooming, mobility, medication reminders, and companionship throughout the day or night.',1),
