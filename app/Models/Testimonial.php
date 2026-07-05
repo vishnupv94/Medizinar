@@ -11,8 +11,7 @@ class Testimonial
     // ----------------------------------------------------------------
     public static function getPublished(int $limit = 50, int $offset = 0): array
     {
-        $db = Database::getInstance();
-        return $db->query(
+        return Database::getInstance()->fetchAll(
             'SELECT * FROM testimonials WHERE status = "published"
              ORDER BY sort_order ASC, id ASC
              LIMIT ? OFFSET ?',
@@ -24,13 +23,13 @@ class Testimonial
     {
         $db = Database::getInstance();
         if ($q !== '') {
-            return $db->query(
+            return $db->fetchAll(
                 'SELECT * FROM testimonials WHERE name LIKE ? OR text LIKE ?
                  ORDER BY sort_order ASC, id ASC LIMIT ? OFFSET ?',
                 ["%$q%", "%$q%", $limit, $offset]
             );
         }
-        return $db->query(
+        return $db->fetchAll(
             'SELECT * FROM testimonials ORDER BY sort_order ASC, id ASC LIMIT ? OFFSET ?',
             [$limit, $offset]
         );
@@ -40,25 +39,24 @@ class Testimonial
     {
         $db = Database::getInstance();
         if ($q !== '') {
-            $row = $db->queryOne(
+            $row = $db->fetch(
                 'SELECT COUNT(*) AS c FROM testimonials WHERE name LIKE ? OR text LIKE ?',
                 ["%$q%", "%$q%"]
             );
         } else {
-            $row = $db->queryOne('SELECT COUNT(*) AS c FROM testimonials');
+            $row = $db->fetch('SELECT COUNT(*) AS c FROM testimonials');
         }
         return (int) ($row->c ?? 0);
     }
 
     public static function findById(int $id): ?object
     {
-        $db = Database::getInstance();
-        return $db->queryOne('SELECT * FROM testimonials WHERE id = ?', [$id]) ?: null;
+        return Database::getInstance()->fetch('SELECT * FROM testimonials WHERE id = ?', [$id]);
     }
 
     public static function countDraft(): int
     {
-        $row = Database::getInstance()->queryOne('SELECT COUNT(*) AS c FROM testimonials WHERE status = "draft"');
+        $row = Database::getInstance()->fetch('SELECT COUNT(*) AS c FROM testimonials WHERE status = "draft"');
         return (int) ($row->c ?? 0);
     }
 
@@ -68,7 +66,7 @@ class Testimonial
     public static function create(array $data): int
     {
         $db = Database::getInstance();
-        $db->execute(
+        $db->query(
             'INSERT INTO testimonials (name, location_label, text, stars, status, sort_order)
              VALUES (?, ?, ?, ?, ?, ?)',
             [
@@ -80,13 +78,12 @@ class Testimonial
                 (int) ($data['sort_order'] ?? 0),
             ]
         );
-        return $db->lastInsertId();
+        return (int) $db->query('SELECT LAST_INSERT_ID() AS id')->fetch()->id;
     }
 
     public static function update(int $id, array $data): void
     {
-        $db = Database::getInstance();
-        $db->execute(
+        Database::getInstance()->query(
             'UPDATE testimonials SET name=?, location_label=?, text=?, stars=?, status=?, sort_order=?
              WHERE id=?',
             [
@@ -103,6 +100,6 @@ class Testimonial
 
     public static function delete(int $id): void
     {
-        Database::getInstance()->execute('DELETE FROM testimonials WHERE id = ?', [$id]);
+        Database::getInstance()->query('DELETE FROM testimonials WHERE id = ?', [$id]);
     }
 }

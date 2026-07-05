@@ -11,7 +11,7 @@ class TeamMember
     // ----------------------------------------------------------------
     public static function getPublished(): array
     {
-        return Database::getInstance()->query(
+        return Database::getInstance()->fetchAll(
             'SELECT * FROM team_members WHERE status = "published"
              ORDER BY sort_order ASC, id ASC'
         );
@@ -21,13 +21,13 @@ class TeamMember
     {
         $db = Database::getInstance();
         if ($q !== '') {
-            return $db->query(
+            return $db->fetchAll(
                 'SELECT * FROM team_members WHERE name LIKE ? OR role LIKE ?
                  ORDER BY sort_order ASC, id ASC LIMIT ? OFFSET ?',
                 ["%$q%", "%$q%", $limit, $offset]
             );
         }
-        return $db->query(
+        return $db->fetchAll(
             'SELECT * FROM team_members ORDER BY sort_order ASC, id ASC LIMIT ? OFFSET ?',
             [$limit, $offset]
         );
@@ -37,26 +37,24 @@ class TeamMember
     {
         $db = Database::getInstance();
         if ($q !== '') {
-            $row = $db->queryOne(
+            $row = $db->fetch(
                 'SELECT COUNT(*) AS c FROM team_members WHERE name LIKE ? OR role LIKE ?',
                 ["%$q%", "%$q%"]
             );
         } else {
-            $row = $db->queryOne('SELECT COUNT(*) AS c FROM team_members');
+            $row = $db->fetch('SELECT COUNT(*) AS c FROM team_members');
         }
         return (int) ($row->c ?? 0);
     }
 
     public static function findById(int $id): ?object
     {
-        return Database::getInstance()->queryOne(
-            'SELECT * FROM team_members WHERE id = ?', [$id]
-        ) ?: null;
+        return Database::getInstance()->fetch('SELECT * FROM team_members WHERE id = ?', [$id]);
     }
 
     public static function countDraft(): int
     {
-        $row = Database::getInstance()->queryOne('SELECT COUNT(*) AS c FROM team_members WHERE status = "draft"');
+        $row = Database::getInstance()->fetch('SELECT COUNT(*) AS c FROM team_members WHERE status = "draft"');
         return (int) ($row->c ?? 0);
     }
 
@@ -66,7 +64,7 @@ class TeamMember
     public static function create(array $data): int
     {
         $db = Database::getInstance();
-        $db->execute(
+        $db->query(
             'INSERT INTO team_members (name, role, initial, color, bio, photo, obj_pos, status, sort_order)
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [
@@ -81,12 +79,12 @@ class TeamMember
                 (int) ($data['sort_order'] ?? 0),
             ]
         );
-        return $db->lastInsertId();
+        return (int) $db->query('SELECT LAST_INSERT_ID() AS id')->fetch()->id;
     }
 
     public static function update(int $id, array $data): void
     {
-        Database::getInstance()->execute(
+        Database::getInstance()->query(
             'UPDATE team_members SET name=?, role=?, initial=?, color=?, bio=?, photo=?, obj_pos=?, status=?, sort_order=?
              WHERE id=?',
             [
@@ -106,6 +104,6 @@ class TeamMember
 
     public static function delete(int $id): void
     {
-        Database::getInstance()->execute('DELETE FROM team_members WHERE id = ?', [$id]);
+        Database::getInstance()->query('DELETE FROM team_members WHERE id = ?', [$id]);
     }
 }

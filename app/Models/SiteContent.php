@@ -17,7 +17,7 @@ class SiteContent
     /** Returns all published rows for a group, ordered by sort_order. */
     public static function getGroup(string $groupKey): array
     {
-        return Database::getInstance()->query(
+        return Database::getInstance()->fetchAll(
             'SELECT * FROM site_content WHERE group_key = ? AND status = "published"
              ORDER BY sort_order ASC, id ASC',
             [$groupKey]
@@ -27,7 +27,7 @@ class SiteContent
     /** Returns all rows for a group regardless of status (admin use). */
     public static function getGroupAll(string $groupKey): array
     {
-        return Database::getInstance()->query(
+        return Database::getInstance()->fetchAll(
             'SELECT * FROM site_content WHERE group_key = ?
              ORDER BY sort_order ASC, id ASC',
             [$groupKey]
@@ -50,11 +50,11 @@ class SiteContent
             $params[] = "%$q%";
         }
 
-        $where = $wheres ? ('WHERE ' . implode(' AND ', $wheres)) : '';
+        $where    = $wheres ? ('WHERE ' . implode(' AND ', $wheres)) : '';
         $params[] = $limit;
         $params[] = $offset;
 
-        return $db->query(
+        return $db->fetchAll(
             "SELECT * FROM site_content $where ORDER BY group_key ASC, sort_order ASC, id ASC LIMIT ? OFFSET ?",
             $params
         );
@@ -77,21 +77,21 @@ class SiteContent
         }
 
         $where = $wheres ? ('WHERE ' . implode(' AND ', $wheres)) : '';
-        $row   = $db->queryOne("SELECT COUNT(*) AS c FROM site_content $where", $params);
+        $row   = $db->fetch("SELECT COUNT(*) AS c FROM site_content $where", $params);
         return (int) ($row->c ?? 0);
     }
 
     public static function findById(int $id): ?object
     {
-        return Database::getInstance()->queryOne(
+        return Database::getInstance()->fetch(
             'SELECT * FROM site_content WHERE id = ?', [$id]
-        ) ?: null;
+        );
     }
 
     /** Returns a list of all distinct group_key values. */
     public static function getGroups(): array
     {
-        $rows = Database::getInstance()->query(
+        $rows = Database::getInstance()->fetchAll(
             'SELECT DISTINCT group_key FROM site_content ORDER BY group_key ASC'
         );
         return array_column($rows, 'group_key');
@@ -99,7 +99,7 @@ class SiteContent
 
     public static function countDraft(): int
     {
-        $row = Database::getInstance()->queryOne('SELECT COUNT(*) AS c FROM site_content WHERE status = "draft"');
+        $row = Database::getInstance()->fetch('SELECT COUNT(*) AS c FROM site_content WHERE status = "draft"');
         return (int) ($row->c ?? 0);
     }
 
@@ -109,7 +109,7 @@ class SiteContent
     public static function create(array $data): int
     {
         $db = Database::getInstance();
-        $db->execute(
+        $db->query(
             'INSERT INTO site_content (group_key, item_key, label, value, icon_type, icon_value, sort_order, status)
              VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             [
@@ -123,12 +123,12 @@ class SiteContent
                 $data['status']     ?? 'published',
             ]
         );
-        return $db->lastInsertId();
+        return (int) $db->query('SELECT LAST_INSERT_ID() AS id')->fetch()->id;
     }
 
     public static function update(int $id, array $data): void
     {
-        Database::getInstance()->execute(
+        Database::getInstance()->query(
             'UPDATE site_content SET group_key=?, item_key=?, label=?, value=?, icon_type=?, icon_value=?, sort_order=?, status=?
              WHERE id=?',
             [
@@ -147,6 +147,6 @@ class SiteContent
 
     public static function delete(int $id): void
     {
-        Database::getInstance()->execute('DELETE FROM site_content WHERE id = ?', [$id]);
+        Database::getInstance()->query('DELETE FROM site_content WHERE id = ?', [$id]);
     }
 }
