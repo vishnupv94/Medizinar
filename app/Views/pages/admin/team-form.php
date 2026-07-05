@@ -77,7 +77,7 @@
                 <div class="flex-shrink-0">
                     <div id="posPreviewCard" style="width:180px; aspect-ratio:3/4; border-radius:12px; overflow:hidden; border:1px solid #e5e7eb; box-shadow:0 2px 10px rgba(0,0,0,0.08); position:relative; background:#f3f4f6;">
                         <img id="posPreviewImg" src="<?= h($photoUrl) ?>" alt="Preview"
-                             style="width:100%; height:100%; object-fit:cover; object-position:<?= h($old['obj_pos'] ?? 'center 20%') ?>; transform: scale(<?= h($old['obj_scale'] ?? 1.00) ?>); display:block; transform-origin: center;">
+                             style="width:100%; height:100%; object-fit:cover; object-position:<?= h($old['obj_pos'] ?? 'center 20%') ?>; transform-origin:<?= h($old['obj_pos'] ?? 'center 20%') ?>; transform: scale(<?= h($old['obj_scale'] ?? 1.00) ?>); display:block;">
                         <!-- Nameplate overlay -->
                         <div style="position:absolute; bottom:0; left:0; right:0; padding:10px 12px;
                                     background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);">
@@ -297,6 +297,7 @@
         input.value = val;
         scaleInput.value = z;
         preview.style.objectPosition = val;
+        preview.style.transformOrigin = val;
         preview.style.transform = 'scale(' + z + ')';
         updateSliderTrack(xSlider, x);
         updateSliderTrack(ySlider, y);
