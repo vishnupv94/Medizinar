@@ -27,6 +27,20 @@ class PageController extends Controller
                     'query-input' => 'required name=search_term_string',
                 ],
             ],
+            // AggregateRating — enables star rating in Google Search results
+            'aggregateRatingJsonLd' => [
+                '@context'        => 'https://schema.org',
+                '@type'           => 'LocalBusiness',
+                'name'            => SITE_NAME,
+                'url'             => SITE_URL,
+                'aggregateRating' => [
+                    '@type'       => 'AggregateRating',
+                    'ratingValue' => '5.0',
+                    'reviewCount' => '3',
+                    'bestRating'  => '5',
+                    'worstRating' => '1',
+                ],
+            ],
         ]);
     }
 

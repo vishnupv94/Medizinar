@@ -58,7 +58,7 @@
         $ogUrl   = $canonicalUrl;
         $ogImage = isset($ogImage) && $ogImage ? $ogImage : asset('images/og-image.png');
     ?>
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="<?= isset($ogType) ? h($ogType) : 'website' ?>">
     <meta property="og:site_name" content="<?= SITE_NAME ?>">
     <meta property="og:title" content="<?= $ogTitle ?>">
     <meta property="og:description" content="<?= $ogDesc ?>">
@@ -86,6 +86,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+
+    <?php if (($page ?? '') === 'home'): ?>
+    <!-- Preload LCP hero image for faster Largest Contentful Paint -->
+    <link rel="preload" as="image" href="<?= asset('images/medizinar-care-home-hero.webp') ?>" type="image/webp">
+    <?php endif; ?>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -195,6 +200,52 @@
     <?= json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
     </script>
     <?php endif; ?>
+
+    <?php if (!empty($aggregateRatingJsonLd)): ?>
+    <!-- JSON-LD: AggregateRating -->
+    <script type="application/ld+json">
+    <?= json_encode($aggregateRatingJsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
+    </script>
+    <?php endif; ?>
+
+    <?php
+    // BreadcrumbList schema — inject on all inner pages (not home)
+    $breadcrumbMap = [
+        'about'    => ['name' => 'About Us',      'url' => '/about'],
+        'services' => ['name' => 'Services',       'url' => '/services'],
+        'blog'     => ['name' => 'Blog',           'url' => '/blog'],
+        'faq'      => ['name' => 'FAQ',            'url' => '/faq'],
+        'team'     => ['name' => 'Our Team',       'url' => '/team'],
+        'contact'  => ['name' => 'Contact Us',     'url' => '/contact'],
+        'appointment' => ['name' => 'Make an Appointment', 'url' => '/appointment'],
+    ];
+    $currentPage = $page ?? '';
+    $bcItems = [];
+    if ($currentPage && isset($breadcrumbMap[$currentPage])) {
+        $bcItems = [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',   'item' => SITE_URL . '/'],
+            ['@type' => 'ListItem', 'position' => 2,
+             'name' => $breadcrumbMap[$currentPage]['name'],
+             'item' => SITE_URL . $breadcrumbMap[$currentPage]['url']],
+        ];
+    } elseif ($currentPage === 'blog-single' && !empty($pageTitle)) {
+        $bcItems = [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',  'item' => SITE_URL . '/'],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => 'Blog',  'item' => SITE_URL . '/blog'],
+            ['@type' => 'ListItem', 'position' => 3, 'name' => h($pageTitle), 'item' => $canonicalUrl],
+        ];
+    }
+    if (!empty($bcItems)):
+    ?>
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    <?= json_encode([
+        '@context'        => 'https://schema.org',
+        '@type'           => 'BreadcrumbList',
+        'itemListElement' => $bcItems,
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
+    </script>
+    <?php endif; ?>
 </head>
 
 <body class="font-sans text-gray-800 bg-white antialiased">
@@ -216,6 +267,45 @@
     <?php partial('footer') ?>
 
     <script src="<?= asset('js/app.js') ?>?v=<?= filemtime(ROOT_PATH . '/assets/js/app.js') ?>"></script>
+
+    <?php if (defined('GA_MEASUREMENT_ID') && GA_MEASUREMENT_ID): ?>
+    <!-- GA4 Conversion Events -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function safeGtag() {
+            if (typeof gtag === 'function') gtag.apply(null, arguments);
+        }
+        // Track all phone link clicks
+        document.querySelectorAll('a[href^="tel:"]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                safeGtag('event', 'phone_call_click', {
+                    event_category: 'Lead',
+                    event_label: el.href,
+                });
+            });
+        });
+        // Track all WhatsApp link clicks
+        document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                safeGtag('event', 'whatsapp_click', {
+                    event_category: 'Lead',
+                    event_label: 'WhatsApp CTA',
+                });
+            });
+        });
+        // Track form submissions (contact & appointment)
+        document.querySelectorAll('form').forEach(function (form) {
+            form.addEventListener('submit', function () {
+                var formName = form.getAttribute('action') || window.location.pathname;
+                safeGtag('event', 'form_submit', {
+                    event_category: 'Lead',
+                    event_label: formName,
+                });
+            });
+        });
+    });
+    </script>
+    <?php endif; ?>
 
     <?php partial('cookie-consent') ?>
 

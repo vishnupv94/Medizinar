@@ -51,9 +51,10 @@ class BlogController extends Controller
         $postImg  = $post->image ? SITE_URL . '/uploads/blog/' . $post->image : null;
 
         $this->view('blog-single', [
-            'page'      => 'blog',
+            'page'      => 'blog-single',
             'pageTitle' => $post->title,
             'metaDesc'  => $metaDesc,
+            'ogType'    => 'article',
             'ogImage'   => $postImg,
             'post'      => $post,
             'jsonLd'    => [
