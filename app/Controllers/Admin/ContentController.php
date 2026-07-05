@@ -15,13 +15,23 @@ class ContentController extends Controller
         $this->guardAdmin();
     }
     private const KNOWN_GROUPS = [
-        'why_us'       => 'Why Choose Us',
-        'stats'        => 'Stats / Counters',
-        'trust_bullets'=> 'Trust Bullets',
-        'core_values'  => 'Core Values',
-        'why_reasons'  => 'Why Reasons',
-        'commitments'  => 'Team Commitments',
+        'why_us'        => ['label' => 'Why Choose Us',       'page' => 'Home',          'desc' => '6 feature cards shown in the "Why Choose Medizinar Care" grid on the home page'],
+        'stats'         => ['label' => 'Stats / Counters',    'page' => 'Home',          'desc' => 'Counter cards (e.g. 100+, 24/7) in the green "Trusted Team" section'],
+        'trust_bullets'=> ['label' => 'Trust Bullets',       'page' => 'Home',          'desc' => 'Checkmark bullet points under "Trusted & Verified Caregivers"'],
+        'core_values'   => ['label' => 'Core Values',         'page' => 'About',         'desc' => 'Value cards (Compassion, Trust, etc.) shown in the About page'],
+        'why_reasons'   => ['label' => 'Why Reasons',         'page' => 'About',         'desc' => 'Reasons listed in the "Why Choose Us" section on About page'],
+        'commitments'   => ['label' => 'Team Commitments',    'page' => 'Team',          'desc' => 'Commitment cards shown below the team members grid'],
     ];
+
+    /** Helper: returns a flat key => label map for dropdowns */
+    private static function groupLabels(): array
+    {
+        $labels = [];
+        foreach (self::KNOWN_GROUPS as $key => $meta) {
+            $labels[$key] = $meta['label'];
+        }
+        return $labels;
+    }
 
     public function index(): void
     {
@@ -33,9 +43,14 @@ class ContentController extends Controller
         $items  = SiteContent::getFiltered($group, $q, self::PER_PAGE, $offset);
         $total  = SiteContent::countFiltered($group, $q);
         $pages  = max(1, (int) ceil($total / self::PER_PAGE));
-        $groups = array_merge(self::KNOWN_GROUPS, array_fill_keys(SiteContent::getGroups(), ''));
+        $groupLabels = self::groupLabels();
+        // Merge any DB groups not in KNOWN_GROUPS
+        foreach (SiteContent::getGroups() as $gk) {
+            if (!isset($groupLabels[$gk])) $groupLabels[$gk] = $gk;
+        }
+        $groupsMeta = self::KNOWN_GROUPS;
 
-        $this->view('admin/content-list', compact('items', 'q', 'group', 'page', 'pages', 'total', 'groups') + ['pageTitle' => 'Site Content']);
+        $this->view('admin/content-list', compact('items', 'q', 'group', 'page', 'pages', 'total', 'groupLabels', 'groupsMeta') + ['pageTitle' => 'Site Content']);
     }
 
     public function create(): void
@@ -44,7 +59,7 @@ class ContentController extends Controller
             'item'   => null,
             'errors' => [],
             'old'    => ['group_key' => $_GET['group'] ?? '', 'icon_type' => ''],
-            'groups' => self::KNOWN_GROUPS,
+            'groups' => self::groupLabels(),
             'pageTitle' => 'New Content Item',
         ]);
     }
@@ -56,7 +71,7 @@ class ContentController extends Controller
 
         if ($errors) {
             $this->view('admin/content-form', [
-                'item' => null, 'errors' => $errors, 'old' => $data, 'groups' => self::KNOWN_GROUPS, 'pageTitle' => 'New Content Item',
+                'item' => null, 'errors' => $errors, 'old' => $data, 'groups' => self::groupLabels(), 'pageTitle' => 'New Content Item',
             ]);
             return;
         }
@@ -76,7 +91,7 @@ class ContentController extends Controller
             'item'   => $item,
             'errors' => [],
             'old'    => (array) $item,
-            'groups' => self::KNOWN_GROUPS,
+            'groups' => self::groupLabels(),
             'pageTitle' => 'Edit Content Item',
         ]);
     }
@@ -94,7 +109,7 @@ class ContentController extends Controller
 
         if ($errors) {
             $this->view('admin/content-form', [
-                'item' => $item, 'errors' => $errors, 'old' => $data, 'groups' => self::KNOWN_GROUPS, 'pageTitle' => 'Edit Content Item',
+                'item' => $item, 'errors' => $errors, 'old' => $data, 'groups' => self::groupLabels(), 'pageTitle' => 'Edit Content Item',
             ]);
             return;
         }

@@ -28,14 +28,11 @@
         </div>
     </div>
 
-    <?php if (isset($_GET['success'])): ?>
+    <?php if (isset($_GET['success'])):
+        $msgs = ['created' => '✓ Team member created.', 'updated' => '✓ Team member updated.', 'deleted' => '✓ Team member deleted.'];
+    ?>
         <div class="px-4 py-3 rounded-lg text-sm font-medium bg-green-50 border border-green-200 text-green-700">
-            <?= match($_GET['success']) {
-                'created' => '✓ Team member created.',
-                'updated' => '✓ Team member updated.',
-                'deleted' => '✓ Team member deleted.',
-                default   => '✓ Done.',
-            } ?>
+            <?= $msgs[$_GET['success']] ?? '✓ Done.' ?>
         </div>
     <?php endif; ?>
 
