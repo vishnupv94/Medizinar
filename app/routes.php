@@ -17,6 +17,9 @@ use App\Controllers\SitemapController;
 use App\Controllers\Admin\FaqController as AdminFaqController;
 use App\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Controllers\Admin\LocationController as AdminLocationController;
+use App\Controllers\Admin\TestimonialController as AdminTestimonialController;
+use App\Controllers\Admin\TeamController as AdminTeamController;
+use App\Controllers\Admin\ContentController as AdminContentController;
 
 $router = new Router();
 
@@ -100,6 +103,30 @@ $router->post('/admin/locations',              [AdminLocationController::class, 
 $router->get('/admin/locations/{id}/edit',      [AdminLocationController::class, 'edit']);
 $router->post('/admin/locations/{id}',         [AdminLocationController::class, 'update']);
 $router->post('/admin/locations/{id}/delete',  [AdminLocationController::class, 'delete']);
+
+// Admin: Testimonials
+$router->get('/admin/testimonials',                [AdminTestimonialController::class, 'index']);
+$router->get('/admin/testimonials/create',         [AdminTestimonialController::class, 'create']);
+$router->post('/admin/testimonials',              [AdminTestimonialController::class, 'store']);
+$router->get('/admin/testimonials/{id}/edit',      [AdminTestimonialController::class, 'edit']);
+$router->post('/admin/testimonials/{id}',         [AdminTestimonialController::class, 'update']);
+$router->post('/admin/testimonials/{id}/delete',  [AdminTestimonialController::class, 'delete']);
+
+// Admin: Team Members
+$router->get('/admin/team',                [AdminTeamController::class, 'index']);
+$router->get('/admin/team/create',         [AdminTeamController::class, 'create']);
+$router->post('/admin/team',              [AdminTeamController::class, 'store']);
+$router->get('/admin/team/{id}/edit',      [AdminTeamController::class, 'edit']);
+$router->post('/admin/team/{id}',         [AdminTeamController::class, 'update']);
+$router->post('/admin/team/{id}/delete',  [AdminTeamController::class, 'delete']);
+
+// Admin: Site Content
+$router->get('/admin/content',                [AdminContentController::class, 'index']);
+$router->get('/admin/content/create',         [AdminContentController::class, 'create']);
+$router->post('/admin/content',              [AdminContentController::class, 'store']);
+$router->get('/admin/content/{id}/edit',      [AdminContentController::class, 'edit']);
+$router->post('/admin/content/{id}',         [AdminContentController::class, 'update']);
+$router->post('/admin/content/{id}/delete',  [AdminContentController::class, 'delete']);
 
 $router->get('/admin/settings',          [SettingsController::class, 'index']);
 $router->post('/admin/settings',         [SettingsController::class, 'update']);

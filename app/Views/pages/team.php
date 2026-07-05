@@ -39,73 +39,47 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <?php
-            $team = [
-                [
-                    'name' => 'Jayhar M.J.',
-                    'role' => 'Founder & Managing Partner',
-                    'initial' => 'J',
-                    'color' => '#176B23',
-                    'photo' => asset('images/team/medizinar-jayahar-caregiver.webp'),
-                    'bio' => 'Visionary leader driving Medizinar Care LLP\'s mission to provide trusted, compassionate, and professional home nursing services across India. Focused on operational excellence, service quality, and client satisfaction.',
-                    'obj_pos' => 'left',
-                ],
-                [
-                    'name' => 'Shanimol S.M.',
-                    'role' => 'Accounts & Finance Manager',
-                    'initial' => 'S',
-                    'color' => '#ab7e22',
-                    'photo' => asset('images/team/medizinar-shani-caregiver.webp'),
-                    'bio' => 'Responsible for financial planning, accounting operations, compliance management, budgeting, and maintaining the organization\'s financial integrity and transparency.',
-                ],
-                [
-                    'name' => 'Jaya M.',
-                    'role' => 'Client Relationship Manager',
-                    'initial' => 'J',
-                    'color' => '#176B23',
-                    'photo' => asset('images/team/medizinar-jaya-caregiver.webp'),
-                    'bio' => 'Dedicated to ensuring exceptional client satisfaction through seamless communication, personalized support, service coordination, and long-term relationship management.',
-                    'obj_pos' => 'bottom',
-                ],
-                [
-                    'name' => 'Soumya M.',
-                    'role' => 'Brand & Digital Communications Manager',
-                    'initial' => 'S',
-                    'color' => '#ab7e22',
-                    'photo' => asset('images/team/medizinar-soumya-caregiver.webp'),
-                    'bio' => 'Responsible for strengthening Medizinar Care LLP\'s brand presence through strategic digital communication, social media management, online engagement, and marketing initiatives. Focused on building trust, increasing visibility, and connecting families with quality home healthcare services.',
-                ],
-            ];
-            foreach ($team as $i => $member): ?>
+            use App\Models\TeamMember;
+            $team = TeamMember::getPublished();
+            foreach ($team as $i => $member):
+                $photoUrl = $member->photo
+                    ? (str_starts_with($member->photo, 'http')
+                        ? $member->photo
+                        : (str_starts_with($member->photo, 'uploads/')
+                            ? url($member->photo)
+                            : asset($member->photo)))
+                    : '';
+            ?>
                 <button type="button"
                     class="team-card group relative text-center w-full fade-in-up cursor-pointer focus:outline-none"
-                    style="animation-delay:<?= $i * 0.1 ?>s" data-name="<?= h($member['name']) ?>"
-                    data-role="<?= h($member['role']) ?>" data-initial="<?= h($member['initial']) ?>"
-                    data-color="<?= h($member['color']) ?>" data-photo="<?= h($member['photo']) ?>"
-                    data-bio="<?= h($member['bio']) ?>" onclick="openTeamModal(this)">
+                    style="animation-delay:<?= $i * 0.1 ?>s" data-name="<?= h($member->name) ?>"
+                    data-role="<?= h($member->role) ?>" data-initial="<?= h($member->initial) ?>"
+                    data-color="<?= h($member->color) ?>" data-photo="<?= h($photoUrl) ?>"
+                    data-bio="<?= h($member->bio) ?>" onclick="openTeamModal(this)">
                     <div class="pt-8 px-5 pb-6">
                         <!-- full-bleed photo -->
-                        <img src="<?= h($member['photo']) ?>" alt="<?= h($member['name']) ?>" class="team-card-photo"
-                            style="object-position:<?= h($member['obj_pos'] ?? 'center top') ?>" loading="lazy">
+                        <img src="<?= h($photoUrl) ?>" alt="<?= h($member->name) ?>" class="team-card-photo"
+                            style="object-position:<?= h($member->obj_pos ?? 'center top') ?>" loading="lazy">
 
                         <!-- default: bottom nameplate -->
                         <div class="absolute bottom-0 left-0 right-0 px-4 py-4 transition-opacity duration-300 group-hover:opacity-0"
                             style="background:linear-gradient(to top, rgba(0,0,0,0.68) 0%, transparent 100%)">
-                            <h3 class="font-bold text-white text-sm leading-snug mb-1"><?= h($member['name']) ?></h3>
+                            <h3 class="font-bold text-white text-sm leading-snug mb-1"><?= h($member->name) ?></h3>
                             <span class="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full text-white"
-                                style="background:<?= $member['color'] ?>88">
-                                <?= h($member['role']) ?>
+                                style="background:<?= $member->color ?>88">
+                                <?= h($member->role) ?>
                             </span>
                         </div>
 
                         <!-- hover: brand gradient mask + centered text -->
                         <div class="absolute inset-0 flex flex-col items-center justify-center px-5
                                     opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                            style="background:linear-gradient(135deg,<?= $member['color'] ?>e0 0%,<?= $member['color'] ?>80 100%)">
+                            style="background:linear-gradient(135deg,<?= $member->color ?>e0 0%,<?= $member->color ?>80 100%)">
                             <h3 class="font-extrabold text-white text-lg leading-tight mb-2 tracking-wide uppercase">
-                                <?= h($member['name']) ?>
+                                <?= h($member->name) ?>
                             </h3>
                             <p class="text-white/90 text-xs font-semibold tracking-widest uppercase mb-5">
-                                <?= h($member['role']) ?>
+                                <?= h($member->role) ?>
                             </p>
                             <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full"
                                 style="background:rgba(255,255,255,0.22); backdrop-filter:blur(6px); color:#fff; border:1px solid rgba(255,255,255,0.35)">
@@ -224,21 +198,21 @@
                 </p>
                 <div class="space-y-4">
                     <?php
-                    $commitments = [
-                        ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#176B23"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>', 'title' => 'Compassionate Care', 'desc' => 'Caregivers provide support with kindness, patience, and respect for every individual.'],
-                        ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#176B23"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>', 'title' => 'Trusted Caregivers', 'desc' => 'Carefully selected caregivers who demonstrate responsibility and dedication.'],
-                        ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#176B23"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>', 'title' => 'Reliable Service', 'desc' => 'Timely caregiver arrangement and dependable support for families.'],
-                        ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#176B23"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>', 'title' => 'Client-Centered', 'desc' => 'Every family has unique needs and we tailor our care to match those needs.'],
-                    ];
+                    use App\Models\SiteContent;
+                    $commitments = SiteContent::getGroup('commitments');
                     foreach ($commitments as $com): ?>
                         <div class="flex gap-4 items-start">
                             <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
                                 style="background:#e0f4e2">
-                                <?= $com['icon'] ?>
+                                <?php if ($com->icon_type === 'svg'): ?>
+                                    <?= str_replace('stroke="currentColor"', 'stroke="#176B23"', $com->icon_value) ?>
+                                <?php elseif ($com->icon_value): ?>
+                                    <img src="<?= h($com->icon_value) ?>" class="w-5 h-5" alt="">
+                                <?php endif; ?>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800 mb-1"><?= h($com['title']) ?></h4>
-                                <p class="text-gray-500 text-sm"><?= $com['desc'] ?></p>
+                                <h4 class="font-semibold text-gray-800 mb-1"><?= h($com->label) ?></h4>
+                                <p class="text-gray-500 text-sm"><?= h($com->value) ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>

@@ -104,17 +104,17 @@
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php
-            $values = [
-                ['img' => 'icon-medizinar-compassion.webp',     'title' => 'Compassion',      'desc' => 'We treat every individual with kindness, empathy, and deep respect regardless of their condition.'],
-                ['img' => 'icon-medizinar-trust.webp',          'title' => 'Trust',           'desc' => 'We understand the importance of trust when families invite caregivers into their homes.'],
-                ['img' => 'icon-medizinar-responsibility.webp', 'title' => 'Responsibility',  'desc' => 'Our caregivers are committed to providing responsible, dependable, and consistent support.'],
-                ['img' => 'icon-medizinar-quality.webp',        'title' => 'Quality Care',    'desc' => 'We focus on maintaining high standards in every service we provide to every family.'],
-            ];
-            foreach ($values as $i => $v): ?>
+            use App\Models\SiteContent;
+            $coreValues = SiteContent::getGroup('core_values');
+            foreach ($coreValues as $i => $v): ?>
                 <div class="value-card text-center fade-in-up" style="animation-delay:<?= $i * 0.1 ?>s">
-                    <img src="<?= asset('images/' . $v['img']) ?>" alt="<?= h($v['title']) ?>" class="w-14 h-14 mx-auto mb-4" loading="lazy">
-                    <h3 class="font-bold text-lg mb-2" style="color:var(--text-dark)"><?= h($v['title']) ?></h3>
-                    <p class="text-sm leading-relaxed" style="color:var(--text-muted)"><?= $v['desc'] ?></p>
+                    <?php if ($v->icon_type === 'path'): ?>
+                        <img src="<?= asset(h($v->icon_value)) ?>" alt="<?= h($v->label) ?>" class="w-14 h-14 mx-auto mb-4" loading="lazy">
+                    <?php elseif ($v->icon_type === 'svg'): ?>
+                        <div class="w-14 h-14 mx-auto mb-4 flex items-center justify-center"><?= $v->icon_value ?></div>
+                    <?php endif; ?>
+                    <h3 class="font-bold text-lg mb-2" style="color:var(--text-dark)"><?= h($v->label) ?></h3>
+                    <p class="text-sm leading-relaxed" style="color:var(--text-muted)"><?= h($v->value) ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -192,17 +192,15 @@
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 max-w-5xl mx-auto">
             <?php
-            $reasons = [
-                ['img' => 'icon-medizinar-caregivers.webp',   'title' => 'Compassionate Caregivers'],
-                ['img' => 'icon-medizinar-reliable.webp',      'title' => 'Reliable Service Support'],
-                ['img' => 'icon-medizinar-flexible.webp',      'title' => 'Flexible Care Options'],
-                ['img' => 'icon-medizinar-quality.webp',       'title' => 'Client Satisfaction'],
-                ['img' => 'icon-medizinar-professional.webp',  'title' => 'Professional Assistance'],
-            ];
-            foreach ($reasons as $i => $r): ?>
+            $whyReasons = SiteContent::getGroup('why_reasons');
+            foreach ($whyReasons as $i => $r): ?>
                 <div class="value-card text-center fade-in-up" style="animation-delay:<?= $i * 0.08 ?>s">
-                    <img src="<?= asset('images/' . $r['img']) ?>" alt="<?= h($r['title']) ?>" class="w-14 h-14 mx-auto mb-3" loading="lazy">
-                    <p class="font-semibold text-sm" style="color:var(--text-dark)"><?= h($r['title']) ?></p>
+                    <?php if ($r->icon_type === 'path'): ?>
+                        <img src="<?= asset(h($r->icon_value)) ?>" alt="<?= h($r->label) ?>" class="w-14 h-14 mx-auto mb-3" loading="lazy">
+                    <?php elseif ($r->icon_type === 'svg'): ?>
+                        <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center"><?= $r->icon_value ?></div>
+                    <?php endif; ?>
+                    <p class="font-semibold text-sm" style="color:var(--text-dark)"><?= h($r->label) ?></p>
                 </div>
             <?php endforeach; ?>
         </div>

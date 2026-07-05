@@ -96,20 +96,20 @@
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php
-            $services = [
-                ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>', 'title' => 'Bedside Patient Care', 'desc' => 'Professional support for patients recovering from illness, surgery, or long-term health conditions at home.', 'href' => url('/services') . '#bedside'],
-                ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>', 'title' => 'Elderly Care', 'desc' => 'Dedicated assistance for senior citizens including daily care, mobility support, and compassionate companionship.', 'href' => url('/services') . '#elderly'],
-                ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"/></svg>', 'title' => 'Mother & Baby Care', 'desc' => 'Compassionate care and support for mothers and newborn babies during the important postnatal period.', 'href' => url('/services') . '#mother-baby'],
-                ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>', 'title' => 'House Maid Services', 'desc' => 'Reliable domestic assistance including cleaning, cooking, laundry, and general household support.', 'href' => url('/services') . '#housemaid'],
-            ];
-            foreach ($services as $i => $svc): ?>
+            use App\Models\Service as ServiceModel;
+            $homeServices = ServiceModel::getFiltered('', 4, 0);
+            foreach ($homeServices as $i => $svc): ?>
                 <div class="service-card fade-in-up" style="animation-delay: <?= $i * 0.1 ?>s">
                     <div class="service-icon">
-                        <?= $svc['icon'] ?>
+                        <?php if (!empty($svc->icon_value)): ?>
+                            <?= $svc->icon_value ?>
+                        <?php else: ?>
+                            <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="#186c21" stroke-width="1.75"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <?php endif; ?>
                     </div>
-                    <h3 class="font-bold text-gray-800 text-lg mb-2"><?= h($svc['title']) ?></h3>
-                    <p class="text-gray-500 text-sm leading-relaxed mb-4"><?= h($svc['desc']) ?></p>
-                    <a href="<?= h($svc['href']) ?>"
+                    <h3 class="font-bold text-gray-800 text-lg mb-2"><?= h($svc->h1) ?></h3>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4"><?= h($svc->hero_desc) ?></p>
+                    <a href="<?= url('/services/' . $svc->slug) ?>"
                         class="inline-flex items-center gap-1.5 text-sm font-semibold hover:gap-2.5 transition-all"
                         style="color:#a5781e">
                         Learn More
@@ -156,19 +156,20 @@
 
             <div class="grid grid-cols-2 gap-4 fade-in-up">
                 <?php
-                $why_cards = [
-                    ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>', 'title' => 'Verified Caregivers', 'desc' => 'All caregivers are carefully selected and background checked'],
-                    ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>', 'title' => 'Compassionate Support', 'desc' => 'We treat every individual with kindness and respect'],
-                    ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>', 'title' => 'Reliable Service', 'desc' => 'Timely caregiver arrangement and dependable daily support'],
-                    ['icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="#186c21" stroke-linecap="round" stroke-linejoin="round"><path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/></svg>', 'title' => 'Client Satisfaction', 'desc' => 'Families across Kerala trust us for quality home care'],
-                ];
-                foreach ($why_cards as $card): ?>
+                use App\Models\SiteContent;
+                $whyCards = SiteContent::getGroup('why_us');
+                foreach ($whyCards as $card): ?>
                     <div class="value-card">
                         <div class="w-12 h-12 rounded-2xl mb-4 flex items-center justify-center"
-                            style="background:var(--primary-light)"><?= $card['icon'] ?></div>
-                        <h3 class="font-bold mb-2" style="color:var(--text-dark);font-size:0.95rem"><?= h($card['title']) ?>
-                        </h3>
-                        <p class="text-sm leading-relaxed" style="color:var(--text-muted)"><?= $card['desc'] ?></p>
+                            style="background:var(--primary-light)">
+                            <?php if ($card->icon_type === 'svg'): ?>
+                                <?= str_replace('stroke="currentColor"', 'stroke="#186c21"', $card->icon_value) ?>
+                            <?php elseif ($card->icon_value): ?>
+                                <img src="<?= h($card->icon_value) ?>" alt="" class="w-6 h-6">
+                            <?php endif; ?>
+                        </div>
+                        <h3 class="font-bold mb-2" style="color:var(--text-dark);font-size:0.95rem"><?= h($card->label) ?></h3>
+                        <p class="text-sm leading-relaxed" style="color:var(--text-muted)"><?= h($card->value) ?></p>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -194,14 +195,14 @@
                 </p>
                 <ul class="space-y-3 mb-8">
                     <?php
-                    $trust = ['Background-checked caregivers', 'Experienced patient attendants', 'Compassionate elderly care assistants', 'Responsible and trustworthy staff'];
-                    foreach ($trust as $t): ?>
+                    $trustBullets = SiteContent::getGroup('trust_bullets');
+                    foreach ($trustBullets as $t): ?>
                         <li class="flex items-center gap-3">
                             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="#4ade80" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <span class="text-white/90 text-sm"><?= h($t) ?></span>
+                            <span class="text-white/90 text-sm"><?= h($t->label) ?></span>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -210,17 +211,12 @@
 
             <div class="grid grid-cols-2 gap-4 fade-in-up">
                 <?php
-                $stats2 = [
-                    ['num' => '100+', 'label' => 'Families Served', 'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="rgba(255,255,255,0.85)" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>'],
-                    ['num' => '4+', 'label' => 'Core Services', 'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="rgba(255,255,255,0.85)" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>'],
-                    ['num' => '24/7', 'label' => 'Support Available', 'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="rgba(255,255,255,0.85)" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>'],
-                    ['num' => '100%', 'label' => 'Verified Caregivers', 'icon' => '<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="rgba(255,255,255,0.85)" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"/></svg>'],
-                ];
-                foreach ($stats2 as $s): ?>
+                $statsItems = SiteContent::getGroup('stats');
+                foreach ($statsItems as $s): ?>
                     <div class="stat-card">
-                        <div class="mb-2"><?= $s['icon'] ?></div>
-                        <div class="text-3xl font-extrabold text-white mb-1"><?= $s['num'] ?></div>
-                        <div class="text-white/70 text-sm"><?= $s['label'] ?></div>
+                        <div class="mb-2"><?= $s->icon_value ?? '' ?></div>
+                        <div class="text-3xl font-extrabold text-white mb-1"><?= h($s->value) ?></div>
+                        <div class="text-white/70 text-sm"><?= h($s->label) ?></div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -257,7 +253,7 @@
             <?php endforeach; ?>
         </div>
         <div class="text-center mt-8">
-            <a href="<?= url('/services') ?>#quick-support" class="btn-outline-green">View All Services</a>
+            <a href="<?= url('/services/quick-support') ?>" class="btn-outline-green">View All Services</a>
         </div>
     </div>
 </section>
@@ -332,30 +328,26 @@
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php
-            $testimonials = [
-                ['stars' => 5, 'text' => '"Medizinar Care arranged a caring and responsible caregiver for our elderly mother. The service was professional and reliable. We are truly grateful."', 'name' => 'A Happy Family', 'location' => 'Kottarakkara, Kerala'],
-                ['stars' => 5, 'text' => '"The mother and baby care assistant was wonderful. She was very experienced, caring, and our family felt completely at ease. Highly recommended."', 'name' => 'New Mother', 'location' => 'Kollam, Kerala'],
-                ['stars' => 5, 'text' => '"We used the NRI Parent Care service while living abroad. The team provided excellent home visits and kept us informed about our parents\' well-being."', 'name' => 'NRI Family', 'location' => 'Abroad'],
-            ];
+            use App\Models\Testimonial;
+            $testimonials = Testimonial::getPublished(6);
             foreach ($testimonials as $t): ?>
                 <div class="testimonial-card fade-in-up">
                     <div class="flex gap-1 mb-3 mt-6 pl-1">
-                        <?php for ($i = 0; $i < $t['stars']; $i++): ?>
+                        <?php for ($i = 0; $i < (int)$t->stars; $i++): ?>
                             <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                             </svg>
                         <?php endfor; ?>
                     </div>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-4 italic"><?= h($t['text']) ?></p>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4 italic"><?= h($t->text) ?></p>
                     <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
                         <div class="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
                             style="background:#a5781e">
-                            <?= strtoupper(substr($t['name'], 0, 1)) ?>
+                            <?= strtoupper(substr($t->name, 0, 1)) ?>
                         </div>
                         <div>
-                            <div class="font-semibold text-gray-800 text-sm"><?= h($t['name']) ?></div>
-                            <div class="text-gray-400 text-xs"><?= h($t['location']) ?></div>
+                            <div class="font-semibold text-gray-800 text-sm"><?= h($t->name) ?></div>
+                            <div class="text-gray-400 text-xs"><?= h($t->location_label) ?></div>
                         </div>
                     </div>
                 </div>
@@ -368,35 +360,39 @@
 <section class="py-12 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="rounded-2xl overflow-hidden fade-in-up"
-            style="background:#0c2912;position:relative;min-height:220px;">
+            style="background:#0c2912;position:relative;">
             <div class="hero-pattern absolute inset-0" style="opacity:0.08"></div>
             <div class="absolute inset-0"
                 style="background:radial-gradient(ellipse 55% 100% at 30% 50%, #1a5c26 0%, transparent 80%)"></div>
-            <div class="relative z-10 p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-10">
+            <div class="relative z-10 p-8 sm:p-12">
 
-                <div class="flex-1 text-center sm:text-left">
-                    <div class="section-badge mb-4" style="color:rgba(255,255,255,0.55)">Coverage</div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3 leading-tight">Areas We Serve</h2>
-                    <p class="text-white/65 text-sm leading-relaxed max-w-md">
-                        We currently provide home care services across Kerala, India, with our primary base in
-                        Kottarakkara, Kollam District.
+                <div class="text-center mb-8">
+                    <div class="section-badge mb-3" style="color:rgba(255,255,255,0.55)">Coverage</div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2 leading-tight">Areas We Serve</h2>
+                    <p class="text-white/60 text-sm max-w-xl mx-auto">
+                        Based in Kottarakkara, Kollam — we provide professional home care services across all 14 districts of Kerala.
                     </p>
                 </div>
 
-                <div class="flex-shrink-0 flex items-center justify-center"
-                    style="position:relative;width:260px;height:180px;">
-                    <img src="<?= asset('images/medizinar-care-caregiver-elderly.webp') ?>"
-                        alt="Medizinar Care caregiver assisting elderly patient at home"
-                        style="position:absolute;right:0;top:0;width:180px;height:160px;object-fit:cover;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,0.45);">
-                    <img src="<?= asset('images/medizinar-care-doctor-stethoscope.webp') ?>"
-                        alt="Medizinar Care doctor with stethoscope providing home healthcare"
-                        style="position:absolute;left:0;bottom:0;width:130px;height:120px;object-fit:cover;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.5);border:3px solid #0c2912;">
+                <?php
+                use App\Models\Location as LocationModel;
+                $districts = LocationModel::getPublished();
+                ?>
+                <div class="flex flex-wrap justify-center gap-2.5">
+                    <?php foreach ($districts as $dist): ?>
+                        <a href="<?= url('/location/' . $dist->slug) ?>"
+                            class="px-4 py-2 rounded-full text-sm font-medium transition-all hover:scale-105"
+                            style="background:rgba(255,255,255,0.10);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(4px)">
+                            <?= h($dist->name) ?>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
 
             </div>
         </div>
     </div>
 </section>
+
 
 
 <?php partial('cta', [
