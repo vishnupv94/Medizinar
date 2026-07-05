@@ -5,6 +5,8 @@ use App\Controllers\PageController;
 use App\Controllers\ContactController;
 use App\Controllers\AppointmentController;
 use App\Controllers\BlogController;
+use App\Controllers\ServiceController;
+use App\Controllers\LocationController;
 use App\Controllers\Admin\AuthController;
 use App\Controllers\Admin\DashboardController;
 use App\Controllers\Admin\EntryController;
@@ -30,8 +32,14 @@ $router->post('/appointment', [AppointmentController::class, 'submit']);
 $router->get('/blog',        [BlogController::class,       'index']);
 $router->get('/blog/{slug}', [BlogController::class,       'show']);
 
-$router->get('/faq',         [FaqController::class,        'index']);
-$router->get('/sitemap.xml',  [SitemapController::class,    'index']);
+$router->get('/faq',              [FaqController::class,        'index']);
+$router->get('/sitemap.xml',      [SitemapController::class,    'index']);
+
+// Individual service pages
+$router->get('/services/{slug}',  [ServiceController::class,    'show']);
+
+// Kerala location pages
+$router->get('/location/{district}', [LocationController::class, 'show']);
 
 $router->get('/privacy-policy',       [PageController::class, 'privacyPolicy']);
 $router->get('/terms-and-conditions', [PageController::class, 'termsAndConditions']);

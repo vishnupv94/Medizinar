@@ -40,7 +40,7 @@
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
                 </a>
-                <a href="https://g.page/r/medizinarcare" target="_blank" rel="noopener" aria-label="Google Business Profile"
+                <a href="https://share.google/0qloHLw8H3LCWgbcf" target="_blank" rel="noopener" aria-label="Google Business Profile"
                     class="w-9 h-9 rounded-full bg-primary-700 hover:bg-accent flex items-center justify-center transition-colors">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12.545 10.239v3.821h5.445c-.712 2.315-2.647 3.972-5.445 3.972a6.033 6.033 0 110-12.064 5.963 5.963 0 014.123 1.632l2.884-2.884A9.969 9.969 0 0012.545 2C7.021 2 2.543 6.477 2.543 12s4.478 10 10.002 10c8.396 0 10.249-7.85 9.426-11.748l-9.426-.013z" />
@@ -82,12 +82,12 @@
             <h3 class="font-semibold text-white mb-5 text-base">Our Services</h3>
             <div class="w-8 h-0.5 mb-4 rounded" style="background:#a5781e"></div>
             <ul class="space-y-2.5">
-                <li><a href="<?= url('/services') ?>#bedside" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Bedside Patient Care</a></li>
-                <li><a href="<?= url('/services') ?>#elderly" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Elderly Care</a></li>
-                <li><a href="<?= url('/services') ?>#mother-baby" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Mother &amp; Baby Care</a></li>
-                <li><a href="<?= url('/services') ?>#housemaid" class="text-primary-200 hover:text-accent-light text-sm transition-colors">House Maid Services</a></li>
-                <li><a href="<?= url('/services') ?>#quick-support" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Quick Support Services</a></li>
-                <li><a href="<?= url('/services') ?>#nri" class="text-primary-200 hover:text-accent-light text-sm transition-colors">NRI Parent Care</a></li>
+                <li><a href="<?= url('/services/bedside-patient-care') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Bedside Patient Care</a></li>
+                <li><a href="<?= url('/services/elderly-care') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Elderly Care</a></li>
+                <li><a href="<?= url('/services/mother-baby-care') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Mother &amp; Baby Care</a></li>
+                <li><a href="<?= url('/services/home-maid-services') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">House Maid Services</a></li>
+                <li><a href="<?= url('/services/quick-support') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">Quick Support Services</a></li>
+                <li><a href="<?= url('/services/nri-parent-care') ?>" class="text-primary-200 hover:text-accent-light text-sm transition-colors">NRI Parent Care</a></li>
             </ul>
         </div>
 
@@ -168,7 +168,7 @@
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
                 </a>
-                <a href="https://g.page/r/medizinarcare" target="_blank" rel="noopener" aria-label="Google Business Profile"
+                <a href="https://share.google/0qloHLw8H3LCWgbcf" target="_blank" rel="noopener" aria-label="Google Business Profile"
                     class="w-7 h-7 rounded-full bg-primary-700 hover:bg-accent flex items-center justify-center transition-colors">
                     <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12.545 10.239v3.821h5.445c-.712 2.315-2.647 3.972-5.445 3.972a6.033 6.033 0 110-12.064 5.963 5.963 0 014.123 1.632l2.884-2.884A9.969 9.969 0 0012.545 2C7.021 2 2.543 6.477 2.543 12s4.478 10 10.002 10c8.396 0 10.249-7.85 9.426-11.748l-9.426-.013z" />

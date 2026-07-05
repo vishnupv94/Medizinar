@@ -172,7 +172,8 @@
             "https://www.facebook.com/share/1bADZmQVno/",
             "https://www.instagram.com/medizinarcare",
             "https://www.youtube.com/@MedizinarCare",
-            "https://www.linkedin.com/company/medizinar/"
+            "https://www.linkedin.com/company/medizinar/",
+            "https://share.google/0qloHLw8H3LCWgbcf"
         ],
         "priceRange": "$$",
         "currenciesAccepted": "INR",
@@ -208,16 +209,24 @@
     </script>
     <?php endif; ?>
 
+    <?php if (!empty($faqJsonLd)): ?>
+    <!-- JSON-LD: FAQPage (service-level) -->
+    <script type="application/ld+json">
+    <?= json_encode($faqJsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
+    </script>
+    <?php endif; ?>
+
     <?php
     // BreadcrumbList schema — inject on all inner pages (not home)
     $breadcrumbMap = [
-        'about'    => ['name' => 'About Us',      'url' => '/about'],
-        'services' => ['name' => 'Services',       'url' => '/services'],
-        'blog'     => ['name' => 'Blog',           'url' => '/blog'],
-        'faq'      => ['name' => 'FAQ',            'url' => '/faq'],
-        'team'     => ['name' => 'Our Team',       'url' => '/team'],
-        'contact'  => ['name' => 'Contact Us',     'url' => '/contact'],
+        'about'       => ['name' => 'About Us',           'url' => '/about'],
+        'services'    => ['name' => 'Services',            'url' => '/services'],
+        'blog'        => ['name' => 'Blog',                'url' => '/blog'],
+        'faq'         => ['name' => 'FAQ',                 'url' => '/faq'],
+        'team'        => ['name' => 'Our Team',            'url' => '/team'],
+        'contact'     => ['name' => 'Contact Us',          'url' => '/contact'],
         'appointment' => ['name' => 'Make an Appointment', 'url' => '/appointment'],
+        'location'    => ['name' => 'Locations',           'url' => '/location'],
     ];
     $currentPage = $page ?? '';
     $bcItems = [];
@@ -233,6 +242,20 @@
             ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',  'item' => SITE_URL . '/'],
             ['@type' => 'ListItem', 'position' => 2, 'name' => 'Blog',  'item' => SITE_URL . '/blog'],
             ['@type' => 'ListItem', 'position' => 3, 'name' => h($pageTitle), 'item' => $canonicalUrl],
+        ];
+    } elseif ($currentPage === 'services' && !empty($slug)) {
+        // Individual service page — 3-level breadcrumb
+        $bcItems = [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',     'item' => SITE_URL . '/'],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => 'Services', 'item' => SITE_URL . '/services'],
+            ['@type' => 'ListItem', 'position' => 3, 'name' => h($service['h1'] ?? $pageTitle ?? ''), 'item' => $canonicalUrl],
+        ];
+    } elseif ($currentPage === 'location' && !empty($slug)) {
+        // Location page — 3-level breadcrumb
+        $bcItems = [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',      'item' => SITE_URL . '/'],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => 'Locations', 'item' => SITE_URL . '/location'],
+            ['@type' => 'ListItem', 'position' => 3, 'name' => h($district['name'] ?? $pageTitle ?? ''), 'item' => $canonicalUrl],
         ];
     }
     if (!empty($bcItems)):

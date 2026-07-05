@@ -23,6 +23,28 @@ class SitemapController extends Controller
         ['loc' => '/blog',        'changefreq' => 'daily',   'priority' => '0.7', 'lastmod' => null],
         ['loc' => '/contact',     'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-04-01'],
         ['loc' => '/appointment', 'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-04-01'],
+        // Individual service pages
+        ['loc' => '/services/bedside-patient-care', 'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
+        ['loc' => '/services/elderly-care',         'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
+        ['loc' => '/services/mother-baby-care',     'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
+        ['loc' => '/services/home-maid-services',   'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
+        ['loc' => '/services/nri-parent-care',      'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
+        ['loc' => '/services/quick-support',        'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
+        // Kerala location pages
+        ['loc' => '/location/kollam',            'changefreq' => 'monthly', 'priority' => '0.8', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/thiruvananthapuram','changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/pathanamthitta',    'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/alappuzha',         'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/kottayam',          'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/ernakulam',         'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/idukki',            'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/thrissur',          'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/palakkad',          'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/malappuram',        'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/kozhikode',         'changefreq' => 'monthly', 'priority' => '0.5', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/wayanad',           'changefreq' => 'monthly', 'priority' => '0.5', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/kannur',            'changefreq' => 'monthly', 'priority' => '0.5', 'lastmod' => '2025-07-01'],
+        ['loc' => '/location/kasaragod',         'changefreq' => 'monthly', 'priority' => '0.5', 'lastmod' => '2025-07-01'],
     ];
 
     public function index(): void
