@@ -10,6 +10,11 @@ class TeamController extends Controller
     private const UPLOAD_DIR = 'uploads/team/';
     private const PER_PAGE   = 20;
 
+    public function __construct()
+    {
+        $this->layout = 'admin';
+        $this->guardAdmin();
+    }
     public function index(): void
     {
         $q      = trim($_GET['q'] ?? '');

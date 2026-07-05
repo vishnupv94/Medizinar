@@ -9,6 +9,11 @@ class TestimonialController extends Controller
 {
     private const PER_PAGE = 20;
 
+    public function __construct()
+    {
+        $this->layout = 'admin';
+        $this->guardAdmin();
+    }
     public function index(): void
     {
         $q      = trim($_GET['q'] ?? '');

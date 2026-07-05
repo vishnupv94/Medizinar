@@ -9,6 +9,11 @@ class ContentController extends Controller
 {
     private const PER_PAGE = 30;
 
+    public function __construct()
+    {
+        $this->layout = 'admin';
+        $this->guardAdmin();
+    }
     private const KNOWN_GROUPS = [
         'why_us'       => 'Why Choose Us',
         'stats'        => 'Stats / Counters',
