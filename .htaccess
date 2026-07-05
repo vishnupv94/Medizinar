@@ -17,6 +17,9 @@
     # Allow blog image uploads to be served publicly
     RewriteRule ^uploads/blog/.+\.(jpe?g|png|webp)$ - [L]
 
+    # Allow team member photo uploads to be served publicly
+    RewriteRule ^uploads/team/.+\.(jpe?g|png|webp|gif)$ - [L]
+
     # Allow legal documents to be served publicly
     RewriteRule ^docs/legal/.+\.pdf$ - [L]
 

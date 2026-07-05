@@ -11,8 +11,9 @@ Disallow: /app/
 Disallow: /database/
 Disallow: /scripts/
 
-# Allow blog images to be crawled (inside blocked uploads/)
+# Allow blog and team images to be crawled (inside blocked uploads/)
 Allow: /uploads/blog/
+Allow: /uploads/team/
 
 # Block common scraper traps / search bots from non-content URLs
 Disallow: /contact?*

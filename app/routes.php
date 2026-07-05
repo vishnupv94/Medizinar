@@ -110,6 +110,7 @@ $router->get('/admin/testimonials/create',         [AdminTestimonialController::
 $router->post('/admin/testimonials',              [AdminTestimonialController::class, 'store']);
 $router->get('/admin/testimonials/{id}/edit',      [AdminTestimonialController::class, 'edit']);
 $router->post('/admin/testimonials/{id}',         [AdminTestimonialController::class, 'update']);
+$router->post('/admin/testimonials/{id}/update',  [AdminTestimonialController::class, 'update']);
 $router->post('/admin/testimonials/{id}/delete',  [AdminTestimonialController::class, 'delete']);
 
 // Admin: Team Members
@@ -118,6 +119,7 @@ $router->get('/admin/team/create',         [AdminTeamController::class, 'create'
 $router->post('/admin/team',              [AdminTeamController::class, 'store']);
 $router->get('/admin/team/{id}/edit',      [AdminTeamController::class, 'edit']);
 $router->post('/admin/team/{id}',         [AdminTeamController::class, 'update']);
+$router->post('/admin/team/{id}/update',  [AdminTeamController::class, 'update']);
 $router->post('/admin/team/{id}/delete',  [AdminTeamController::class, 'delete']);
 
 // Admin: Site Content
@@ -126,6 +128,7 @@ $router->get('/admin/content/create',         [AdminContentController::class, 'c
 $router->post('/admin/content',              [AdminContentController::class, 'store']);
 $router->get('/admin/content/{id}/edit',      [AdminContentController::class, 'edit']);
 $router->post('/admin/content/{id}',         [AdminContentController::class, 'update']);
+$router->post('/admin/content/{id}/update',  [AdminContentController::class, 'update']);
 $router->post('/admin/content/{id}/delete',  [AdminContentController::class, 'delete']);
 
 $router->get('/admin/settings',          [SettingsController::class, 'index']);
