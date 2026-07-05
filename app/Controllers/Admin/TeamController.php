@@ -110,6 +110,7 @@ class TeamController extends Controller
             'color'      => trim($p['color']      ?? '#176B23'),
             'bio'        => trim($p['bio']        ?? ''),
             'obj_pos'    => trim($p['obj_pos']    ?? 'center top'),
+            'obj_scale'  => (float) ($p['obj_scale'] ?? 1.00),
             'status'     => in_array($p['status'] ?? '', ['draft', 'published']) ? $p['status'] : 'published',
             'sort_order' => (int) ($p['sort_order'] ?? 0),
             'photo'      => trim($p['photo_path'] ?? ''), // manual path fallback

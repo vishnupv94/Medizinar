@@ -460,10 +460,11 @@ body {
   position: absolute;
   inset: 0;
   transition: transform 0.4s ease;
+  transform: scale(var(--base-scale, 1));
 }
 
 .team-card:hover .team-card-photo {
-  transform: scale(1.05);
+  transform: scale(calc(var(--base-scale, 1) * 1.05));
 }
 
 .team-avatar {

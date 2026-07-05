@@ -68,7 +68,7 @@
         <!-- ===== Photo Position Editor ===== -->
         <div id="posEditorPanel" style="display:<?= $photoUrl ? 'block' : 'none' ?>">
             <label class="block text-sm font-medium text-gray-700 mb-3">
-                Photo Crop Position
+                Photo Crop & Zoom
                 <span class="text-xs font-normal text-gray-400 ml-1">— adjust how the photo is framed in the card</span>
             </label>
 
@@ -77,7 +77,7 @@
                 <div class="flex-shrink-0">
                     <div id="posPreviewCard" style="width:180px; aspect-ratio:3/4; border-radius:12px; overflow:hidden; border:1px solid #e5e7eb; box-shadow:0 2px 10px rgba(0,0,0,0.08); position:relative; background:#f3f4f6;">
                         <img id="posPreviewImg" src="<?= h($photoUrl) ?>" alt="Preview"
-                             style="width:100%; height:100%; object-fit:cover; object-position:<?= h($old['obj_pos'] ?? 'center 20%') ?>; display:block;">
+                             style="width:100%; height:100%; object-fit:cover; object-position:<?= h($old['obj_pos'] ?? 'center 20%') ?>; transform: scale(<?= h($old['obj_scale'] ?? 1.00) ?>); display:block; transform-origin: center;">
                         <!-- Nameplate overlay -->
                         <div style="position:absolute; bottom:0; left:0; right:0; padding:10px 12px;
                                     background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);">
@@ -119,7 +119,7 @@
                     </div>
 
                     <!-- Range Sliders -->
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-3 gap-4">
                         <div>
                             <label class="flex items-center justify-between text-xs font-medium text-gray-600 mb-1">
                                 <span>Horizontal (X)</span>
@@ -141,6 +141,19 @@
                             <div class="flex justify-between text-[10px] text-gray-400 mt-0.5">
                                 <span>Top</span><span>Center</span><span>Bottom</span>
                             </div>
+                        </div>
+                        <div>
+                            <label class="flex items-center justify-between text-xs font-medium text-gray-600 mb-1">
+                                <span>Zoom</span>
+                                <span id="zoomLabel" class="tabular-nums text-primary font-semibold">1.00x</span>
+                            </label>
+                            <input type="range" id="zoomSlider" min="1.0" max="3.0" value="<?= h($old['obj_scale'] ?? 1.00) ?>" step="0.05"
+                                class="pos-range-slider w-full">
+                            <div class="flex justify-between text-[10px] text-gray-400 mt-0.5">
+                                <span>1x</span><span>2x</span><span>3x</span>
+                            </div>
+                            <!-- Hidden input for form submission -->
+                            <input type="hidden" name="obj_scale" id="objScaleInput" value="<?= h($old['obj_scale'] ?? 1.00) ?>">
                         </div>
                     </div>
 
@@ -261,9 +274,12 @@
 (function() {
     var xSlider   = document.getElementById('posXSlider');
     var ySlider   = document.getElementById('posYSlider');
+    var zoomSlider= document.getElementById('zoomSlider');
     var xLabel    = document.getElementById('posXLabel');
     var yLabel    = document.getElementById('posYLabel');
+    var zoomLabel = document.getElementById('zoomLabel');
     var input     = document.getElementById('objPosInput');
+    var scaleInput= document.getElementById('objScaleInput');
     var preview   = document.getElementById('posPreviewImg');
     var panel     = document.getElementById('posEditorPanel');
     var fileInput = document.getElementById('photoFileInput');
@@ -273,13 +289,18 @@
     function updateFromSliders() {
         var x = xSlider.value;
         var y = ySlider.value;
+        var z = parseFloat(zoomSlider.value).toFixed(2);
         xLabel.textContent = x + '%';
         yLabel.textContent = y + '%';
+        zoomLabel.textContent = z + 'x';
         var val = x + '% ' + y + '%';
         input.value = val;
+        scaleInput.value = z;
         preview.style.objectPosition = val;
+        preview.style.transform = 'scale(' + z + ')';
         updateSliderTrack(xSlider, x);
         updateSliderTrack(ySlider, y);
+        updateSliderTrack(zoomSlider, z);
         highlightPreset(val);
     }
 
@@ -365,6 +386,7 @@
     // Wire sliders
     xSlider.addEventListener('input', updateFromSliders);
     ySlider.addEventListener('input', updateFromSliders);
+    zoomSlider.addEventListener('input', updateFromSliders);
 
     // ---- Show panel & preview when new file selected ----
     fileInput.addEventListener('change', function() {
@@ -401,12 +423,16 @@
     // ---- Initialize sliders from current value ----
     var initVal = input.value || 'center 20%';
     var initPos = parsePosition(initVal);
+    var initZoom = parseFloat(scaleInput.value) || 1.00;
     xSlider.value = initPos.x;
     ySlider.value = initPos.y;
+    zoomSlider.value = initZoom;
     xLabel.textContent = initPos.x + '%';
     yLabel.textContent = initPos.y + '%';
+    zoomLabel.textContent = initZoom.toFixed(2) + 'x';
     updateSliderTrack(xSlider, initPos.x);
     updateSliderTrack(ySlider, initPos.y);
+    updateSliderTrack(zoomSlider, initZoom);
     highlightPreset(initVal);
 
     // ---- Color sync ----

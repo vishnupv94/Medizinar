@@ -73,7 +73,7 @@
 
                         <!-- full-bleed photo -->
                         <img src="<?= h($photoUrl) ?>" alt="<?= h($member->name) ?>" class="team-card-photo"
-                            style="object-position:<?= h($member->obj_pos ?? 'center 20%') ?>" loading="lazy">
+                            style="object-position:<?= h($member->obj_pos ?? 'center 20%') ?>; --base-scale:<?= (float)($member->obj_scale ?? 1.00) ?>;" loading="lazy">
 
                         <!-- default: bottom nameplate -->
                         <div class="absolute bottom-0 left-0 right-0 px-4 py-4 transition-opacity duration-300 group-hover:opacity-0"

@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `team_members` (
     `bio`        TEXT          DEFAULT NULL,
     `photo`      VARCHAR(255)  DEFAULT NULL            COMMENT 'Relative path or /uploads/team/ filename',
     `obj_pos`    VARCHAR(30)   DEFAULT 'center top'   COMMENT 'CSS object-position for photo',
+    `obj_scale`  DECIMAL(4,2)  DEFAULT 1.00           COMMENT 'CSS transform scale for photo zoom',
     `status`     ENUM('draft','published') DEFAULT 'published',
     `sort_order` INT           DEFAULT 0,
     `created_at` TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
