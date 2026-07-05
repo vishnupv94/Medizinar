@@ -15,6 +15,8 @@ use App\Controllers\Admin\BlogController as AdminBlogController;
 use App\Controllers\FaqController;
 use App\Controllers\SitemapController;
 use App\Controllers\Admin\FaqController as AdminFaqController;
+use App\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Controllers\Admin\LocationController as AdminLocationController;
 
 $router = new Router();
 
@@ -82,6 +84,22 @@ $router->post('/admin/faqs',              [AdminFaqController::class, 'store']);
 $router->get('/admin/faqs/{id}/edit',      [AdminFaqController::class, 'edit']);
 $router->post('/admin/faqs/{id}',         [AdminFaqController::class, 'update']);
 $router->post('/admin/faqs/{id}/delete',  [AdminFaqController::class, 'delete']);
+
+// Admin: Services
+$router->get('/admin/services',                 [AdminServiceController::class, 'index']);
+$router->get('/admin/services/create',          [AdminServiceController::class, 'create']);
+$router->post('/admin/services',               [AdminServiceController::class, 'store']);
+$router->get('/admin/services/{id}/edit',       [AdminServiceController::class, 'edit']);
+$router->post('/admin/services/{id}',          [AdminServiceController::class, 'update']);
+$router->post('/admin/services/{id}/delete',   [AdminServiceController::class, 'delete']);
+
+// Admin: Locations
+$router->get('/admin/locations',                [AdminLocationController::class, 'index']);
+$router->get('/admin/locations/create',         [AdminLocationController::class, 'create']);
+$router->post('/admin/locations',              [AdminLocationController::class, 'store']);
+$router->get('/admin/locations/{id}/edit',      [AdminLocationController::class, 'edit']);
+$router->post('/admin/locations/{id}',         [AdminLocationController::class, 'update']);
+$router->post('/admin/locations/{id}/delete',  [AdminLocationController::class, 'delete']);
 
 $router->get('/admin/settings',          [SettingsController::class, 'index']);
 $router->post('/admin/settings',         [SettingsController::class, 'update']);

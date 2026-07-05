@@ -4,16 +4,19 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Models\BlogPost;
+use App\Models\Service;
+use App\Models\Location;
 
 /**
- * Generates a dynamic XML sitemap for search engines.
+ * Generates a fully dynamic XML sitemap for search engines.
  *
  * Static pages use a fixed priority and changefreq.
- * Blog posts are fetched from the database and use slug-based URLs.
+ * Service pages, location pages, and blog posts are all fetched from the DB —
+ * so adding/removing content in admin automatically updates the sitemap.
  */
 class SitemapController extends Controller
 {
-    /** @var array<array{loc:string, changefreq:string, priority:string, lastmod?:string}> */
+    /** @var array<array{loc:string, changefreq:string, priority:string, lastmod?:string|null}> */
     private array $staticPages = [
         ['loc' => '/',            'changefreq' => 'weekly',  'priority' => '1.0', 'lastmod' => '2025-06-01'],
         ['loc' => '/services',    'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-06-01'],
@@ -23,28 +26,6 @@ class SitemapController extends Controller
         ['loc' => '/blog',        'changefreq' => 'daily',   'priority' => '0.7', 'lastmod' => null],
         ['loc' => '/contact',     'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-04-01'],
         ['loc' => '/appointment', 'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-04-01'],
-        // Individual service pages
-        ['loc' => '/services/bedside-patient-care', 'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
-        ['loc' => '/services/elderly-care',         'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
-        ['loc' => '/services/mother-baby-care',     'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
-        ['loc' => '/services/home-maid-services',   'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
-        ['loc' => '/services/nri-parent-care',      'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
-        ['loc' => '/services/quick-support',        'changefreq' => 'monthly', 'priority' => '0.9', 'lastmod' => '2025-07-01'],
-        // Kerala location pages
-        ['loc' => '/location/kollam',            'changefreq' => 'monthly', 'priority' => '0.8', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/thiruvananthapuram','changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/pathanamthitta',    'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/alappuzha',         'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/kottayam',          'changefreq' => 'monthly', 'priority' => '0.7', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/ernakulam',         'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/idukki',            'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/thrissur',          'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/palakkad',          'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/malappuram',        'changefreq' => 'monthly', 'priority' => '0.6', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/kozhikode',         'changefreq' => 'monthly', 'priority' => '0.5', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/wayanad',           'changefreq' => 'monthly', 'priority' => '0.5', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/kannur',            'changefreq' => 'monthly', 'priority' => '0.5', 'lastmod' => '2025-07-01'],
-        ['loc' => '/location/kasaragod',         'changefreq' => 'monthly', 'priority' => '0.5', 'lastmod' => '2025-07-01'],
     ];
 
     public function index(): void
@@ -55,7 +36,7 @@ class SitemapController extends Controller
 
         $baseUrl = rtrim(SITE_URL, '/');
 
-        // Set /blog lastmod to today — it always has the freshest content
+        // Set /blog lastmod dynamically
         foreach ($this->staticPages as &$p) {
             if ($p['loc'] === '/blog' && $p['lastmod'] === null) {
                 $p['lastmod'] = date('Y-m-d');
@@ -63,33 +44,77 @@ class SitemapController extends Controller
         }
         unset($p);
 
-        // Fetch all published blog posts
-        $posts = [];
+        // --- Fetch dynamic content from DB ----------------------------------
+        $posts     = [];
+        $services  = [];
+        $locations = [];
+
         try {
             $posts = BlogPost::getPublished(500, 0);
         } catch (\Throwable $e) {
-            // Fail silently — sitemap still renders static pages
+            // Fail silently — sitemap still renders remaining pages
         }
+        try {
+            $services = Service::getPublished();
+        } catch (\Throwable $e) {
+            // Fail silently
+        }
+        try {
+            $locations = Location::getPublished();
+        } catch (\Throwable $e) {
+            // Fail silently
+        }
+        // --------------------------------------------------------------------
 
         echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n";
         echo '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n";
 
-        // Static pages
+        // ---- Static pages --------------------------------------------------
         foreach ($this->staticPages as $p) {
             $loc = htmlspecialchars($baseUrl . $p['loc'], ENT_XML1 | ENT_COMPAT, 'UTF-8');
             echo "  <url>\n";
             echo "    <loc>{$loc}</loc>\n";
             if (!empty($p['lastmod'])) {
-                $lm = is_callable($p['lastmod']) ? ($p['lastmod'])() : $p['lastmod'];
-                echo "    <lastmod>{$lm}</lastmod>\n";
+                echo "    <lastmod>{$p['lastmod']}</lastmod>\n";
             }
             echo "    <changefreq>{$p['changefreq']}</changefreq>\n";
             echo "    <priority>{$p['priority']}</priority>\n";
             echo "  </url>\n";
         }
 
-        // Dynamic blog post pages
+        // ---- Service pages (from DB) ----------------------------------------
+        foreach ($services as $svc) {
+            if (empty($svc->slug)) {
+                continue;
+            }
+            $loc     = htmlspecialchars($baseUrl . '/services/' . $svc->slug, ENT_XML1 | ENT_COMPAT, 'UTF-8');
+            $lastmod = !empty($svc->updated_at) ? date('Y-m-d', strtotime($svc->updated_at)) : date('Y-m-d');
+            echo "  <url>\n";
+            echo "    <loc>{$loc}</loc>\n";
+            echo "    <lastmod>{$lastmod}</lastmod>\n";
+            echo "    <changefreq>monthly</changefreq>\n";
+            echo "    <priority>0.9</priority>\n";
+            echo "  </url>\n";
+        }
+
+        // ---- Location pages (from DB) ----------------------------------------
+        foreach ($locations as $loc_row) {
+            if (empty($loc_row->slug)) {
+                continue;
+            }
+            $loc      = htmlspecialchars($baseUrl . '/location/' . $loc_row->slug, ENT_XML1 | ENT_COMPAT, 'UTF-8');
+            $lastmod  = !empty($loc_row->updated_at) ? date('Y-m-d', strtotime($loc_row->updated_at)) : date('Y-m-d');
+            $priority = number_format((float) ($loc_row->sitemap_priority ?? 0.7), 1);
+            echo "  <url>\n";
+            echo "    <loc>{$loc}</loc>\n";
+            echo "    <lastmod>{$lastmod}</lastmod>\n";
+            echo "    <changefreq>monthly</changefreq>\n";
+            echo "    <priority>{$priority}</priority>\n";
+            echo "  </url>\n";
+        }
+
+        // ---- Blog posts (from DB) ------------------------------------------
         foreach ($posts as $post) {
             if (empty($post->slug)) {
                 continue;
@@ -103,9 +128,8 @@ class SitemapController extends Controller
             echo "    <changefreq>monthly</changefreq>\n";
             echo "    <priority>0.6</priority>\n";
 
-            // Include OG image as sitemap image if available
             if (!empty($post->image)) {
-                $imgLoc = htmlspecialchars($baseUrl . '/uploads/blog/' . $post->image, ENT_XML1 | ENT_COMPAT, 'UTF-8');
+                $imgLoc     = htmlspecialchars($baseUrl . '/uploads/blog/' . $post->image, ENT_XML1 | ENT_COMPAT, 'UTF-8');
                 $imgCaption = htmlspecialchars($post->title ?? '', ENT_XML1 | ENT_COMPAT, 'UTF-8');
                 echo "    <image:image>\n";
                 echo "      <image:loc>{$imgLoc}</image:loc>\n";
