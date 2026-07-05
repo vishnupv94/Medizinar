@@ -65,8 +65,8 @@ class TeamMember
     {
         $db = Database::getInstance();
         $db->query(
-            'INSERT INTO team_members (name, role, initial, color, bio, photo, obj_pos, status, sort_order)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO team_members (name, role, initial, color, bio, photo, obj_pos, obj_scale, status, sort_order)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [
                 $data['name'],
                 $data['role'],
@@ -75,6 +75,7 @@ class TeamMember
                 $data['bio']        ?? null,
                 $data['photo']      ?? null,
                 $data['obj_pos']    ?? 'center top',
+                (float) ($data['obj_scale'] ?? 1.00),
                 $data['status']     ?? 'published',
                 (int) ($data['sort_order'] ?? 0),
             ]
@@ -85,7 +86,7 @@ class TeamMember
     public static function update(int $id, array $data): void
     {
         Database::getInstance()->query(
-            'UPDATE team_members SET name=?, role=?, initial=?, color=?, bio=?, photo=?, obj_pos=?, status=?, sort_order=?
+            'UPDATE team_members SET name=?, role=?, initial=?, color=?, bio=?, photo=?, obj_pos=?, obj_scale=?, status=?, sort_order=?
              WHERE id=?',
             [
                 $data['name'],
@@ -95,6 +96,7 @@ class TeamMember
                 $data['bio']        ?? null,
                 $data['photo']      ?? null,
                 $data['obj_pos']    ?? 'center top',
+                (float) ($data['obj_scale'] ?? 1.00),
                 $data['status']     ?? 'published',
                 (int) ($data['sort_order'] ?? 0),
                 $id,
