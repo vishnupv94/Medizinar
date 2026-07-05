@@ -161,37 +161,37 @@ VALUES
  'quick-support','gold',6,'published');
 
 -- ---- service_faqs -------------------------------------------
-INSERT IGNORE INTO `service_faqs` (`service_id`,`question`,`answer`,`sort_order`) VALUES
+INSERT IGNORE INTO `service_faqs` (`id`,`service_id`,`question`,`answer`,`sort_order`) VALUES
 -- bedside
-((SELECT id FROM services WHERE slug='bedside-patient-care'),'What does a bedside caregiver do?','A bedside caregiver assists patients with daily personal care including bathing, grooming, mobility, medication reminders, and companionship throughout the day or night.',1),
-((SELECT id FROM services WHERE slug='bedside-patient-care'),'Is bedside care available 24 hours?','Yes. Medizinar Care provides full-time, part-time, daytime, and night-shift bedside care depending on your family''s requirement.',2),
-((SELECT id FROM services WHERE slug='bedside-patient-care'),'Do I need a doctor''s referral for home bedside care?','No referral is needed. You can contact us directly and we will arrange a verified caregiver based on the patient''s specific care needs.',3),
-((SELECT id FROM services WHERE slug='bedside-patient-care'),'How quickly can you arrange a bedside caregiver in Kottarakkara or Kollam?','We typically arrange a suitable caregiver within 24–48 hours of enquiry, depending on availability in your area.',4),
+(1, (SELECT id FROM services WHERE slug='bedside-patient-care'),'What does a bedside caregiver do?','A bedside caregiver assists patients with daily personal care including bathing, grooming, mobility, medication reminders, and companionship throughout the day or night.',1),
+(2, (SELECT id FROM services WHERE slug='bedside-patient-care'),'Is bedside care available 24 hours?','Yes. Medizinar Care provides full-time, part-time, daytime, and night-shift bedside care depending on your family''s requirement.',2),
+(3, (SELECT id FROM services WHERE slug='bedside-patient-care'),'Do I need a doctor''s referral for home bedside care?','No referral is needed. You can contact us directly and we will arrange a verified caregiver based on the patient''s specific care needs.',3),
+(4, (SELECT id FROM services WHERE slug='bedside-patient-care'),'How quickly can you arrange a bedside caregiver in Kottarakkara or Kollam?','We typically arrange a suitable caregiver within 24–48 hours of enquiry, depending on availability in your area.',4),
 -- elderly
-((SELECT id FROM services WHERE slug='elderly-care'),'What is included in elderly home care?','Our elderly care includes daily living assistance, mobility support, personal hygiene, meal assistance, companionship, safety monitoring, and regular updates to the family.',1),
-((SELECT id FROM services WHERE slug='elderly-care'),'Can you arrange care for my elderly parents while I am abroad?','Yes. We provide NRI Parent Care specifically for families abroad. Our caregivers visit regularly, and we provide updates to you remotely.',2),
-((SELECT id FROM services WHERE slug='elderly-care'),'Are your elderly caregivers trained?','Yes. All Medizinar Care caregivers undergo a background check and selection process before being placed with a family.',3),
-((SELECT id FROM services WHERE slug='elderly-care'),'Is elderly care available across Kerala?','We primarily serve Kottarakkara, Kollam, and surrounding districts. Contact us to confirm availability in your area.',4),
+(5, (SELECT id FROM services WHERE slug='elderly-care'),'What is included in elderly home care?','Our elderly care includes daily living assistance, mobility support, personal hygiene, meal assistance, companionship, safety monitoring, and regular updates to the family.',1),
+(6, (SELECT id FROM services WHERE slug='elderly-care'),'Can you arrange care for my elderly parents while I am abroad?','Yes. We provide NRI Parent Care specifically for families abroad. Our caregivers visit regularly, and we provide updates to you remotely.',2),
+(7, (SELECT id FROM services WHERE slug='elderly-care'),'Are your elderly caregivers trained?','Yes. All Medizinar Care caregivers undergo a background check and selection process before being placed with a family.',3),
+(8, (SELECT id FROM services WHERE slug='elderly-care'),'Is elderly care available across Kerala?','We primarily serve Kottarakkara, Kollam, and surrounding districts. Contact us to confirm availability in your area.',4),
 -- mother-baby
-((SELECT id FROM services WHERE slug='mother-baby-care'),'What does a mother and baby care assistant do?','She assists with newborn bathing, feeding support, baby routines, mother''s personal care during recovery, and general household support related to the baby.',1),
-((SELECT id FROM services WHERE slug='mother-baby-care'),'How soon after delivery can I arrange a care assistant?','You can arrange the care assistant before the expected delivery date. We recommend booking 1–2 weeks in advance to ensure availability.',2),
-((SELECT id FROM services WHERE slug='mother-baby-care'),'Is this service available for C-section recovery?','Yes. Our care assistants are experienced in supporting mothers recovering from both normal and C-section deliveries.',3),
-((SELECT id FROM services WHERE slug='mother-baby-care'),'How long is the mother and baby care service provided?','The duration is flexible — most families arrange 30 to 90 days of postnatal care. We customise based on your requirement.',4),
+(9, (SELECT id FROM services WHERE slug='mother-baby-care'),'What does a mother and baby care assistant do?','She assists with newborn bathing, feeding support, baby routines, mother''s personal care during recovery, and general household support related to the baby.',1),
+(10, (SELECT id FROM services WHERE slug='mother-baby-care'),'How soon after delivery can I arrange a care assistant?','You can arrange the care assistant before the expected delivery date. We recommend booking 1–2 weeks in advance to ensure availability.',2),
+(11, (SELECT id FROM services WHERE slug='mother-baby-care'),'Is this service available for C-section recovery?','Yes. Our care assistants are experienced in supporting mothers recovering from both normal and C-section deliveries.',3),
+(12, (SELECT id FROM services WHERE slug='mother-baby-care'),'How long is the mother and baby care service provided?','The duration is flexible — most families arrange 30 to 90 days of postnatal care. We customise based on your requirement.',4),
 -- home-maid
-((SELECT id FROM services WHERE slug='home-maid-services'),'Are your home maids background-verified?','Yes. All domestic staff placed by Medizinar Care go through our background check and selection process before being sent to a family.',1),
-((SELECT id FROM services WHERE slug='home-maid-services'),'Can I get a part-time home maid?','Yes. We offer both full-time (live-in or daily) and part-time maid services based on your household needs.',2),
-((SELECT id FROM services WHERE slug='home-maid-services'),'What tasks does the home maid assist with?','Typical tasks include house cleaning, cooking, laundry, dishwashing, and general household organisation. Specific duties are agreed upon at the time of placement.',3),
-((SELECT id FROM services WHERE slug='home-maid-services'),'Where do you provide home maid services?','We primarily serve Kottarakkara, Kollam, and the surrounding districts in Kerala. Contact us to check availability in your area.',4),
+(13, (SELECT id FROM services WHERE slug='home-maid-services'),'Are your home maids background-verified?','Yes. All domestic staff placed by Medizinar Care go through our background check and selection process before being sent to a family.',1),
+(14, (SELECT id FROM services WHERE slug='home-maid-services'),'Can I get a part-time home maid?','Yes. We offer both full-time (live-in or daily) and part-time maid services based on your household needs.',2),
+(15, (SELECT id FROM services WHERE slug='home-maid-services'),'What tasks does the home maid assist with?','Typical tasks include house cleaning, cooking, laundry, dishwashing, and general household organisation. Specific duties are agreed upon at the time of placement.',3),
+(16, (SELECT id FROM services WHERE slug='home-maid-services'),'Where do you provide home maid services?','We primarily serve Kottarakkara, Kollam, and the surrounding districts in Kerala. Contact us to check availability in your area.',4),
 -- nri
-((SELECT id FROM services WHERE slug='nri-parent-care'),'How does NRI Parent Care work?','We arrange scheduled visits to your parents'' home in Kerala. After each visit, we provide a well-being update to you via phone or WhatsApp, covering health, daily activities, and any concerns.',1),
-((SELECT id FROM services WHERE slug='nri-parent-care'),'How often are home visits made?','Visit frequency is customisable — weekly, bi-weekly, or daily depending on your parents'' needs and your preference.',2),
-((SELECT id FROM services WHERE slug='nri-parent-care'),'Can you accompany my parents to hospital appointments?','Yes. Hospital visit accompaniment is part of our Quick Support Services and can be arranged alongside NRI Parent Care visits.',3),
-((SELECT id FROM services WHERE slug='nri-parent-care'),'What areas in Kerala do you cover for NRI Parent Care?','We primarily serve Kottarakkara, Kollam district, and nearby areas. Contact us to confirm coverage for your parents'' location.',4),
+(17, (SELECT id FROM services WHERE slug='nri-parent-care'),'How does NRI Parent Care work?','We arrange scheduled visits to your parents'' home in Kerala. After each visit, we provide a well-being update to you via phone or WhatsApp, covering health, daily activities, and any concerns.',1),
+(18, (SELECT id FROM services WHERE slug='nri-parent-care'),'How often are home visits made?','Visit frequency is customisable — weekly, bi-weekly, or daily depending on your parents'' needs and your preference.',2),
+(19, (SELECT id FROM services WHERE slug='nri-parent-care'),'Can you accompany my parents to hospital appointments?','Yes. Hospital visit accompaniment is part of our Quick Support Services and can be arranged alongside NRI Parent Care visits.',3),
+(20, (SELECT id FROM services WHERE slug='nri-parent-care'),'What areas in Kerala do you cover for NRI Parent Care?','We primarily serve Kottarakkara, Kollam district, and nearby areas. Contact us to confirm coverage for your parents'' location.',4),
 -- quick-support
-((SELECT id FROM services WHERE slug='quick-support'),'What is a quick support service?','Quick Support is short-duration care — available for a few hours, a day, or a specific event like a hospital visit. It is billed on a daily service charge basis.',1),
-((SELECT id FROM services WHERE slug='quick-support'),'Can I book a caregiver for just one day?','Yes. Our quick support services are available on a daily basis with no long-term commitment required.',2),
-((SELECT id FROM services WHERE slug='quick-support'),'Is there a minimum duration for quick support?','Minimum duration is typically 4 hours for daytime support. Contact us to discuss your specific requirement.',3),
-((SELECT id FROM services WHERE slug='quick-support'),'Can I use quick support while my regular caregiver is unavailable?','Absolutely. Quick support is ideal as a temporary replacement or gap-fill when your regular caregiver is unavailable.',4);
+(21, (SELECT id FROM services WHERE slug='quick-support'),'What is a quick support service?','Quick Support is short-duration care — available for a few hours, a day, or a specific event like a hospital visit. It is billed on a daily service charge basis.',1),
+(22, (SELECT id FROM services WHERE slug='quick-support'),'Can I book a caregiver for just one day?','Yes. Our quick support services are available on a daily basis with no long-term commitment required.',2),
+(23, (SELECT id FROM services WHERE slug='quick-support'),'Is there a minimum duration for quick support?','Minimum duration is typically 4 hours for daytime support. Contact us to discuss your specific requirement.',3),
+(24, (SELECT id FROM services WHERE slug='quick-support'),'Can I use quick support while my regular caregiver is unavailable?','Absolutely. Quick support is ideal as a temporary replacement or gap-fill when your regular caregiver is unavailable.',4);
 
 -- ---- locations ----------------------------------------------
 INSERT IGNORE INTO `locations`
