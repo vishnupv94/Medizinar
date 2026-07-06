@@ -98,13 +98,13 @@ $accentLight = $isGreen ? 'rgba(23,107,35,0.10)' : 'rgba(171,126,34,0.10)';
                 <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
                     <button class="w-full text-left px-6 py-4 flex items-center justify-between gap-4 font-semibold text-gray-800 hover:bg-gray-50 transition-colors"
                         onclick="toggleFaq(this)" aria-expanded="false" id="faq-btn-<?= $i ?>">
-                        <span><?= h($faq->question) ?></span>
+                        <span><?= h(strip_tags($faq->question)) ?></span>
                         <svg class="w-4 h-4 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
                     <div class="faq-body px-6 pb-5 text-gray-600 text-sm leading-relaxed hidden">
-                        <?= h($faq->answer) ?>
+                        <?= h(strip_tags($faq->answer)) ?>
                     </div>
                 </div>
             <?php endforeach; ?>

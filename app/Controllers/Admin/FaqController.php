@@ -166,8 +166,8 @@ class FaqController extends Controller
      */
     private function validateFaq(): array
     {
-        $question  = trim($_POST['question'] ?? '');
-        $answer    = trim($_POST['answer'] ?? '');
+        $question  = sanitize_input($_POST['question'] ?? '');
+        $answer    = sanitize_input($_POST['answer'] ?? '');
         $sortOrder = (int) ($_POST['sort_order'] ?? 0);
 
         $errors = [];

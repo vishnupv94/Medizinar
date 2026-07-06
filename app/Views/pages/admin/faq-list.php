@@ -49,7 +49,7 @@
                                 <td class="px-5 py-3">
                                     <a href="<?= url('/admin/faqs/' . $faq->id . '/edit') ?>"
                                         class="font-medium text-gray-800 hover:text-primary transition-colors block max-w-lg truncate">
-                                        <?= h($faq->question) ?>
+                                        <?= h(strip_tags($faq->question)) ?>
                                     </a>
                                     <p class="text-xs text-gray-400 mt-0.5 line-clamp-1"><?= h(mb_substr(strip_tags($faq->answer), 0, 80)) ?>...</p>
                                 </td>

@@ -240,8 +240,8 @@ class ServiceController extends Controller
         $answers   = $_POST['faq_answer']   ?? [];
         $faqs      = [];
         foreach ($questions as $i => $q) {
-            $q = trim($q);
-            $a = trim($answers[$i] ?? '');
+            $q = sanitize_input($q);
+            $a = sanitize_input($answers[$i] ?? '');
             if ($q !== '' && $a !== '') {
                 $faqs[] = ['question' => $q, 'answer' => $a];
             }

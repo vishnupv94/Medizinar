@@ -23,7 +23,7 @@
                 <?php foreach ($faqs as $faq): ?>
                     <div class="faq-item border border-gray-200/80 rounded-xl bg-white overflow-hidden transition-all duration-300 hover:shadow-sm">
                         <button class="faq-toggle w-full flex items-center justify-between p-5 text-left text-gray-800 hover:text-primary transition-colors focus:outline-none" aria-expanded="false">
-                            <span class="font-semibold text-base sm:text-lg pr-4"><?= h($faq->question) ?></span>
+                            <span class="font-semibold text-base sm:text-lg pr-4"><?= h(strip_tags($faq->question)) ?></span>
                             <span class="faq-icon-wrapper flex-shrink-0 text-gray-400 bg-gray-50 rounded-lg p-1.5 transition-colors duration-300">
                                 <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -32,7 +32,7 @@
                         </button>
                         <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
                             <div class="p-5 pt-0 border-t border-gray-100/50 text-gray-600 leading-relaxed text-sm sm:text-base">
-                                <?= nl2br(h($faq->answer)) ?>
+                                <?= nl2br(h(strip_tags($faq->answer))) ?>
                             </div>
                         </div>
                     </div>
