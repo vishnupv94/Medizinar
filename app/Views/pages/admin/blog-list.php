@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <form method="GET" action="<?= url('/admin/blog') ?>" class="flex items-center gap-2">
                 <div class="relative">
-                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"/>
                     </svg>
                     <input type="text" name="q" value="<?= h($q) ?>" placeholder="Search posts…"
@@ -51,7 +51,7 @@
                                         <img src="<?= url('uploads/blog/' . h($post->image)) ?>" alt="" class="w-12 h-9 object-cover rounded-md border border-gray-200">
                                     <?php else: ?>
                                         <div class="w-12 h-9 bg-gray-100 rounded-md flex items-center justify-center">
-                                            <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <svg class="w-5 h-5 text-gray-300" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                             </svg>
                                         </div>

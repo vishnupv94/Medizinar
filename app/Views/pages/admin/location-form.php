@@ -148,7 +148,7 @@ if ($isEdit && !empty($location->localities)) {
                         <?php if ($isEdit): ?>
                             <a href="<?= url('/location/' . $location->slug) ?>" target="_blank"
                                 class="flex items-center justify-center gap-1.5 w-full px-4 py-2 text-sm text-gray-500 hover:text-primary transition-colors">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-3.5 h-3.5" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                                 </svg>
                                 View Live Page
