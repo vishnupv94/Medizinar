@@ -48,6 +48,36 @@
         .admin-scrollbar::-webkit-scrollbar { width: 6px; }
         .admin-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .admin-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
+
+        /* ── Critical fallback styles ──
+           These ensure the admin layout remains usable even if the
+           Tailwind Play CDN (cdn.tailwindcss.com) fails to load.
+           Tailwind utilities will override these when available. */
+
+        /* Constrain all SVGs inside admin to their parent's dimensions */
+        svg { max-width: 100%; height: auto; }
+        /* Sidebar & topbar icon SVGs — explicit fallback size */
+        aside svg, header svg, main svg,
+        nav svg, table svg, form svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
+
+        /* Core layout */
+        body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; }
+        .flex   { display: flex; }
+        .hidden { display: none; }
+
+        /* Sidebar */
+        #admin-sidebar { width: 16rem; }
+        #admin-overlay.hidden { display: none; }
+
+        /* Content area */
+        .flex-1 { flex: 1 1 0%; min-width: 0; }
+        .overflow-hidden { overflow: hidden; }
+        .overflow-y-auto { overflow-y: auto; }
+        .overflow-x-auto { overflow-x: auto; }
+
+        /* Ensure table doesn't overflow */
+        table { border-collapse: collapse; width: 100%; }
+        table th, table td { text-align: left; padding: 0.75rem 1.25rem; }
     </style>
 </head>
 

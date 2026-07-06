@@ -48,7 +48,7 @@ $links = [
     <div class="h-16 flex items-center px-5 border-b border-gray-700">
         <a href="<?= url('/admin/dashboard') ?>" class="flex items-center gap-2 flex-1">
             <span class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-white" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
             </span>
@@ -56,7 +56,7 @@ $links = [
         </a>
         <!-- Close button (mobile only) -->
         <button onclick="closeSidebar()" class="lg:hidden p-1 text-gray-400 hover:text-white" aria-label="Close menu">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
         </button>
@@ -69,7 +69,7 @@ $links = [
                 onclick="closeSidebar()"
                 class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                       <?= $active ? 'bg-sidebar-active text-white' : 'text-gray-400 hover:bg-sidebar-hover hover:text-white' ?>">
-                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><?= $link['icon'] ?></svg>
+                <svg class="w-5 h-5 flex-shrink-0" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><?= $link['icon'] ?></svg>
                 <span class="flex-1"><?= $link['label'] ?></span>
                 <?php if (!empty($link['badge'])): ?>
                     <span class="ml-auto text-xs font-bold bg-red-500 text-white rounded-full min-w-[1.25rem] h-5 px-1 flex items-center justify-center leading-none">
@@ -83,7 +83,7 @@ $links = [
     <div class="px-3 py-4 border-t border-gray-700">
         <a href="<?= url('/') ?>" target="_blank"
             class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-500 hover:text-gray-300 hover:bg-sidebar-hover transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
             View Website
