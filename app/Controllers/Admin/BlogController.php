@@ -236,10 +236,12 @@ class BlogController extends Controller
      */
     private function validatePost(): array
     {
-        $title   = sanitize_input($_POST['title'] ?? '');
-        $slug    = sanitize_input($_POST['slug'] ?? '');
-        $content = trim($_POST['content'] ?? '');
-        $excerpt = sanitize_input($_POST['excerpt'] ?? '');
+        $title      = sanitize_input($_POST['title'] ?? '');
+        $slug       = sanitize_input($_POST['slug'] ?? '');
+        $content    = trim($_POST['content'] ?? '');
+        $excerpt    = sanitize_input($_POST['excerpt'] ?? '');
+        $bannerPos  = sanitize_input($_POST['banner_pos'] ?? 'center center');
+        $bannerScale = (float) ($_POST['banner_scale'] ?? 1.00);
 
         $errors = [];
         if ($title === '') {
@@ -265,12 +267,17 @@ class BlogController extends Controller
             }
         }
 
+        // Clamp banner_scale to reasonable range
+        $bannerScale = max(0.1, min(3.0, $bannerScale));
+
         return [
             'fields' => [
-                'title'   => $title,
-                'slug'    => $slug,
-                'content' => $content,
-                'excerpt' => $excerpt,
+                'title'        => $title,
+                'slug'         => $slug,
+                'content'      => $content,
+                'excerpt'      => $excerpt,
+                'banner_pos'   => $bannerPos,
+                'banner_scale' => $bannerScale,
             ],
             'errors' => $errors,
         ];

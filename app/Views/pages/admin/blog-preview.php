@@ -30,6 +30,8 @@
                     <input type="hidden" name="slug" value="<?= h($post->slug) ?>">
                     <input type="hidden" name="content" value="<?= h($post->content) ?>">
                     <input type="hidden" name="excerpt" value="<?= h($post->excerpt ?? '') ?>">
+                    <input type="hidden" name="banner_pos" value="<?= h($post->banner_pos ?? 'center center') ?>">
+                    <input type="hidden" name="banner_scale" value="<?= (float)($post->banner_scale ?? 1.00) ?>">
                     <button type="submit" name="action" value="publish"
                         class="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary-700 transition-colors">
                         Publish Now
@@ -45,7 +47,8 @@
         <?php if (!empty($post->image)): ?>
             <div class="w-full h-64 sm:h-80 overflow-hidden">
                 <img src="<?= url('uploads/blog/' . h($post->image)) ?>" alt="<?= h($post->title) ?>"
-                    class="w-full h-full object-cover">
+                    class="w-full h-full object-cover"
+                    style="object-position:<?= h($post->banner_pos ?? 'center center') ?>; transform-origin:<?= h($post->banner_pos ?? 'center center') ?>; transform: scale(<?= (float)($post->banner_scale ?? 1.00) ?>);">
             </div>
         <?php endif; ?>
 

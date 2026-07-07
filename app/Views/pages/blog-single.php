@@ -42,8 +42,13 @@ $imageUrl      = !empty($post->image) ? url('uploads/blog/' . $post->image) : ''
 
 <!-- Banner image -->
 <?php if ($imageUrl): ?>
+<?php
+$bPos   = $post->banner_pos ?? 'center center';
+$bScale = (float)($post->banner_scale ?? 1.00);
+?>
 <div class="blog-banner">
-    <img src="<?= h($imageUrl) ?>" alt="<?= h($post->title) ?>" class="blog-banner-img">
+    <img src="<?= h($imageUrl) ?>" alt="<?= h($post->title) ?>" class="blog-banner-img"
+         style="object-position:<?= h($bPos) ?>; transform-origin:<?= h($bPos) ?>; transform: scale(<?= $bScale ?>);">
     <div class="blog-banner-overlay"></div>
 </div>
 <?php else: ?>

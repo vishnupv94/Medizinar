@@ -21,10 +21,12 @@
                     <article class="blog-card fade-in-up">
                         <a href="<?= url('/blog/' . h($post->slug)) ?>" class="block">
                             <?php if (!empty($post->image)): ?>
+                                <?php $cardScale = (float)($post->banner_scale ?? 1.00); ?>
                                 <div class="blog-card-image-wrap">
                                     <img src="<?= url('uploads/blog/' . h($post->image)) ?>"
                                         alt="<?= h($post->title) ?>"
                                         class="blog-card-image"
+                                        style="object-position:<?= h($post->banner_pos ?? 'center center') ?>; transform-origin:<?= h($post->banner_pos ?? 'center center') ?>; --banner-scale:<?= $cardScale ?>; transform: scale(<?= $cardScale ?>);"
                                         loading="lazy">
                                 </div>
                             <?php else: ?>

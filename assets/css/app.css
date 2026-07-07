@@ -662,10 +662,11 @@ body {
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
+  --banner-scale: 1;
 }
 
 .blog-card:hover .blog-card-image {
-  transform: scale(1.05);
+  transform: scale(calc(var(--banner-scale) * 1.05));
 }
 
 /* Clamp lines utility */

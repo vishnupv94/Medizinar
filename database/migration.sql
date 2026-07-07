@@ -51,6 +51,8 @@ CREATE TABLE IF NOT EXISTS `blog_posts` (
     `content`      TEXT          NOT NULL,
     `excerpt`      VARCHAR(500)  DEFAULT NULL,
     `image`        VARCHAR(255)  DEFAULT NULL,
+    `banner_pos`   VARCHAR(50)   DEFAULT 'center center',
+    `banner_scale` DECIMAL(4,2)  DEFAULT 1.00,
     `status`       ENUM('draft','published') DEFAULT 'draft',
     `published_at` TIMESTAMP     NULL DEFAULT NULL,
     `created_at`   TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,

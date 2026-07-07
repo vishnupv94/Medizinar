@@ -6,14 +6,47 @@ use App\Core\Database;
 
 class BlogPost
 {
+    /**
+     * Ensure banner_pos and banner_scale columns exist (auto-migration).
+     */
+    private static function ensureBannerColumns(): void
+    {
+        $db = Database::getInstance();
+        try {
+            $db->query('SELECT `banner_pos` FROM `blog_posts` LIMIT 1');
+        } catch (\PDOException $e) {
+            if (strpos($e->getMessage(), 'Unknown column') !== false || strpos($e->getMessage(), "doesn't exist") !== false) {
+                $db->query('ALTER TABLE `blog_posts` ADD COLUMN `banner_pos` VARCHAR(50) DEFAULT \'center center\' AFTER `image`');
+                $db->query('ALTER TABLE `blog_posts` ADD COLUMN `banner_scale` DECIMAL(4,2) DEFAULT 1.00 AFTER `banner_pos`');
+            }
+        }
+    }
+
     public static function create(array $data): int
     {
-        return Database::getInstance()->insert('blog_posts', $data);
+        try {
+            return Database::getInstance()->insert('blog_posts', $data);
+        } catch (\PDOException $e) {
+            if (strpos($e->getMessage(), 'Unknown column') !== false) {
+                self::ensureBannerColumns();
+                return Database::getInstance()->insert('blog_posts', $data);
+            }
+            throw $e;
+        }
     }
 
     public static function update(int $id, array $data): void
     {
-        Database::getInstance()->update('blog_posts', $data, 'id = ?', [$id]);
+        try {
+            Database::getInstance()->update('blog_posts', $data, 'id = ?', [$id]);
+        } catch (\PDOException $e) {
+            if (strpos($e->getMessage(), 'Unknown column') !== false) {
+                self::ensureBannerColumns();
+                Database::getInstance()->update('blog_posts', $data, 'id = ?', [$id]);
+            } else {
+                throw $e;
+            }
+        }
     }
 
     public static function findById(int $id): ?object
