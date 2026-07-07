@@ -425,6 +425,13 @@ body {
 }
 
 /* ----- Team cards ----- */
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
 .team-card {
   background: white;
   border-radius: 14px;
@@ -434,7 +441,9 @@ body {
   transition: transform 0.28s ease, box-shadow 0.28s ease;
   text-align: center;
   position: relative;
-  height: 260px;
+  aspect-ratio: 3 / 4;
+  width: calc(100% / var(--team-cols, 4) - 1rem);
+  min-width: 200px;
 }
 
 .team-card:hover {
@@ -446,15 +455,16 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 20%;
   display: block;
   position: absolute;
   inset: 0;
   transition: transform 0.4s ease;
+  transform: scale(var(--base-scale, 1));
 }
 
 .team-card:hover .team-card-photo {
-  transform: scale(1.05);
+  transform: scale(calc(var(--base-scale, 1) * 1.05));
 }
 
 .team-avatar {
@@ -574,6 +584,16 @@ body {
 /* ----- Responsive tweaks ----- */
 @media (max-width: 640px) {
   .fixed.rounded-full span { font-size: 0.78rem; }
+  .team-card {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .team-card {
+    width: calc(50% - 1rem);
+  }
 }
 
 /* ----- Scroll fade-in animation ----- */
@@ -586,4 +606,253 @@ body {
 .fade-in-up.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ----- Blog cards ----- */
+.blog-card {
+  background: linear-gradient(
+    145deg,
+    rgba(171,126,34,0.06) 0%,
+    rgba(255,255,255,0.95) 35%,
+    rgba(23,107,35,0.05) 100%
+  );
+  border-radius: 16px;
+  border: 1px solid #eaeaea;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 4px 16px rgba(23,107,35,0.07);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--logo-gold), var(--logo-green), var(--logo-gold));
+  opacity: 0;
+  transition: opacity 0.28s ease;
+  z-index: 2;
+}
+
+.blog-card:hover::before {
+  opacity: 1;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(171,126,34,0.28);
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.05),
+    0 14px 38px rgba(23,107,35,0.12),
+    0 4px 12px rgba(171,126,34,0.08);
+}
+
+.blog-card-image-wrap {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+
+.blog-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+  --banner-scale: 1;
+}
+
+.blog-card:hover .blog-card-image {
+  transform: scale(calc(var(--banner-scale) * 1.05));
+}
+
+/* Clamp lines utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ----- Blog single page banner ----- */
+.blog-banner {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .blog-banner { height: 420px; }
+}
+
+.blog-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.blog-banner-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,0.25) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* ----- Blog content typography ----- */
+.blog-content {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #374151;
+}
+
+.blog-content p,
+.blog-content br + br {
+  margin-bottom: 1em;
+}
+
+/* ----- Hide reCAPTCHA v3 badge (disclosure shown on forms instead) ----- */
+.grecaptcha-badge { visibility: hidden !important; }
+
+/* =====================================================================
+   Cookie Consent Banner
+   ===================================================================== */
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 0 1rem 1rem;
+  pointer-events: none;
+  animation: cookie-slide-up 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cookie-slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* hidden state — JS sets display:none, but we also handle hidden attr */
+.cookie-banner[hidden] { display: none !important; }
+
+.cookie-banner-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow:
+    0 4px 6px rgba(0,0,0,0.04),
+    0 12px 40px rgba(23,107,35,0.12),
+    0 0 0 1px rgba(23,107,35,0.06);
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  pointer-events: all;
+}
+
+.cookie-banner-icon {
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.cookie-banner-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cookie-banner-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.cookie-banner-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.2rem;
+}
+
+.cookie-banner-desc {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cookie-banner-link {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cookie-banner-link:hover { color: var(--primary-dark); }
+
+.cookie-banner-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.cookie-btn {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.cookie-btn-accept {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(23,107,35,0.25);
+}
+
+.cookie-btn-accept:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(23,107,35,0.30);
+}
+
+.cookie-btn-decline {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.cookie-btn-decline:hover {
+  background: #e5e7eb;
+}
+
+/* Mobile — stack vertically */
+@media (max-width: 540px) {
+  .cookie-banner-inner {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .cookie-banner-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
 }

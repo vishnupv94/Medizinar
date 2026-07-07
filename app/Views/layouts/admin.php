@@ -43,36 +43,57 @@
     </script>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23176B23'/%3E%3Crect x='13' y='8' width='6' height='16' rx='2' fill='white'/%3E%3Crect x='8' y='13' width='16' height='6' rx='2' fill='white'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23a5781e'/%3E%3C/svg%3E">
     <style>
-        [x-cloak] {
-            display: none !important;
-        }
+        [x-cloak] { display: none !important; }
 
-        .admin-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
+        .admin-scrollbar::-webkit-scrollbar { width: 6px; }
+        .admin-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .admin-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
 
-        .admin-scrollbar::-webkit-scrollbar-track {
-            background: transparent;
-        }
+        /* ── Critical fallback styles ──
+           These ensure the admin layout remains usable even if the
+           Tailwind Play CDN (cdn.tailwindcss.com) fails to load.
+           Tailwind utilities will override these when available. */
 
-        .admin-scrollbar::-webkit-scrollbar-thumb {
-            background: #4b5563;
-            border-radius: 3px;
-        }
+        /* Constrain all SVGs inside admin to their parent's dimensions */
+        svg { max-width: 100%; height: auto; }
+        /* Sidebar & topbar icon SVGs — explicit fallback size */
+        aside svg, header svg, main svg,
+        nav svg, table svg, form svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
+
+        /* Core layout */
+        body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; }
+        .flex   { display: flex; }
+        .hidden { display: none; }
+
+        /* Sidebar */
+        #admin-sidebar { width: 16rem; }
+        #admin-overlay.hidden { display: none; }
+
+        /* Content area */
+        .flex-1 { flex: 1 1 0%; min-width: 0; }
+        .overflow-hidden { overflow: hidden; }
+        .overflow-y-auto { overflow-y: auto; }
+        .overflow-x-auto { overflow-x: auto; }
+
+        /* Ensure table doesn't overflow */
+        table { border-collapse: collapse; width: 100%; }
+        table th, table td { text-align: left; padding: 0.75rem 1.25rem; }
     </style>
 </head>
 
-<body class="font-sans bg-gray-100 text-gray-800 antialiased">
+<body class="font-sans bg-gray-100 text-gray-800 antialiased overflow-x-hidden">
     <?php partial('success-popup') ?>
     <div class="flex h-screen overflow-hidden">
 
+        <!-- Sidebar: fixed/off-canvas on mobile, static on lg+ -->
         <?php partial('admin/sidebar', ['adminPage' => $adminPage ?? '']) ?>
 
-        <div class="flex-1 flex flex-col overflow-hidden">
+        <!-- Content: takes full width (sidebar is out of flow on mobile) -->
+        <div class="flex-1 flex flex-col overflow-hidden min-w-0">
 
             <?php partial('admin/topbar') ?>
 
-            <main class="flex-1 overflow-y-auto p-6 admin-scrollbar">
+            <main class="flex-1 overflow-y-auto p-4 sm:p-6 admin-scrollbar">
                 <?php if ($msg = flash('error')): ?>
                     <div class="mb-4 rounded-lg bg-red-50 border border-red-200 text-red-800 px-4 py-3 text-sm"><?= h($msg) ?></div>
                 <?php endif; ?>

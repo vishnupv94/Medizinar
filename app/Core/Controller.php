@@ -22,12 +22,12 @@ class Controller
         $_SESSION['admin_last_activity'] = time();
     }
 
-    protected function view(string $page, array $data = []): void
+    protected function view(string $_viewPath, array $_data = []): void
     {
-        extract($data, EXTR_SKIP);
+        extract($_data, EXTR_SKIP);
 
         ob_start();
-        require \APP_PATH . '/Views/pages/' . $page . '.php';
+        require \APP_PATH . '/Views/pages/' . $_viewPath . '.php';
         $content = ob_get_clean();
 
         require \APP_PATH . '/Views/layouts/' . $this->layout . '.php';

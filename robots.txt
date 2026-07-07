@@ -1,0 +1,24 @@
+# robots.txt — Medizinar Care
+# https://medizinarcare.com/robots.txt
+
+User-agent: *
+
+# Block admin and private paths
+Disallow: /admin/
+Disallow: /uploads/
+Disallow: /tmp/
+Disallow: /app/
+Disallow: /database/
+Disallow: /scripts/
+
+# Allow blog and team images to be crawled (inside blocked uploads/)
+Allow: /uploads/blog/
+Allow: /uploads/team/
+
+# Block common scraper traps / search bots from non-content URLs
+Disallow: /contact?*
+Disallow: /appointment?*
+Disallow: /blog?page=*
+
+# Sitemap location
+Sitemap: https://medizinarcare.com/sitemap.xml

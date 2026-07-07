@@ -12,7 +12,7 @@
             <div class="fade-in-up">
                 <div class="relative">
                     <div class="rounded-2xl overflow-hidden" style="height:420px">
-                        <img src="<?= asset('images/homecare.jpg') ?>" alt="Medizinar Care caregiver" class="w-full h-full object-cover" loading="lazy">
+                        <img src="<?= asset('images/medizinar-care-caregiver-elderly.webp') ?>" alt="Medizinar Care caregiver supporting elderly patient at home in Kerala" class="w-full h-full object-cover" loading="lazy">
                         <div class="absolute inset-0 rounded-2xl" style="background:linear-gradient(to top,rgba(12,41,18,0.6) 0%,transparent 55%)"></div>
                     </div>
                     <!-- Stats bar -->
@@ -66,7 +66,7 @@
 
             <div class="value-card fade-in-up">
                 <div class="flex items-center gap-3 mb-4">
-                    <img src="<?= asset('images/icon-mission.png') ?>" alt="Mission" class="w-12 h-12 shrink-0" loading="lazy">
+                    <img src="<?= asset('images/icon-medizinar-mission.webp') ?>" alt="Medizinar Care mission icon" class="w-12 h-12 shrink-0" loading="lazy">
                     <h3 class="text-xl font-bold" style="color:var(--text-dark)">Our Mission</h3>
                 </div>
                 <p class="text-sm leading-relaxed" style="color:var(--text-muted)">
@@ -78,7 +78,7 @@
 
             <div class="value-card fade-in-up">
                 <div class="flex items-center gap-3 mb-4">
-                    <img src="<?= asset('images/icon-vision.png') ?>" alt="Vision" class="w-12 h-12 shrink-0" loading="lazy">
+                    <img src="<?= asset('images/icon-medizinar-vision.webp') ?>" alt="Medizinar Care vision icon" class="w-12 h-12 shrink-0" loading="lazy">
                     <h3 class="text-xl font-bold" style="color:var(--text-dark)">Our Vision</h3>
                 </div>
                 <p class="text-sm leading-relaxed" style="color:var(--text-muted)">
@@ -104,17 +104,17 @@
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php
-            $values = [
-                ['img' => 'icon-compassion.png', 'title' => 'Compassion',      'desc' => 'We treat every individual with kindness, empathy, and deep respect regardless of their condition.'],
-                ['img' => 'icon-trust.png',       'title' => 'Trust',           'desc' => 'We understand the importance of trust when families invite caregivers into their homes.'],
-                ['img' => 'icon-responsibility.png', 'title' => 'Responsibility', 'desc' => 'Our caregivers are committed to providing responsible, dependable, and consistent support.'],
-                ['img' => 'icon-quality.png',     'title' => 'Quality Care',    'desc' => 'We focus on maintaining high standards in every service we provide to every family.'],
-            ];
-            foreach ($values as $i => $v): ?>
+            use App\Models\SiteContent;
+            $coreValues = SiteContent::getGroup('core_values');
+            foreach ($coreValues as $i => $v): ?>
                 <div class="value-card text-center fade-in-up" style="animation-delay:<?= $i * 0.1 ?>s">
-                    <img src="<?= asset('images/' . $v['img']) ?>" alt="<?= h($v['title']) ?>" class="w-14 h-14 mx-auto mb-4" loading="lazy">
-                    <h3 class="font-bold text-lg mb-2" style="color:var(--text-dark)"><?= h($v['title']) ?></h3>
-                    <p class="text-sm leading-relaxed" style="color:var(--text-muted)"><?= $v['desc'] ?></p>
+                    <?php if ($v->icon_type === 'path'): ?>
+                        <img src="<?= asset(h($v->icon_value)) ?>" alt="<?= h($v->label) ?>" class="w-14 h-14 mx-auto mb-4" loading="lazy">
+                    <?php elseif ($v->icon_type === 'svg'): ?>
+                        <div class="w-14 h-14 mx-auto mb-4 flex items-center justify-center"><?= $v->icon_value ?></div>
+                    <?php endif; ?>
+                    <h3 class="font-bold text-lg mb-2" style="color:var(--text-dark)"><?= h($v->label) ?></h3>
+                    <p class="text-sm leading-relaxed" style="color:var(--text-muted)"><?= h($v->value) ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -153,7 +153,7 @@
 
             <div class="fade-in-up relative">
                 <div class="rounded-2xl overflow-hidden" style="height:420px">
-                    <img src="<?= asset('images/about-care.jpg') ?>" alt="Medizinar Care professional caregiver" class="w-full h-full object-cover" loading="lazy">
+                    <img src="<?= asset('images/medizinar-care-professional-caregiver.webp') ?>" alt="Medizinar Care professional caregiver providing quality home care" class="w-full h-full object-cover" loading="lazy">
                     <div class="absolute inset-0 rounded-2xl" style="background:linear-gradient(to top,rgba(12,41,18,0.55) 0%,transparent 50%)"></div>
                 </div>
                 <div class="absolute bottom-5 left-5 right-5">
@@ -192,17 +192,15 @@
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5 max-w-5xl mx-auto">
             <?php
-            $reasons = [
-                ['img' => 'icon-caregivers.png',   'title' => 'Compassionate Caregivers'],
-                ['img' => 'icon-reliable.png',      'title' => 'Reliable Service Support'],
-                ['img' => 'icon-flexible.png',      'title' => 'Flexible Care Options'],
-                ['img' => 'icon-quality.png',       'title' => 'Client Satisfaction'],
-                ['img' => 'icon-professional.png',  'title' => 'Professional Assistance'],
-            ];
-            foreach ($reasons as $i => $r): ?>
+            $whyReasons = SiteContent::getGroup('why_reasons');
+            foreach ($whyReasons as $i => $r): ?>
                 <div class="value-card text-center fade-in-up" style="animation-delay:<?= $i * 0.08 ?>s">
-                    <img src="<?= asset('images/' . $r['img']) ?>" alt="<?= h($r['title']) ?>" class="w-14 h-14 mx-auto mb-3" loading="lazy">
-                    <p class="font-semibold text-sm" style="color:var(--text-dark)"><?= h($r['title']) ?></p>
+                    <?php if ($r->icon_type === 'path'): ?>
+                        <img src="<?= asset(h($r->icon_value)) ?>" alt="<?= h($r->label) ?>" class="w-14 h-14 mx-auto mb-3" loading="lazy">
+                    <?php elseif ($r->icon_type === 'svg'): ?>
+                        <div class="w-14 h-14 mx-auto mb-3 flex items-center justify-center"><?= $r->icon_value ?></div>
+                    <?php endif; ?>
+                    <p class="font-semibold text-sm" style="color:var(--text-dark)"><?= h($r->label) ?></p>
                 </div>
             <?php endforeach; ?>
         </div>

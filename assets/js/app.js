@@ -271,4 +271,103 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── reCAPTCHA v3 invisible form protection ──────────────
+  document.querySelectorAll('input[name="g-recaptcha-response"]').forEach(hiddenInput => {
+    const form = hiddenInput.closest('form');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      // If token already filled (re-submit after grecaptcha resolved) — allow through
+      if (hiddenInput.value) return;
+
+      e.preventDefault();
+
+      const scriptTag = document.querySelector('script[src*="recaptcha/api.js?render="]');
+      const siteKey   = scriptTag ? new URL(scriptTag.src).searchParams.get('render') : '';
+
+      if (!siteKey || typeof grecaptcha === 'undefined') {
+        // reCAPTCHA not loaded — submit anyway (server-side fail-open matches this)
+        form.submit();
+        return;
+      }
+
+      grecaptcha.ready(() => {
+        grecaptcha.execute(siteKey, { action: 'submit' }).then(token => {
+          hiddenInput.value = token;
+          form.submit();
+        }).catch(() => {
+          form.submit();
+        });
+      });
+    });
+  });
+
+  // ── Cookie Consent ─────────────────────────────────────
+  initCookieConsent();
+
 });
+
+// ── Cookie Consent Logic ────────────────────────────────────────────────────
+function initCookieConsent() {
+  const STORAGE_KEY = 'mc_cookie_consent'; // mc = medizinar care
+  const banner      = document.getElementById('cookie-banner');
+  const acceptBtn   = document.getElementById('cookie-accept');
+  const declineBtn  = document.getElementById('cookie-decline');
+
+  if (!banner) return;
+
+  // Returning visitor — restore consent without showing banner
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    if (stored === 'accepted' && typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        analytics_storage:  'granted',
+        ad_storage:         'denied',
+        ad_user_data:       'denied',
+        ad_personalization: 'denied',
+      });
+    }
+    return; // banner stays hidden
+  }
+
+  // First visit — show banner after a brief delay
+  setTimeout(() => {
+    banner.removeAttribute('hidden');
+  }, 800);
+
+
+  function dismiss(choice) {
+    localStorage.setItem(STORAGE_KEY, choice); // 'accepted' | 'declined'
+
+    // Update Google Analytics Consent Mode based on user choice
+    if (typeof gtag === 'function') {
+      if (choice === 'accepted') {
+        gtag('consent', 'update', {
+          analytics_storage:  'granted',
+          ad_storage:         'denied',  // we don't run ads
+          ad_user_data:       'denied',
+          ad_personalization: 'denied',
+        });
+      } else {
+        gtag('consent', 'update', {
+          analytics_storage:  'denied',
+          ad_storage:         'denied',
+          ad_user_data:       'denied',
+          ad_personalization: 'denied',
+        });
+      }
+    }
+
+    // Slide banner back down
+    banner.style.transition = 'transform 0.35s cubic-bezier(0.4, 0, 1, 1), opacity 0.3s ease';
+    banner.style.transform  = 'translateY(110%)';
+    banner.style.opacity    = '0';
+
+    setTimeout(() => banner.setAttribute('hidden', ''), 380);
+  }
+
+
+  if (acceptBtn)  acceptBtn.addEventListener('click',  () => dismiss('accepted'));
+  if (declineBtn) declineBtn.addEventListener('click', () => dismiss('declined'));
+}
+

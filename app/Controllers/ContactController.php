@@ -29,6 +29,20 @@ class ContactController extends Controller
             $this->redirect(url('/contact'), ['error' => 'Invalid form submission. Please try again.']);
         }
 
+        // reCAPTCHA verification
+        $recaptchaToken = $_POST['g-recaptcha-response'] ?? '';
+        if (!recaptcha_verify($recaptchaToken)) {
+            $_SESSION['old_cf'] = [
+                'name'     => sanitize_input($_POST['name']     ?? ''),
+                'phone'    => sanitize_input($_POST['phone']    ?? ''),
+                'email'    => sanitize_input($_POST['email']    ?? ''),
+                'category' => sanitize_input($_POST['category'] ?? ''),
+                'subject'  => sanitize_input($_POST['subject']  ?? ''),
+                'message'  => sanitize_input($_POST['message']  ?? ''),
+            ];
+            $this->redirect(url('/contact'), ['error' => 'reCAPTCHA verification failed. Please try again.']);
+        }
+
         $name     = sanitize_input($_POST['name']     ?? '');
         $phone    = sanitize_input($_POST['phone']    ?? '');
         $email    = sanitize_input($_POST['email']    ?? '');
@@ -84,6 +98,7 @@ class ContactController extends Controller
                     $safeName       = bin2hex(random_bytes(8)) . '.' . $fileExt;
                     $attachmentPath = $uploadDir . $safeName;
                     $attachmentName = basename($file['name']);
+                    $attachmentSafe = $safeName; // stored in DB for later retrieval
 
                     if (!move_uploaded_file($file['tmp_name'], $attachmentPath)) {
                         $errors[] = 'Could not save attachment. Please try without a file.';
@@ -111,6 +126,7 @@ class ContactController extends Controller
                 'subject'         => $subject,
                 'message'         => $message,
                 'attachment_name' => $attachmentName,
+                'attachment_path' => $attachmentSafe ?? null,
                 'ip_address'      => $_SERVER['REMOTE_ADDR'] ?? '',
             ]);
         } catch (\Throwable $e) {
@@ -172,9 +188,8 @@ class ContactController extends Controller
 
         @mail(MAIL_TO, $mailSubject, $body, $headers);
 
-        if ($attachmentPath && file_exists($attachmentPath)) {
-            unlink($attachmentPath);
-        }
+        // File is kept on server so admin can download it from the panel.
+        // (It was already saved to contact_entries.attachment_path above.)
 
         unset($_SESSION['old_cf']);
 

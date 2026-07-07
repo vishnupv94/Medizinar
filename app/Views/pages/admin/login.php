@@ -1,7 +1,7 @@
 <div class="w-full max-w-md mx-auto">
     <div class="text-center mb-8">
         <div class="w-14 h-14 rounded-2xl bg-primary mx-auto flex items-center justify-center mb-4">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-8 h-8 text-white" width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
         </div>

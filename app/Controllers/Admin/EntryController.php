@@ -132,4 +132,52 @@ class EntryController extends Controller
         AppointmentEntry::delete((int) $id);
         $this->redirect(url('/admin/entries/appointments'), ['success' => 'Appointment entry deleted.']);
     }
+
+    /**
+     * Serve a contact attachment through PHP (uploads/ dir stays blocked publicly).
+     * Route: GET /admin/entries/contact/{id}/attachment
+     */
+    public function serveAttachment(string $id): void
+    {
+        $entry = ContactEntry::findById((int) $id);
+
+        if (!$entry || empty($entry->attachment_path)) {
+            http_response_code(404);
+            exit('Attachment not found.');
+        }
+
+        // Sanitise: only allow the basename stored in DB (prevents path traversal)
+        $safeName = basename($entry->attachment_path);
+        $filePath = ROOT_PATH . '/uploads/contact/' . $safeName;
+
+        if (!file_exists($filePath) || !is_file($filePath)) {
+            http_response_code(404);
+            exit('File not found on server.');
+        }
+
+        $ext      = strtolower(pathinfo($safeName, PATHINFO_EXTENSION));
+        $mimeMap  = [
+            'jpg'  => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png'  => 'image/png',
+            'gif'  => 'image/gif',
+            'webp' => 'image/webp',
+            'pdf'  => 'application/pdf',
+            'doc'  => 'application/msword',
+            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        ];
+        $mime = $mimeMap[$ext] ?? 'application/octet-stream';
+
+        // Inline for images/PDF so they preview in browser; force-download otherwise
+        $inline = in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf']);
+
+        header('Content-Type: ' . $mime);
+        header('Content-Length: ' . filesize($filePath));
+        header('Content-Disposition: ' . ($inline ? 'inline' : 'attachment') . '; filename="' . addslashes($entry->attachment_name) . '"');
+        header('Cache-Control: private, no-cache');
+        header('X-Content-Type-Options: nosniff');
+
+        readfile($filePath);
+        exit;
+    }
 }

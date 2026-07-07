@@ -1,9 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Force HTTPS (uncomment on production if SSL is available)
-    # RewriteCond %{HTTPS} off
-    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    # Force HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # Block access to the app directory
     RewriteRule ^app/ - [F,L]
@@ -13,6 +13,15 @@
 
     # Block access to hidden files and directories
     RewriteRule (^|/)\.(?!well-known) - [F,L]
+
+    # Allow blog image uploads to be served publicly
+    RewriteRule ^uploads/blog/.+\.(jpe?g|png|webp)$ - [L]
+
+    # Allow team member photo uploads to be served publicly
+    RewriteRule ^uploads/team/.+\.(jpe?g|png|webp|gif)$ - [L]
+
+    # Allow legal documents to be served publicly
+    RewriteRule ^docs/legal/.+\.pdf$ - [L]
 
     # Block access to uploads directory listing
     RewriteRule ^uploads/ - [F,L]
@@ -49,6 +58,55 @@ AddDefaultCharset UTF-8
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header always set Vary "Accept-Encoding"
+</IfModule>
+
+# Browser caching for static assets — improves Core Web Vitals / PageSpeed
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Fonts
+    ExpiresByType font/woff2                     "access plus 1 year"
+    ExpiresByType font/woff                      "access plus 1 year"
+    ExpiresByType application/font-woff2         "access plus 1 year"
+
+    # CSS and JS
+    ExpiresByType text/css                       "access plus 6 months"
+    ExpiresByType application/javascript         "access plus 6 months"
+    ExpiresByType text/javascript                "access plus 6 months"
+
+    # Images
+    ExpiresByType image/png                      "access plus 1 year"
+    ExpiresByType image/jpg                      "access plus 1 year"
+    ExpiresByType image/jpeg                     "access plus 1 year"
+    ExpiresByType image/webp                     "access plus 1 year"
+    ExpiresByType image/gif                      "access plus 1 year"
+    ExpiresByType image/svg+xml                  "access plus 6 months"
+    ExpiresByType image/x-icon                   "access plus 1 year"
+
+    # Webmanifest
+    ExpiresByType application/manifest+json      "access plus 1 week"
+    ExpiresByType application/json               "access plus 0 seconds"
+
+    # PDF documents
+    ExpiresByType application/pdf                "access plus 1 month"
+
+    # HTML — no cache (always fresh)
+    ExpiresByType text/html                      "access plus 0 seconds"
+</IfModule>
+
+# Cache-Control fallback (for servers without mod_expires)
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js|woff2|woff)$">
+        Header set Cache-Control "public, max-age=15552000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(png|jpg|jpeg|webp|gif|svg|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.webmanifest$">
+        Header set Cache-Control "public, max-age=604800"
+    </FilesMatch>
 </IfModule>
 
 # Block access to sensitive file types

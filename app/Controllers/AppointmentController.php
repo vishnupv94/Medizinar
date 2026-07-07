@@ -35,6 +35,22 @@ class AppointmentController extends Controller
             $this->redirect(url('/appointment'), ['error' => 'Invalid form submission. Please try again.']);
         }
 
+        // reCAPTCHA verification
+        $recaptchaToken = $_POST['g-recaptcha-response'] ?? '';
+        if (!recaptcha_verify($recaptchaToken)) {
+            $_SESSION['old_appt'] = [
+                'name'       => sanitize_input($_POST['name']       ?? ''),
+                'phone'      => sanitize_input($_POST['phone']      ?? ''),
+                'email'      => sanitize_input($_POST['email']      ?? ''),
+                'service'    => sanitize_input($_POST['service']    ?? ''),
+                'location'   => sanitize_input($_POST['location']   ?? ''),
+                'start_date' => sanitize_input($_POST['start_date'] ?? ''),
+                'duration'   => sanitize_input($_POST['duration']   ?? ''),
+                'message'    => sanitize_input($_POST['message']    ?? ''),
+            ];
+            $this->redirect(url('/appointment'), ['error' => 'reCAPTCHA verification failed. Please try again.']);
+        }
+
         $name       = sanitize_input($_POST['name']       ?? '');
         $phone      = sanitize_input($_POST['phone']      ?? '');
         $email      = sanitize_input($_POST['email']      ?? '');

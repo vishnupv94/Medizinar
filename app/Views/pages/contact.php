@@ -164,12 +164,23 @@
                         <p class="text-gray-400 text-xs mt-1.5">Upload a photo or document if needed (max 5 MB). Supported: JPG, PNG, PDF, DOC.</p>
                     </div>
 
+                    <?php if (recaptcha_enabled()): ?>
+                    <input type="hidden" name="g-recaptcha-response" id="cf_recaptcha_token">
+                    <?php endif; ?>
+
                     <button type="submit" class="btn-primary w-full justify-center">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                         </svg>
                         Submit Request
                     </button>
+                    <?php if (recaptcha_enabled()): ?>
+                    <p class="text-gray-400 text-xs mt-3 text-center">
+                        Protected by reCAPTCHA &mdash;
+                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="underline hover:text-gray-500">Privacy</a> &amp;
+                        <a href="https://policies.google.com/terms" target="_blank" rel="noopener" class="underline hover:text-gray-500">Terms</a> apply.
+                    </p>
+                    <?php endif; ?>
                     <?php unset($_SESSION['old_cf']); ?>
                 </form>
             </div>
@@ -180,7 +191,7 @@
                     <div class="rounded-2xl overflow-hidden shadow-card border border-primary-100" style="height:350px;border-color:#d4e8d5">
                         <iframe
                             title="Medizinar Care Office Location"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.5!2d76.7795!3d8.9905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05f82a4b3e9e9b%3A0x0!2sKottarakkara%2C+Kollam%2C+Kerala!5e0!3m2!1sen!2sin!4v1"
+                            src="<?= h(\App\Models\SiteSetting::get('GOOGLE_MAPS_EMBED_URL', GOOGLE_MAPS_EMBED_URL)) ?>"
                             width="100%" height="100%" style="border:0" allowfullscreen=""
                             loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                         </iframe>

@@ -10,8 +10,37 @@ class PageController extends Controller
     {
         $this->view('home', [
             'page'      => 'home',
-            'pageTitle' => 'Compassionate Home Healthcare',
-            'metaDesc'  => 'Medizinar Care provides reliable and compassionate home care services including bedside patient care, elderly care, mother & baby care, and domestic support in Kerala.',
+            'pageTitle' => 'Compassionate Home Healthcare in Kerala',
+            'metaDesc'  => 'Medizinar Care offers trusted home healthcare in Kerala — bedside patient care, elderly care, mother & baby care, and domestic support in Kottarakkara, Kollam and across Kerala.',
+            'jsonLd'    => [
+                '@context'        => 'https://schema.org',
+                '@type'           => 'WebSite',
+                'name'            => SITE_NAME,
+                'url'             => SITE_URL,
+                'description'     => 'Compassionate home healthcare services in Kerala — bedside patient care, elderly care, mother & baby care, housemaid services, and NRI parent care.',
+                'potentialAction' => [
+                    '@type'       => 'SearchAction',
+                    'target'      => [
+                        '@type'       => 'EntryPoint',
+                        'urlTemplate' => SITE_URL . '/blog?q={search_term_string}',
+                    ],
+                    'query-input' => 'required name=search_term_string',
+                ],
+            ],
+            // AggregateRating — enables star rating in Google Search results
+            'aggregateRatingJsonLd' => [
+                '@context'        => 'https://schema.org',
+                '@type'           => 'LocalBusiness',
+                'name'            => SITE_NAME,
+                'url'             => SITE_URL,
+                'aggregateRating' => [
+                    '@type'       => 'AggregateRating',
+                    'ratingValue' => '5.0',
+                    'reviewCount' => '3',
+                    'bestRating'  => '5',
+                    'worstRating' => '1',
+                ],
+            ],
         ]);
     }
 
@@ -19,8 +48,8 @@ class PageController extends Controller
     {
         $this->view('about', [
             'page'      => 'about',
-            'pageTitle' => 'About Us',
-            'metaDesc'  => 'Learn about Medizinar Care — our mission, vision, values, and the compassionate team dedicated to providing reliable home healthcare services in Kerala.',
+            'pageTitle' => 'About Us — Trusted Home Care Providers in Kerala',
+            'metaDesc'  => 'Learn about Medizinar Care — our mission, vision, and the compassionate team dedicated to providing reliable home healthcare services in Kottarakkara, Kollam and across Kerala.',
         ]);
     }
 
@@ -28,8 +57,22 @@ class PageController extends Controller
     {
         $this->view('services', [
             'page'      => 'services',
-            'pageTitle' => 'Our Services',
-            'metaDesc'  => 'Medizinar Care offers bedside patient care, elderly care, mother & baby care, house maid services, and quick support services across Kerala.',
+            'pageTitle' => 'Home Care Services in Kerala — Elderly, Nursing & Patient Care',
+            'metaDesc'  => 'Medizinar Care provides home nursing in Kerala — bedside patient care, elderly care, mother & baby care, housemaid services, NRI parent care and quick support in Kottarakkara, Kollam.',
+            'jsonLd'    => [
+                '@context'    => 'https://schema.org',
+                '@type'       => 'ItemList',
+                'name'        => 'Home Healthcare Services — Medizinar Care Kerala',
+                'description' => 'Compassionate home care services across Kerala for patients, elderly individuals, and families.',
+                'itemListElement' => [
+                    ['@type' => 'ListItem', 'position' => 1, 'name' => 'Bedside Patient Care', 'url' => SITE_URL . '/services'],
+                    ['@type' => 'ListItem', 'position' => 2, 'name' => 'Elderly Care',         'url' => SITE_URL . '/services'],
+                    ['@type' => 'ListItem', 'position' => 3, 'name' => 'Mother & Baby Care',   'url' => SITE_URL . '/services'],
+                    ['@type' => 'ListItem', 'position' => 4, 'name' => 'House Maid Services',  'url' => SITE_URL . '/services'],
+                    ['@type' => 'ListItem', 'position' => 5, 'name' => 'NRI Parent Care',      'url' => SITE_URL . '/services'],
+                    ['@type' => 'ListItem', 'position' => 6, 'name' => 'Quick Support',        'url' => SITE_URL . '/services'],
+                ],
+            ],
         ]);
     }
 
@@ -37,8 +80,71 @@ class PageController extends Controller
     {
         $this->view('team', [
             'page'      => 'team',
-            'pageTitle' => 'Our Team',
-            'metaDesc'  => 'Meet the Medizinar Care team — dedicated professionals committed to providing compassionate and reliable home healthcare services in Kerala.',
+            'pageTitle' => 'Our Caregiving Team in Kerala — Medizinar Care',
+            'metaDesc'  => 'Meet the Medizinar Care team — certified nurses, caregivers and support staff dedicated to compassionate home healthcare across Kottarakkara, Kollam and Kerala.',
+        ]);
+    }
+
+    public function privacyPolicy(): void
+    {
+        $this->view('privacy-policy', [
+            'page'      => 'privacy-policy',
+            'pageTitle' => 'Privacy Policy',
+            'metaDesc'  => 'Read the Medizinar Care Privacy Policy to understand how we collect, use, and protect your personal information when you use our home healthcare services.',
+        ]);
+    }
+
+    public function termsAndConditions(): void
+    {
+        $this->view('terms-and-conditions', [
+            'page'      => 'terms-and-conditions',
+            'pageTitle' => 'Terms & Conditions',
+            'metaDesc'  => 'Review the Terms & Conditions governing your use of Medizinar Care home healthcare services in Kerala.',
+        ]);
+    }
+
+    public function disclaimer(): void
+    {
+        $this->view('disclaimer', [
+            'page'      => 'disclaimer',
+            'pageTitle' => 'Disclaimer',
+            'metaDesc'  => 'Read the Medizinar Care Disclaimer for important information about the limitations and scope of our home healthcare services.',
+        ]);
+    }
+
+    public function refundPolicy(): void
+    {
+        $this->view('refund-policy', [
+            'page'      => 'refund-policy',
+            'pageTitle' => 'Refund Policy',
+            'metaDesc'  => 'Understand the Medizinar Care Refund Policy, including our guidelines for service cancellations, refunds, and adjustments.',
+        ]);
+    }
+
+    public function grievancePolicy(): void
+    {
+        $this->view('grievance-policy', [
+            'page'      => 'grievance-policy',
+            'pageTitle' => 'Grievance Policy',
+            'metaDesc'  => 'Learn how Medizinar Care handles your concerns, complaints, and feedback — fairly, promptly, and confidentially.',
+        ]);
+    }
+
+    public function patientRights(): void
+    {
+        $this->view('patient-rights', [
+            'page'      => 'patient-rights',
+            'pageTitle' => 'Patient Rights Policy',
+            'metaDesc'  => 'Understand your rights as a Medizinar Care patient — dignity, safety, privacy, and quality care are guaranteed.',
+        ]);
+    }
+
+    public function serviceTerms(): void
+    {
+        $this->view('service-terms', [
+            'page'      => 'service-terms',
+            'pageTitle' => 'Service Terms',
+            'metaDesc'  => 'Read the Medizinar Care Service Terms governing the delivery of our professional home healthcare services.',
         ]);
     }
 }

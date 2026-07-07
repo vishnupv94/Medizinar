@@ -78,3 +78,33 @@ function partial(string $name, array $data = []): void
     extract($data, EXTR_SKIP);
     require APP_PATH . '/Views/partials/' . $name . '.php';
 }
+
+function recaptcha_enabled(): bool
+{
+    return \App\Helpers\Recaptcha::isEnabled();
+}
+
+function recaptcha_verify(string $token): bool
+{
+    return \App\Helpers\Recaptcha::verify($token);
+}
+
+function recaptcha_site_key(): string
+{
+    return \App\Helpers\Recaptcha::siteKey();
+}
+
+if (!function_exists('str_starts_with')) {
+    function str_starts_with(string $haystack, string $needle): bool
+    {
+        return 0 === strncmp($haystack, $needle, strlen($needle));
+    }
+}
+
+if (!function_exists('str_ends_with')) {
+    function str_ends_with(string $haystack, string $needle): bool
+    {
+        return $needle === '' || substr($haystack, -strlen($needle)) === $needle;
+    }
+}
+

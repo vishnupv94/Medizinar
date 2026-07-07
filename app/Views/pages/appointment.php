@@ -172,6 +172,10 @@
                                 placeholder="Describe any special requirements, medical conditions, budget preferences, or questions you may have..."><?= h($old['message'] ?? '') ?></textarea>
                         </fieldset>
 
+                        <?php if (recaptcha_enabled()): ?>
+                        <input type="hidden" name="g-recaptcha-response" id="appt_recaptcha_token">
+                        <?php endif; ?>
+
                         <div class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
                             <button type="submit" class="btn-primary w-full sm:w-auto">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -186,6 +190,13 @@
                                 Your data is secure and private.
                             </p>
                         </div>
+                        <?php if (recaptcha_enabled()): ?>
+                        <p class="text-gray-400 text-xs mt-2">
+                            Protected by reCAPTCHA &mdash;
+                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="underline hover:text-gray-500">Privacy</a> &amp;
+                            <a href="https://policies.google.com/terms" target="_blank" rel="noopener" class="underline hover:text-gray-500">Terms</a> apply.
+                        </p>
+                        <?php endif; ?>
 
                         <?php unset($_SESSION['old_appt']); ?>
                     </form>
