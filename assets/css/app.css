@@ -688,12 +688,12 @@ body {
 .blog-banner {
   position: relative;
   width: 100%;
-  height: 360px;
+  height: 400px;
   overflow: hidden;
 }
 
 @media (min-width: 640px) {
-  .blog-banner { height: 420px; }
+  .blog-banner { height: 500px; }
 }
 
 .blog-banner-img {

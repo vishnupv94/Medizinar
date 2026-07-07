@@ -101,6 +101,10 @@ $isEdit = isset($post) && isset($post->id);
                     <p class="mt-1 text-xs text-red-600"><?= h($errors['image']) ?></p>
                 <?php endif; ?>
                 <p class="mt-1 text-xs text-gray-400">JPG, PNG, or WebP. Max 5 MB.</p>
+                <div class="mt-2 px-3 py-2 rounded-lg bg-blue-50 border border-blue-100">
+                    <p class="text-xs font-medium text-blue-700">📐 Recommended: 1920 × 500 px (3.84 : 1 ratio)</p>
+                    <p class="text-[11px] text-blue-500 mt-0.5">Banner displays full-width on the blog page. Use a wide, landscape image for best results.</p>
+                </div>
 
                 <!-- Image preview (for new uploads before save) -->
                 <div id="image-preview-wrap" class="mt-3 hidden">
@@ -122,46 +126,21 @@ $isEdit = isset($post) && isset($post->id);
                     <span class="text-xs font-normal text-gray-400 ml-1">— adjust how the banner is framed on the blog page</span>
                 </label>
 
-                <div class="flex flex-col lg:flex-row gap-5">
-                    <!-- Live Preview -->
-                    <div class="flex-shrink-0" style="width:320px">
-                        <div id="bannerPreviewCard" style="width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; border:1px solid #e5e7eb; box-shadow:0 2px 10px rgba(0,0,0,0.08); position:relative; background:#f3f4f6;">
+                <div class="space-y-5">
+                    <!-- Live Preview (matches frontend: full-width, 1920×500 ratio) -->
+                    <div>
+                        <div id="bannerPreviewCard" style="width:100%; aspect-ratio:1920/500; border-radius:12px; overflow:hidden; border:1px solid #e5e7eb; box-shadow:0 2px 10px rgba(0,0,0,0.08); position:relative; background:#f3f4f6;">
                             <img id="bannerPreviewImg" src="<?= h($bannerImgUrl) ?>" alt="Preview"
                                  style="width:100%; height:100%; object-fit:cover; object-position:<?= $bannerPos ?>; transform-origin:<?= $bannerPos ?>; transform: scale(<?= $bannerScale ?>); display:block;">
-                            <!-- Gradient overlay like the actual banner -->
+                            <!-- Gradient overlay matching the frontend -->
                             <div style="position:absolute; bottom:0; left:0; right:0; height:50%;
                                         background:linear-gradient(to top, rgba(0,0,0,0.25) 0%, transparent 100%); pointer-events:none;"></div>
                         </div>
-                        <p class="text-[10px] text-gray-400 text-center mt-1.5">Live Preview (16:9)</p>
+                        <p class="text-[10px] text-gray-400 text-center mt-1.5">Live Preview — matches blog page banner (1920 × 500 px)</p>
                     </div>
 
                     <!-- Controls -->
-                    <div class="flex-1 space-y-4">
-                        <!-- Preset Buttons -->
-                        <div>
-                            <span class="text-xs font-medium text-gray-500 mb-2 block">Quick Presets</span>
-                            <div class="flex flex-wrap gap-1.5">
-                                <?php
-                                $presets = [
-                                    ['label' => 'Center',       'value' => 'center center'],
-                                    ['label' => 'Top',          'value' => 'center top'],
-                                    ['label' => 'Upper',        'value' => 'center 25%'],
-                                    ['label' => 'Bottom',       'value' => 'center bottom'],
-                                    ['label' => 'Left',         'value' => 'left center'],
-                                    ['label' => 'Right',        'value' => 'right center'],
-                                ];
-                                foreach ($presets as $p):
-                                ?>
-                                    <button type="button" onclick="blogApplyPreset('<?= $p['value'] ?>')"
-                                        class="blog-preset-btn px-2.5 py-1 text-[11px] font-medium rounded-md border transition-all
-                                               border-gray-200 bg-white text-gray-600 hover:border-primary hover:text-primary hover:bg-primary/5"
-                                        data-val="<?= $p['value'] ?>">
-                                        <?= $p['label'] ?>
-                                    </button>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-
+                    <div class="space-y-4">
                         <!-- Range Sliders -->
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                             <div>
@@ -209,24 +188,8 @@ $isEdit = isset($post) && isset($post->id);
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Final CSS Value -->
-                        <div>
-                            <label class="text-xs font-medium text-gray-500 mb-1 block">CSS Value</label>
-                            <div class="flex items-center gap-2">
-                                <input type="text" name="banner_pos" id="blogPosInput"
-                                       value="<?= $bannerPos ?>"
-                                       class="flex-1 px-3 py-1.5 text-sm border border-gray-200 rounded-lg bg-gray-50 font-mono
-                                              focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none">
-                                <button type="button" onclick="blogSyncSliders()" title="Apply custom value"
-                                    class="px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-200 bg-white text-gray-600
-                                           hover:border-primary hover:text-primary transition-colors">
-                                    Apply
-                                </button>
-                            </div>
-                            <p class="text-[10px] text-gray-400 mt-1">You can type any valid CSS object-position value, then click Apply.</p>
-                        </div>
                         <!-- Hidden inputs for form submission -->
+                        <input type="hidden" name="banner_pos" id="blogPosInput" value="<?= $bannerPos ?>">
                         <input type="hidden" name="banner_scale" id="blogScaleInput" value="<?= $bannerScale ?>">
                     </div>
                 </div>
@@ -308,12 +271,6 @@ $isEdit = isset($post) && isset($post->id);
 }
 .blog-range-slider:focus {
     background: linear-gradient(90deg, #176B23 0%, #e5e7eb 100%);
-}
-.blog-preset-btn.active {
-    border-color: #176B23 !important;
-    background: rgba(23,107,35,0.08) !important;
-    color: #176B23 !important;
-    font-weight: 700 !important;
 }
 </style>
 
@@ -402,25 +359,12 @@ document.getElementById('blog-image').addEventListener('change', function(e) {
         updateSliderTrack(ySlider, y);
         updateSliderTrack(zoomSlider, z);
         updateSliderTrack(resizeSlider, r);
-        highlightPreset(val);
     }
 
     // ---- Colored track fill ----
     function updateSliderTrack(slider, val) {
         var pct = ((val - slider.min) / (slider.max - slider.min)) * 100;
         slider.style.background = 'linear-gradient(90deg, #176B23 0%, #176B23 ' + pct + '%, #e5e7eb ' + pct + '%, #e5e7eb 100%)';
-    }
-
-    // ---- Highlight matching preset ----
-    function highlightPreset(val) {
-        var btns = document.querySelectorAll('.blog-preset-btn');
-        for (var i = 0; i < btns.length; i++) {
-            if (btns[i].getAttribute('data-val') === val) {
-                btns[i].classList.add('active');
-            } else {
-                btns[i].classList.remove('active');
-            }
-        }
     }
 
     // ---- Parse CSS object-position → X/Y percentages ----
@@ -452,36 +396,6 @@ document.getElementById('blog-image').addEventListener('change', function(e) {
         return { x: Math.round(Math.min(100, Math.max(0, x))), y: Math.round(Math.min(100, Math.max(0, y))) };
     }
 
-    // ---- Apply a preset ----
-    window.blogApplyPreset = function(val) {
-        input.value = val;
-        preview.style.objectPosition = val;
-        preview.style.transformOrigin = val;
-        var pos = parsePosition(val);
-        xSlider.value = pos.x;
-        ySlider.value = pos.y;
-        xLabel.textContent = pos.x + '%';
-        yLabel.textContent = pos.y + '%';
-        updateSliderTrack(xSlider, pos.x);
-        updateSliderTrack(ySlider, pos.y);
-        highlightPreset(val);
-    };
-
-    // ---- Sync sliders from manual input ----
-    window.blogSyncSliders = function() {
-        var val = input.value.trim();
-        preview.style.objectPosition = val;
-        preview.style.transformOrigin = val;
-        var pos = parsePosition(val);
-        xSlider.value = pos.x;
-        ySlider.value = pos.y;
-        xLabel.textContent = pos.x + '%';
-        yLabel.textContent = pos.y + '%';
-        updateSliderTrack(xSlider, pos.x);
-        updateSliderTrack(ySlider, pos.y);
-        highlightPreset(val);
-    };
-
     // Wire sliders
     xSlider.addEventListener('input', updateFromSliders);
     ySlider.addEventListener('input', updateFromSliders);
@@ -512,7 +426,6 @@ document.getElementById('blog-image').addEventListener('change', function(e) {
     updateSliderTrack(ySlider, initPos.y);
     updateSliderTrack(zoomSlider, initZoom);
     updateSliderTrack(resizeSlider, initResize);
-    highlightPreset(initVal);
 })();
 </script>
 

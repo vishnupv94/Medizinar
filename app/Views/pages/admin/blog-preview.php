@@ -45,10 +45,12 @@
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
 
         <?php if (!empty($post->image)): ?>
-            <div class="w-full h-64 sm:h-80 overflow-hidden">
+            <div class="w-full overflow-hidden" style="position:relative; aspect-ratio:1920/500;">
                 <img src="<?= url('uploads/blog/' . h($post->image)) ?>" alt="<?= h($post->title) ?>"
                     class="w-full h-full object-cover"
                     style="object-position:<?= h($post->banner_pos ?? 'center center') ?>; transform-origin:<?= h($post->banner_pos ?? 'center center') ?>; transform: scale(<?= (float)($post->banner_scale ?? 1.00) ?>);">
+                <div style="position:absolute; bottom:0; left:0; right:0; height:50%;
+                            background:linear-gradient(to top, rgba(0,0,0,0.25) 0%, transparent 100%); pointer-events:none;"></div>
             </div>
         <?php endif; ?>
 
