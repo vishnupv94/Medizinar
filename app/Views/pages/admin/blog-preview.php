@@ -69,7 +69,7 @@
                 <p class="text-gray-500 text-base italic mb-6 pb-6 border-b border-gray-100"><?= h($post->excerpt) ?></p>
             <?php endif; ?>
 
-            <div class="prose prose-gray max-w-none text-gray-700 leading-relaxed whitespace-pre-line"><?= nl2br(h($post->content)) ?></div>
+            <div class="blog-content prose prose-gray max-w-none text-gray-700 leading-relaxed"><?= $post->content ?></div>
         </div>
     </div>
 

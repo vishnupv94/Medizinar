@@ -104,7 +104,7 @@ $bScale = (float)($post->banner_scale ?? 1.00);
 
         <!-- Content -->
         <div class="blog-content">
-            <?= nl2br(h($post->content)) ?>
+            <?= $post->content ?>
         </div>
 
         <!-- Back link -->

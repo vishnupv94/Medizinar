@@ -67,12 +67,12 @@ $isEdit = isset($post) && isset($post->id);
             <div>
                 <label for="blog-content" class="block text-sm font-medium text-gray-700 mb-1">Content <span class="text-red-500">*</span></label>
                 <textarea name="content" id="blog-content" rows="16" required
-                    class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none resize-y font-mono leading-relaxed <?= isset($errors['content']) ? 'border-red-400' : '' ?>"
+                    class="w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/30 focus:border-primary outline-none resize-y leading-relaxed <?= isset($errors['content']) ? 'border-red-400' : '' ?>"
                     placeholder="Write your blog post content here…"><?= h($post->content ?? '') ?></textarea>
                 <?php if (isset($errors['content'])): ?>
                     <p class="mt-1 text-xs text-red-600"><?= h($errors['content']) ?></p>
                 <?php endif; ?>
-                <p class="mt-1 text-xs text-gray-400">Plain text. Use blank lines to separate paragraphs.</p>
+                <p class="mt-1 text-xs text-gray-400">Use the rich text editor above to write and format your post.</p>
             </div>
 
             <!-- Banner Image -->
@@ -514,5 +514,35 @@ document.getElementById('blog-image').addEventListener('change', function(e) {
     updateSliderTrack(resizeSlider, initResize);
     highlightPreset(initVal);
 })();
+</script>
+
+<!-- TinyMCE WYSIWYG Editor -->
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#blog-content',
+        height: 500,
+        menubar: false,
+        plugins: [
+            'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+            'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+        ],
+        toolbar: 'undo redo | blocks | ' +
+            'bold italic forecolor backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'link table | removeformat | code fullscreen | help',
+        content_style: 'body { font-family: "DM Sans", sans-serif; font-size: 14px; line-height: 1.6; }',
+        setup: function (editor) {
+            editor.on('change', function () {
+                editor.save();
+            });
+        }
+    });
+
+    // Sync on form submit
+    document.querySelector('form').addEventListener('submit', function() {
+        tinymce.triggerSave();
+    });
 </script>
 
